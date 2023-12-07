@@ -40,7 +40,7 @@ await creates()
     
 
      
-     <div className="flex flex-col justify-center flex-1 w-full gap-2 px-8 sm:max-w-md">
+     <div className="flex flex-col justify-center flex-1 w-full gap-2 mt-20 px-8 sm:max-w-md">
       <Link
         href="/"
         className="absolute flex items-center px-4 py-2 text-sm no-underline rounded-md left-8 top-24 text-foreground bg-btn-background hover:bg-btn-background-hover group"
