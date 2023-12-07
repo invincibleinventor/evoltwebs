@@ -34,7 +34,7 @@ const supabase = createClient(cookieStore)
 const isSupabaseConnected = canInitSupabaseClient()
 if(isSupabaseConnected){
 
-const {data,error} = await supabase.from('issues').select('*').order('id', { ascending: false }).limit(10) 
+const {data,error} = await supabase.from('issues').select('*').order('id', { ascending: false })
 let posts;data?posts=data:posts=[]
  if(posts){ moderate = posts.reduce(function(moderate, obj){ 
   if(obj.priority === 'Moderate'){ moderate.push(obj.id); } return moderate; }, []); 
