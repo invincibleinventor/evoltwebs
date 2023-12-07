@@ -12,11 +12,11 @@ export default async function Index() {
    let urgent;let very;let moderate; const cookieStore = cookies() ;
    let a; 
    function ask(param:String){ 
-    if(param=='Very Urgent'){ a='text-red-500' }
+    if(param=='Very Urgent'){ a='text-red-500 md:text-md text-xs' }
     else if(param=='Urgent'){ a='text-orange-400' } 
     else if(param=='Closed'){ a='text-green-500' } 
     else{ a='text-yellow-500' } 
-     return 'inline-block px-4 py-1 bg-neutral-50 text-sm rounded-md '+a
+     return 'inline-block px-4 py-1 bg-neutral-50 rounded-md '+a
 
 }
 const canInitSupabaseClient = () => {
