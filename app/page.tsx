@@ -12,7 +12,7 @@ export default async function Index() {
    let urgent;let very;let moderate; const cookieStore = cookies() ;
    let a; 
    function ask(param:String){ 
-    if(param=='Very Urgent'){ a='text-red-500 md:text-md text-xs' }
+    if(param=='Very Urgent'){ a='text-red-500' }
     else if(param=='Urgent'){ a='text-orange-400' } 
     else if(param=='Closed'){ a='text-green-500' } 
     else{ a='text-yellow-500' } 
@@ -44,7 +44,7 @@ let posts;data?posts=data:posts=[]
      return very; }, []);
 
 } return ( 
-   <div className='grid grid-cols-1 gap-4 px-10 mb-10 xl:px-72 lg:px-64'>
+   <div className='grid grid-cols-1 gap-4 px-5 mb-10 sm:px-10 xl:px-72 lg:px-64'>
     {posts?.length ? (posts.map((post: any) => (<Link href={`/complaint/${post.id}`} key={post.id}> <div className="w-full p-4 bg-white rounded-md animate-in ">
       <div className="flex flex-row items-center content-center justify-between mb-4"> <h1 className="text-lg font-bold">{post.name}</h1> <div className={ask(post.priority)}>
 
