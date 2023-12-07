@@ -66,7 +66,10 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
 
   return a>0 ? (
     <div className="flex flex-col w-screen p-10 py-0 animate-in sm:max-w-4xl">
+            <p className={`px-3 py-2 text-xs font-medium w-max mb-5 text-white bg-blue-600 rounded-lg ${d.isverified?``:`hidden`}`}>Verified</p>
+
       <div className='flex content-center fex-col-reverse2'>
+
     <h1 className='text-xl font-bold'>{d.name}</h1>
     {<>
        <form
@@ -80,7 +83,7 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
 <div className="flex flex-row items-center content-center gap-6 mt-4 font-semibold text-justify">
 <p className='px-4 py-2 font-normal rounded-lg text-md w-max border-neutral-200 bg-neutral-100'>{d.area}</p>
 
-<p className='text-md'> ☏ {"⠀"} {d.contact}</p>
+<p className='text-md'> ☏ {"⠀"} +91 {d.contact}</p>
 
 
 </div>

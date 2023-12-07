@@ -56,8 +56,9 @@ let posts;data?posts=data:posts=[]
 
 <div className="flex flex-row items-center content-center gap-4 mb-4 font-semibold text-justify">
 <p className='px-2 py-2 text-sm font-normal rounded-lg w-max bg-neutral-100'>{post.area}</p>
+<p className={`px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg ${post.isverified?``:`hidden`}`}>Verified</p>
 
-<p className='text-sm'>{post.contact}</p>
+<p className='text-sm'>+91 {post.contact}</p>
 
 
 </div>
