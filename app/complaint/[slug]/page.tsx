@@ -78,7 +78,7 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
       >{closedtext}</button></form></>}
 </div>
 <div className="flex flex-row items-center content-center gap-6 mt-4 font-semibold text-justify">
-<p className='px-4 py-2 font-normal rounded-lg text-md w-max bg-neutral-100'>{d.area}</p>
+<p className='px-4 py-2 font-normal rounded-lg text-md w-max border-neutral-200 bg-neutral-100'>{d.area}</p>
 
 <p className='text-md'> ☏ {"⠀"} {d.contact}</p>
 

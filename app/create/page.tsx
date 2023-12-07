@@ -2,9 +2,9 @@ import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 export default async function Create() {
-    
+    const [disabled,setDisable] = useState(false)
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
 let l = ["Adambakkam", "Adyar", "Alandur", "Alapakkam", "Alwarpet", "Alwarthirunagar", "Ambattur", "Aminjikarai", "Anna Nagar", "Annanur", "Arumbakkam", "Ashok Nagar", "Avadi", "Ayanavaram", "Beemannapettai", "Besant Nagar", "Basin Bridge", "Chepauk", "Chetput", "Chintadripet", "Chitlapakkam", "Choolai", "Choolaimedu", "Chrompet", "Egmore", "Ekkaduthangal", "Eranavur", "Ennore", "Foreshore Estate", "Fort St. George", "George Town", "Gopalapuram", "Government Estate", "Guindy", "Guduvancheri", "IIT Madras", "Injambakkam", "ICF", "Iyyapanthangal", "Jafferkhanpet", "Karapakkam", "Kattivakkam", "Kattupakkam", "Kazhipattur", "K.K. Nagar", "Keelkattalai", "Kattivakkam", "Kilpauk", "Kodambakkam", "Kodungaiyur", "Kolathur", "Korattur", "Korukkupet", "Kottivakkam", "Kotturpuram", "Kottur", "Kovilambakkam", "Koyambedu", "Kundrathur", "Madhavaram", "Madhavaram Milk Colony", "Madipakkam", "Madambakkam", "Maduravoyal", "Manali", "Manali New Town", "Manapakkam", "Mandaveli", "Mangadu", "Mannady", "Mathur", "Medavakkam", "Meenambakkam", "MGR Nagar", "Minjur", "Mogappair", "MKB Nagar", "Mount Road", "Moolakadai", "Moulivakkam", "Mugalivakkam", "Mudichur", "Mylapore", "Nandanam", "Nanganallur", "Nanmangalam", "Neelankarai", "Nemilichery", "Nesapakkam", "Nolambur", "Noombal", "Nungambakkam", "Otteri", "Padi", "Pakkam", "Palavakkam", "Pallavaram", "Pallikaranai", "Pammal", "Park Town", "Parry's Corner", "Pattabiram", "Pattaravakkam", "Pazhavanthangal", "Peerkankaranai", "Perambur", "Peravallur", "Perumbakkam", "Perungalathur", "Perungudi", "Pozhichalur", "Poonamallee", "Porur", "Pudupet", "Pulianthope", "Purasaiwalkam", "Puthagaram", "Puzhal", "Puzhuthivakkam/ Ullagaram", "Raj Bhavan", "Ramavaram", "Red Hills", "Royapettah", "Royapuram", "Saidapet", "Saligramam", "Santhome", "Sembakkam", "Selaiyur", "Shenoy Nagar", "Sholavaram", "Sholinganallur", "Sithalapakkam", "Sowcarpet", "St.Thomas Mount", "Surapet", "Tambaram", "Teynampet", "Tharamani", "T. Nagar", "Thirumangalam", "Thirumullaivoyal", "Thiruneermalai", "Thiruninravur", "Thiruvanmiyur", "Tiruverkadu", "Thiruvotriyur", "Thuraipakkam", "Tirusulam", "Tiruvallikeni", "Tondiarpet", "United India Colony", "Vandalur", "Vadapalani", "Valasaravakkam", "Vallalar Nagar", "Vanagaram", "Velachery", "Velappanchavadi", "Villivakkam", "Virugambakkam", "Vyasarpadi", "Washermanpet", "West Mambalam"]
@@ -13,7 +13,7 @@ let l = ["Adambakkam", "Adyar", "Alandur", "Alapakkam", "Alwarpet", "Alwarthirun
   } = await supabase.auth.getUser()
   const create = async (formData: FormData) => {
     "use server";
-    
+    setDisable(true)
     const name = formData.get('name') as string
     const area = formData.get('area') as string
     const contact = formData.get('contact') as string
@@ -29,7 +29,12 @@ let l = ["Adambakkam", "Adyar", "Alandur", "Alapakkam", "Alwarpet", "Alwarthirun
 if(error){
 return redirect('/create?message='+error.message)
 }
+else{
+  
+setDisable(false)
     return redirect('/?message=Successfully Posted Your Complaint')
+
+  }
   }
 
 await creates()
@@ -40,7 +45,10 @@ await creates()
     
 
      
-     <div className="flex flex-col justify-center flex-1 w-full gap-2 mt-20 px-8 sm:max-w-md">
+     <div className="flex flex-col justify-center flex-1 w-full gap-2 px-8 mt-20 sm:max-w-md">
+      <div className={`absolute flex flex-row items-center content-center w-screen h-screen z-100 bg-white ${disabled?'':'hidden'}`}>
+        <h1 className='mx-auto'>Submitting your request...</h1>
+      </div>
       <Link
         href="/"
         className="absolute flex items-center px-4 py-2 text-sm no-underline rounded-md left-8 top-24 text-foreground bg-btn-background hover:bg-btn-background-hover group"
@@ -118,7 +126,7 @@ await creates()
         <option value="Urgent">Urgent</option>
         <option value="Moderate">Moderate</option>
       </select>
-        <button className="px-4 py-2 mb-2 text-white bg-green-700 rounded-md text-foreground">
+        <button disabled={disabled} className="px-4 py-2 mb-2 text-white bg-green-700 rounded-md text-foreground">
           Submit The Complaint
         </button>
         
