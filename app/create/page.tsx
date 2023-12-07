@@ -107,7 +107,7 @@ await creates()
           name="concern"
           placeholder="Please Type Out Your Concern (80 - 100 Characters)"
           required
-          minLength={80}
+          minLength={30}
           maxLength={1000}
         />
           <label className="text-md" htmlFor="concern">
