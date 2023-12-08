@@ -7,7 +7,7 @@ import SignUpUserSteps from '@/components/SignUpUserSteps'
  import { cookies } from 'next/headers'
   import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
-import AuthButton from '@/components/AuthButton'
+
 
 export default function Index() {
   const [active,setActive] = useState("All")
