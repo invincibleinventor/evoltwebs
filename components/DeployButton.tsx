@@ -11,8 +11,8 @@ export default async function DeployButton() {
   } = await supabase.auth.getUser()
 
   return user ? (
-    <div className='flex flex-row items-center content-center gap-4'>
-    <Link href="/" className="mr-2 font-semibold md:text-xl">CFRH</Link>
+    <div className='flex flex-row items-center content-center gap-4 ml-4'>
+    <Link href="/" className="mr-2 text-lg font-semibold md:text-2xl">CFRH</Link>
     <Link
       className="flex px-5 py-2 no-underline border rounded-md hover:bg-btn-background-hover"
      href="/create"
@@ -20,5 +20,5 @@ export default async function DeployButton() {
      
       New
     </Link></div>
-  ) : (<Link href="/" className="font-semibold md:text-xl">CFRH</Link>)
+  ) : (<Link href="/" className="ml-4 text-lg font-semibold md:text-2xl">CFRH</Link>)
 }

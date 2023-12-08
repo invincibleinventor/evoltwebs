@@ -33,7 +33,7 @@ export default function Login({
 
 
   return (
-    <div className="flex flex-col justify-center flex-1 w-full gap-2 px-8 mt-20 sm:max-w-4xl">
+    <div className="flex flex-col justify-center flex-1 w-full gap-2 px-8 mt-40 sm:max-w-4xl">
       
       <form
         className="flex flex-col justify-center flex-1 w-full gap-2 animate-in text-foreground"

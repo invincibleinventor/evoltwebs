@@ -1,6 +1,5 @@
 'use client'
-import DeployButton from '../components/DeployButton'
- import AuthButton from '../components/AuthButton'
+
   import { createClient } from '@/utils/supabase/client' 
   import ConnectSupabaseSteps from '@/components/ConnectSupabaseSteps' 
 import SignUpUserSteps from '@/components/SignUpUserSteps'
@@ -8,6 +7,7 @@ import SignUpUserSteps from '@/components/SignUpUserSteps'
  import { cookies } from 'next/headers'
   import { use, useEffect, useState } from 'react'
 import Link from 'next/link'
+import AuthButton from '@/components/AuthButton'
 
 export default function Index() {
   const [active,setActive] = useState("All")
@@ -36,17 +36,31 @@ const canInitSupabaseClient = () => {
   }
 }
 const supabase = createClient()
+const [usermail,setusermail] = useState("")
+
+const [username,setusername] = useState("")
+const [userimage,setuserimage] = useState('')
+
 
 const isSupabaseConnected = canInitSupabaseClient()
 if(isSupabaseConnected){
   const [posts,setPosts] = useState([])
   useEffect(()=>{
-  
+  async function setmail(){
+    const {
+        data: { user },
+      } = await supabase.auth.getUser()
+      setusermail(user.email)
+      setusername(user.user_metadata.name)
+      setuserimage(user.user_metadata.avatar_url)
+      console.log(user)
+  }
+  setmail()
     async function fetch(){
     
         if(area=='All'){
       if(active=='All'){
-  const {data,error} = await supabase.from('issues').select('*').order('id', { ascending: false })
+  const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).order('id', { ascending: false })
   let a;
   if(data){
     a=data
@@ -57,7 +71,7 @@ if(isSupabaseConnected){
   setPosts(a)
 }
 else if(active=='Active'){
-  const {data,error} = await supabase.from('issues').select('*').order('id', { ascending: false }).neq('isopen',false)
+  const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).order('id', { ascending: false }).neq('isopen',false)
   let a;
   if(data){
     a=data
@@ -68,7 +82,7 @@ else if(active=='Active'){
   setPosts(a)
 }
 else{
-  const {data,error} = await supabase.from('issues').select('*').eq('priority',active).order('id', { ascending: false })
+  const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).eq('priority',active).order('id', { ascending: false })
   let a;
   if(data){
     a=data
@@ -81,7 +95,7 @@ else{
 }
 else{
   if(active=='All'){
-    const {data,error} = await supabase.from('issues').select('*').eq('area',area).order('id', { ascending: false })
+    const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).eq('area',area).order('id', { ascending: false })
     let a;
     if(data){
       a=data
@@ -92,7 +106,7 @@ else{
     setPosts(a)
   }
   else if(active=='Active'){
-    const {data,error} = await supabase.from('issues').select('*').eq('area',area).order('id', { ascending: false }).neq('isopen',false)
+    const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).eq('area',area).order('id', { ascending: false }).neq('isopen',false)
     let a;
     if(data){
       a=data
@@ -103,7 +117,7 @@ else{
     setPosts(a)
   }
   else{
-    const {data,error} = await supabase.from('issues').select('*').eq('area',area).eq('priority',active).order('id', { ascending: false })
+    const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).eq('area',area).eq('priority',active).order('id', { ascending: false })
     let a;
     if(data){
       a=data
@@ -121,8 +135,17 @@ else{
   }
     fetch()
   },[active,area])
-  return ( 
+
+  return usermail ? ( 
     <div className='grid w-auto grid-cols-1 gap-0 px-5 mt-0 mb-10 sm:px-10 xl:px-72 lg:px-64'>
+        <h1 className='mt-5 text-2xl font-bold text-black'>Your Complaints</h1>
+        <div className="flex flex-row items-center content-center gap-5 my-3 mt-5">
+            <img className="w-16 h-16 rounded-full" src={userimage}></img> 
+            <div className='flex flex-col gap-1'>
+            <h1 className='font-medium text-md'>{username}</h1>
+            <h1 className='text-sm'>{usermail}</h1>
+            </div>
+        </div>
     <div className='flex flex-row w-auto gap-4 px-4 py-5 mt-4 mb-5 overflow-x-auto sm:mb-0'>
     <button onClick={()=>setActive('All')} className={`px-3 py-2 text-sm font-medium rounded-lg ${active=='All'?`text-white bg-blue-600`:`text-neutral-700 bg-white`}`}>All</button>
 
@@ -187,4 +210,6 @@ className="w-full rounded-md multiLineLabel"
 <div className="animate-in">
 {isSupabaseConnected ?  <div>{}</div>:<div>An Internal Server Error Occured</div>} 
 </div>
-  </div></div>) }}
+  </div></div>) : (
+    <></>
+  ) }}

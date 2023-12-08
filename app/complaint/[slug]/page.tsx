@@ -65,23 +65,25 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
 }}
 
   return a>0 ? (
-    <div className="flex flex-col w-screen p-10 py-0 animate-in sm:max-w-4xl">
-            <p className={`px-3 py-2 text-xs font-medium w-max mb-5 text-white bg-blue-600 rounded-lg ${d.isverified?``:`hidden`}`}>Verified</p>
+    <div className="flex flex-col w-screen p-10 py-10 animate-in sm:max-w-4xl">
+            {<>
+       <form
+       className="flex flex-row items-center content-center w-full mb-6 md:justify-between animate-in text-foreground"
+       action={close}
+     >
+                  <h1 className={`px-3 py-2 text-sm font-medium w-max mr-2 text-white bg-blue-600 rounded-md ${d.isverified?``:`hidden`}`}>Verified</h1>
 
+      <button
+        
+        className={`flex items-center px-4 py-2 text-sm font-semibold md:ml-auto   text-white w-max hover-neutral-900 no-underline bg-black rounded-md text-foreground group ${closed}`}
+      >{closedtext}</button></form></>}
       <div className='flex content-center fex-col-reverse2'>
 
     <h1 className='text-xl font-bold'>{d.name}</h1>
-    {<>
-       <form
-       className="flex flex-col gap-2 ml-auto w-max animate-in text-foreground"
-       action={close}
-     ><button
-        
-        className={`flex items-center px-4 py-2 text-sm font-semibold text-white w-max hover-neutral-900 no-underline bg-black rounded-md text-foreground group ${closed}`}
-      >{closedtext}</button></form></>}
+   
 </div>
 <div className="flex flex-row items-center content-center gap-6 mt-4 font-semibold text-justify">
-<p className='px-4 py-2 font-normal rounded-lg text-md w-max border-neutral-200 bg-neutral-100'>{d.area}</p>
+<p className='px-4 py-2 font-normal rounded-lg text-md w-max border-neutral-300 bg-neutral-200'>{d.area}</p>
 
 <p className='text-md'> ☏ {"⠀"} +91 {d.contact}</p>
 

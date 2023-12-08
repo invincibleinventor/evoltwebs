@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground">
         <main className="flex flex-col items-center min-h-screen">
         <div className="flex flex-col items-center flex-1 w-full gap-10"> <nav className="fixed z-10 flex justify-center w-full h-16 border-b bg-neutral-50 border-b-foreground/10"> <div className="flex items-center justify-between w-full max-w-4xl p-3 text-sm"> <DeployButton /> {<AuthButton />} </div> </nav>
-        <div className='pt-[103px]'>  {children}</div>
+        <div className='pt-[63px]'>  {children}</div>
           </div>
         </main>
       </body>
