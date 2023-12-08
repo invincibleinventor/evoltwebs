@@ -17,6 +17,12 @@
   word-wrap: break-word;
 }
 
+select {
+  -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+
 .multiLineLabel .textMaxLine {
   display: -webkit-box;
   -webkit-box-orient: vertical;
