@@ -46,7 +46,8 @@ const isSupabaseConnected = canInitSupabaseClient()
 if(isSupabaseConnected){
   const [posts,setPosts] = useState([])
   useEffect(()=>{
-  async function setmail(){
+  
+    async function fetch(){
     const {
         data: { user },
       } = await supabase.auth.getUser()
@@ -54,10 +55,6 @@ if(isSupabaseConnected){
       setusername(user.user_metadata.name)
       setuserimage(user.user_metadata.avatar_url)
       console.log(user)
-  }
-  setmail()
-    async function fetch(){
-    
         if(area=='All'){
       if(active=='All'){
   const {data,error} = await supabase.from('issues').select('*').eq('uid',usermail).order('id', { ascending: false })
@@ -138,8 +135,8 @@ else{
 
   return usermail ? ( 
     <div className='grid w-auto grid-cols-1 gap-0 px-5 mt-0 mb-10 sm:px-10 xl:px-72 lg:px-64'>
-        <h1 className='mt-5 text-2xl font-bold text-black'>Your Complaints</h1>
-        <div className="flex flex-row items-center content-center gap-5 my-3 mt-5">
+        <h1 className='mt-5 text-2xl ml-4 font-bold text-black'>Your Complaints</h1>
+        <div className="flex flex-row items-center content-center ml-4 gap-5 my-3 mt-5">
             <img className="w-16 h-16 rounded-full" src={userimage}></img> 
             <div className='flex flex-col gap-1'>
             <h1 className='font-medium text-md'>{username}</h1>
