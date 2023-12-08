@@ -51,6 +51,7 @@ if(isSupabaseConnected){
     const {
         data: { user },
       } = await supabase.auth.getUser()
+      if(user){
       setusermail(user.email)
       setusername(user.user_metadata.name)
       setuserimage(user.user_metadata.avatar_url)
@@ -127,7 +128,7 @@ else{
   }
 
      
-    }
+    }}
    
   }
     fetch()
