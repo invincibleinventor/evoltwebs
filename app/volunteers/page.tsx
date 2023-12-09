@@ -94,7 +94,7 @@ else{
     </Link>
   
     </div>
-     <div className='flex flex-col mt-10 mb-6 md:content-center md:items-center md:flex-row'>
+     <div className='flex flex-col mt-4 mb-6 md:content-center md:items-center md:flex-row'>
 
 <div className='flex flex-row items-center content-center w-auto gap-4 px-1'>
 <h1 className='font-medium text-md'>Location: </h1>
