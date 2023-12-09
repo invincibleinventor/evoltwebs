@@ -33,10 +33,10 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
    }}
    if(d.isopen==true){
     isopen=true
-    
+    closed="hidden"
    }
    else{
-    closed="bg-neutral-400 hover-neutral-400 hover:cursor-pointer"
+    closed="bg-neutral-500 hover-neutral-400 hover:cursor-pointer"
     closedtext="Resolved"
    }
       }
@@ -71,7 +71,7 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
        className="flex flex-row items-center content-center w-full mb-6 md:justify-between animate-in text-foreground"
        action={close}
      >
-                  <h1 className={`px-3 py-2 text-sm font-medium w-max mr-2 text-white bg-blue-600 rounded-md ${d.isverified?``:`hidden`}`}>Verified</h1>
+<p className={`px-3 py-2 mr-2 text-xs font-medium text-white bg-blue-600 rounded-md ${d.isverified?``:`hidden`}`}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="white" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Zm-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774l.701-.84Z" clip-rule="evenodd"/></svg></p>
 
       <button
         
@@ -83,9 +83,9 @@ let d;let a;let isauthor=false;let isopen=true;let closed;let closedtext='Close'
    
 </div>
 <div className="flex flex-row items-center content-center gap-6 mt-4 font-semibold text-justify">
-<p className='px-4 py-2 font-normal rounded-lg text-md w-max border-neutral-300 bg-neutral-200'>{d.area}</p>
+<p className='px-4 py-2 font-medium text-blue-600 bg-blue-100 rounded-md text-md w-max border-neutral-300'>{d.area}</p>
 
-<p className='text-md'> ☏ {"⠀"} +91 {d.contact}</p>
+<p className='text-md'>+91 {d.contact}</p>
 
 
 </div>

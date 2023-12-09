@@ -1,4 +1,3 @@
-import { GeistSans } from 'geist/font/sans'
 import './globals.css'
 import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
@@ -22,7 +21,7 @@ export default function RootLayout({
 }) {
   
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className="font-poppins">
       <body className="bg-background text-foreground">
         <main className="flex flex-col items-center min-h-screen">
         <div className="flex flex-col items-center flex-1 w-full gap-10"> <nav className="fixed z-10 flex justify-center w-full h-16 border-b bg-neutral-50 border-b-foreground/10"> <div className="flex items-center justify-between w-full max-w-4xl p-3 text-sm"> <DeployButton /> {<AuthButton />} </div> </nav>

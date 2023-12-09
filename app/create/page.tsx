@@ -13,7 +13,15 @@ let l = ["Adambakkam", "Adyar", "Alandur", "Alapakkam", "Alwarpet", "Alwarthirun
   const create = async (formData: FormData) => {
     
     "use server";
-  
+  /*<h1 className='mt-5 ml-4 text-2xl font-bold text-black'>Your Complaints</h1>
+        <div className="flex flex-row items-center content-center gap-5 my-3 mt-5 ml-4">
+            <img className="w-16 h-16 rounded-full" src={userimage}></img> 
+            <div className='flex flex-col gap-1'>
+            <h1 className='font-medium text-md'>{username}</h1>
+            <h1 className='text-sm'>{usermail}</h1>
+            </div>
+        </div>
+        */
     const name = formData.get('name') as string
     const area = formData.get('area') as string
     const contact = formData.get('contact') as string
@@ -28,8 +36,14 @@ let l = ["Adambakkam", "Adyar", "Alandur", "Alapakkam", "Alwarpet", "Alwarthirun
 'use client'
         const supabase = createClient(cookieStore)
 const{data:check} = await supabase.from('issues').select('*').eq('uid',email).order('id',{ascending:false}).limit(1)
-        let s = check[0]
-        if(s.name==name && s.area==area && s.contact==contact && s.concern==concern){
+let s;        
+if(check && check.length>0){
+  s=check[0]
+}
+else{
+  s=[]
+}
+        if(s && s.name==name && s.area==area && s.contact==contact && s.concern==concern){
           return redirect('/?message=Successfully Posted Your Complaint');
         }
         else{
@@ -53,7 +67,7 @@ await creates()
     
 
      
-     <div className={`flex flex-col justify-center flex-1 w-full gap-2 px-8 mt-28 sm:max-w-md ${disabled?'hidden':''}`}>
+     <div className={`flex flex-col justify-center flex-1 w-screen gap-2 px-8 mt-28 sm:max-w-3xl mb-10 ${disabled?'hidden':''}`}>
   
       <Link
         href="/"
@@ -118,7 +132,7 @@ await creates()
         <textarea
           className="px-4 py-2 mb-6 border rounded-md bg-inherit"
           name="concern"
-          placeholder="Please Type Out Your Concern (80 - 100 Characters)"
+          placeholder="Please Type Out Your Concern (30 - 100 Characters)"
           required
           minLength={30}
           maxLength={1000}

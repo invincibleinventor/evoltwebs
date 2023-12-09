@@ -6,8 +6,7 @@
 import Link from 'next/link'
 
 export default function Index() {
-  const [active,setActive] = useState("All")
-  const [type,setType] = useState("priority")
+
 
   const [area,setArea] = useState('All')
    let a; 
@@ -32,18 +31,27 @@ const canInitSupabaseClient = () => {
   }
 }
 const supabase = createClient()
-
+const [mail,setMail] = useState('')
+const [text,setText] = useState('Become A Volunteer')
 const isSupabaseConnected = canInitSupabaseClient()
 if(isSupabaseConnected){
   const [load,setLoad] = useState(true)
   const [posts,setPosts] = useState([])
   useEffect(()=>{
-  
     async function fetch(){
-    
+      const {data:{user},error} = await supabase.auth.getUser()
+      let email;
+if(user){
+  setMail(user.email)
+  email = user.email
+}
+const {data:check} = await supabase.from('volunteer').select('uid').eq('uid',email)
+if(check && check.length>0){
+  console.log(check)
+  setText('Edit Volunteer Profile')
+}
         if(area=='All'){
-      if(active=='All'){
-  const {data,error} = await supabase.from('issues').select('*').order('id', { ascending: false })
+  const {data,error} = await supabase.from('volunteer').select('*')
   let a;
   if(data){
     a=data
@@ -52,55 +60,12 @@ if(isSupabaseConnected){
     a=[]
   }
   setPosts(a);setLoad(false)
-}
-else if(active=='Active'){
-  const {data,error} = await supabase.from('issues').select('*').order('id', { ascending: false }).neq('isopen',false)
-  let a;
-  if(data){
-    a=data
-  }
-  else{
-    a=[]
-  }
-  setPosts(a);setLoad(false)
+
+
 }
 else{
-  const {data,error} = await supabase.from('issues').select('*').eq('priority',active).order('id', { ascending: false })
-  let a;
-  if(data){
-    a=data
-  }
-  else{
-    a=[]
-  }
-  setPosts(a);setLoad(false)
-}
-}
-else{
-  if(active=='All'){
-    const {data,error} = await supabase.from('issues').select('*').eq('area',area).order('id', { ascending: false })
-    let a;
-    if(data){
-      a=data
-    }
-    else{
-      a=[]
-    }
-    setPosts(a);setLoad(false)
-  }
-  else if(active=='Active'){
-    const {data,error} = await supabase.from('issues').select('*').eq('area',area).order('id', { ascending: false }).neq('isopen',false)
-    let a;
-    if(data){
-      a=data
-    }
-    else{
-      a=[]
-    }
-    setPosts(a);setLoad(false)
-  }
-  else{
-    const {data,error} = await supabase.from('issues').select('*').eq('area',area).eq('priority',active).order('id', { ascending: false })
+
+    const {data,error} = await supabase.from('volunteer').select('*').eq('area',area)
     let a;
     if(data){
       a=data
@@ -110,33 +75,26 @@ else{
     }
     setPosts(a);setLoad(false)
   
-  }
 
      
     }
    
   }
     fetch()
-  },[active,area])
-  return ( 
-    <div className='grid w-auto grid-cols-1 gap-0 px-5 mt-0 mb-20 sm:px-10 xl:px-72 lg:px-64'>
-      <div className='flex flex-row gap-4 mb-0 md:mb-4'>
+  },[area])
+  return (
+    <div className='grid w-auto grid-cols-1 gap-0 px-5 mt-0 sm:px-10 xl:px-72 lg:px-64'>
+       <div className='flex flex-row gap-4 mb-0 md:mb-0'>
      <Link
       className="flex px-5 py-2 mt-10 mb-6 text-white no-underline bg-blue-600 rounded-md md:ml-auto md:mb-0 w-max"
-     href="/create"
+     href="/newvolunteer"
     >
      
-      New Complaint
+      {text}
     </Link>
-    <Link
-      className="flex px-5 py-2 mt-10 mb-6 font-medium text-blue-700 no-underline bg-blue-100 rounded-md md:mb-0 w-max"
-     href="/volunteers"
-    >
-     
-      Volunteer Zone
-    </Link>
+  
     </div>
-     <div className='flex flex-col md:content-center md:items-center md:flex-row'>
+     <div className='flex flex-col mt-10 mb-6 md:content-center md:items-center md:flex-row'>
 
 <div className='flex flex-row items-center content-center w-auto gap-4 px-1'>
 <h1 className='font-medium text-md'>Location: </h1>
@@ -151,50 +109,30 @@ else{
 </select>
 </div>
 
-<div className='flex flex-row w-auto gap-4 px-0 py-5 mt-0 mb-0 overflow-x-auto hiddenscroll'>
-<button onClick={()=>setActive('All')} className={`px-3 py-2 text-sm font-semibold rounded-md ${active=='All'?`text-blue-600 bg-blue-100`:`text-neutral-700 bg-white`}`}>All</button>
 
-<button onClick={()=>(setType('priority'),setActive('Very Urgent'))} className={`flex-shrink-0 px-3 py-2 text-sm font-medium rounded-md ${active=='Very Urgent'?`text-blue-600 bg-blue-100`:`text-neutral-700 bg-white`}`}>Very Urgent</button>
-<button onClick={()=>(setType('priority'),setActive('Urgent'))} className={`px-3 py-2 text-sm font-medium rounded-md ${active=='Urgent'?`text-blue-600 bg-blue-100`:`text-neutral-700 bg-white`}`}>Urgent</button>
-<button onClick={()=>(setType('priority'),setActive('Moderate'),console.log(active))} className={`px-3 py-2 text-sm font-medium rounded-md ${active=='Moderate'?`text-blue-600 bg-blue-100`:`text-neutral-700 bg-white`}`}>Moderate</button>
-<button onClick={()=>(setType('priority'),setActive('Closed'),console.log(active))} className={`px-3 py-2 text-sm font-medium rounded-md ${active=='Closed'?`text-blue-600 bg-blue-100`:`text-neutral-700 bg-white`}`}>Closed</button>
-<button onClick={()=>(setType('priority'),setActive('Active'),console.log(active))} className={`px-3 py-2 text-sm font-medium rounded-md ${active=='Active'?`text-blue-600 bg-blue-100`:`text-neutral-700 bg-white`}`}>Active</button>
-</div>
 </div>
 
-   <div className='grid grid-cols-1 gap-6'>
+   <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
    
-    {posts?.length ? (posts.map((post: any) => (<Link href={`/complaint/${post.id}`} key={post.id}> <div className="w-full p-4 bg-white rounded-md animate-in ">
-    <div className="flex flex-row items-center content-center justify-between mb-4">
-    <div className="flex flex-row items-center content-center gap-4 font-semibold text-justify ">
+    {posts?.length ? (posts.map((post: any) => (<Link className='px-6 py-6 bg-white rounded-md animate-in border-neutral-300'href={`/volunteer/${post.id}`} key={post.id}> 
+    
+        
+           
+      <div className='flex flex-row items-center content-center gap-6 px-4 mx-auto ml-0 w-max md:mx-0 md:ml-0 '>
+<img className='w-16 h-16 rounded-full' src={post.pic}></img>
+<div className='flex flex-col gap-[10px]'>
+    <h1 className='text-xl font-bold'>{post.name}</h1>
+    <p className='px-4 py-2 text-xs font-medium text-blue-600 bg-blue-100 rounded-md w-max border-neutral-300'>{post.area}</p>
+   </div>
+</div>
+<div className="flex flex-col gap-2 mt-8 font-semibold text-justify">
+    <div className='flex flex-col gap-2'>
+<p className='mb-0 font-semibold rounded-md text-md w-max'>Services Offered</p>
 
-    <p className='px-4 py-2 font-medium text-blue-600 bg-blue-100 rounded-md text-md w-max border-neutral-300'>{post.area}</p>
-    <p className={`px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-md ${post.isverified?``:`hidden`}`}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="white" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Zm-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774l.701-.84Z" clip-rule="evenodd"/></svg></p>
-    </div>
-    <div className={ask(post.priority)}>
-
-{post.priority}
-
+<p className='w-full text-sm font-normal leading-relaxed rounded-md multiLineLabel'>{post.services}</p>
 </div>
 </div>
-      <div className="flex flex-row items-center content-center justify-between "> <h1 className="text-lg font-semibold">{post.name}</h1> 
-
-</div>
-
-
-<div className="mt-4">
-
-<span
-
-className="w-full rounded-md multiLineLabel"
-
-
-
->{post.concern}</span>
-
-</div>
-
-</div></Link>))
+        </Link>))
     ) : (
       
       <div className='w-auto py-20 animate-in'>
