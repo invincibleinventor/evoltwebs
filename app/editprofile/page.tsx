@@ -57,7 +57,7 @@ export default function Create(){
   
        
      <form
-       className="flex flex-col justify-center w-full gap-2 my-auto ml-auto pr-6 animate-in text-foreground"
+       className="flex flex-col justify-center w-full gap-2 my-auto ml-auto pr-10 animate-in text-foreground"
        action={create}>
        
        <label className="text-md" htmlFor="name">
@@ -65,7 +65,7 @@ export default function Create(){
        </label>
        <textarea
         onChange={(e:any)=>setName(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
          name="name"
          placeholder="Please Type Out Your Display Name"
          required
