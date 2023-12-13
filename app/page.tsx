@@ -24,7 +24,7 @@ const [loading,setLoading] = useState(true)
 useEffect(()=>{
 async function get(){
     
-  const {data,error} = await supabase.from('posts').select('*')  
+  const {data,error} = await supabase.from('posts').select('*').order('id',ascending:false)
   if(error){
     console.log(error)
   }
@@ -51,7 +51,7 @@ get()},[])
 </div>
   <div className='h-full overflow-y-scroll hiddenscroll'>
   
-  <div className='flex flex-col gap-2 animate-in hiddenscroll'>
+  <div className='flex flex-col gap-2 animate-in mb-20 hiddenscroll'>
     
   {!loading ? ( posts.map((post) => (
 <PostComponent id={post.id} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
