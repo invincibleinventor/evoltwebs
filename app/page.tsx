@@ -31,10 +31,11 @@ async function get(){
   else{
     console.log(data)
    let ds = data
-  
+ setPosts(ds)
     
     console.log(ds)
     console.log(posts)
+    setLoading(false)
   }
   }
 get()},[])
