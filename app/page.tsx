@@ -24,7 +24,7 @@ const [loading,setLoading] = useState(true)
 useEffect(()=>{
 async function get(){
     
-  const {data,error} = await supabase.from('posts').select('*').order('id',ascending:false)
+  const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false})
   if(error){
     console.log(error)
   }
