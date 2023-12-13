@@ -26,7 +26,7 @@ console.log(error)
   
        
      <form
-       className="flex flex-col justify-center flex-1 w-full gap-2 my-auto animate-in text-foreground"
+       className="flex flex-col justify-center flex-1 w-full gap-2 pr-5 my-auto animate-in text-foreground"
        action={create}>
        
      
