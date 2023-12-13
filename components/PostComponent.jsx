@@ -4,10 +4,10 @@ export default function Post(props){
       <Link href={`/posts/${props.id}`}>
         <div className="w-full">
             <div className="flex flex-row gap-4 px-8 py-3">
-                <div className="flex flex-col shrink-0">
+                <Link href={`/profile/${props.handle}`} className="flex flex-col shrink-0">
                     <img className="w-10 h-10 rounded-lg shrink-0" src={props.dp}></img>
                     
-                </div>
+                </Link>
                 
                 <div className="flex flex-col gap-[2px]">
                 <Link href={'/profile/'+props.handle} className="flex flex-row items-center content-center gap-1">
