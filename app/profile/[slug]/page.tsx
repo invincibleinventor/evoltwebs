@@ -60,7 +60,7 @@ const [loading,setLoading]  = useState(true)
         <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-6" src={image}></img>
         <button className={`absolute rounded-full text-xs font-bold bottom-10 md:right-12 right-6 px-8 py-3 shadow-lg ${!imfollowing?'bg-red-400 text-white border-2 border-red-400':'bg-white text-red-500 border-2 border-red-400'}`}>{imfollowing?'Unfollow':'Follow'}</button>
         </div>
-        <div className="flex flex-col gap-2 mt-2 ml-8 md:ml-14">
+        <div className="flex flex-col gap-2 ml-8 md:ml-14">
         <div className="flex flex-row items-center content-center gap-2 ">
             <h1 className="text-xl font-semibold">{name}</h1>
             <h1 className="text-xs font-normal text-neutral-400">@{params.slug}</h1>
