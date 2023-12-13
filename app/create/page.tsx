@@ -35,7 +35,7 @@ console.log(error)
        </label>
        <textarea
         onChange={(e:any)=>setContent(e.target.value)}
-         className="px-4 py-2 mb-6 border rounded-md h-4/6 bg-inherit"
+         className="px-4 py-2 mb-6 border rounded-md h-2/6 bg-inherit"
          name="content"
          placeholder="Please Type Out Your Concern (30 - 100 Characters)"
          required
@@ -43,7 +43,7 @@ console.log(error)
        />
        
        <button className="px-8 py-4 mb-2 text-white bg-red-400 rounded-full w-max text-foreground">
-         Submit The Complaint
+         Publish This Post
        </button>
        
       
