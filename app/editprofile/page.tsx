@@ -13,8 +13,13 @@ export default function Create(){
           redirect('/login')
         }
         else{
+          const {data,error} = await supabase.from('user').select('*').eq('id',user.id)
+          if(data && data.length>0){
+            redirect('/')
+          }else{
           setEmail(user.email)
           setImage(user.user_metadata.avatar_url)
+          }
         }
       }
       get()
