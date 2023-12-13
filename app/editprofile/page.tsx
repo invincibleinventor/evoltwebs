@@ -15,7 +15,8 @@ export default function Create(){
         else{
           const {data,error} = await supabase.from('user').select('*').eq('id',user.id)
           if(data && data.length>0){
-            redirect('/')
+            
+            window.location.replace('/')
           }else{
           setEmail(user.email)
           setImage(user.user_metadata.avatar_url)
