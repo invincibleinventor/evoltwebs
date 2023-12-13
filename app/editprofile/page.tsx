@@ -18,6 +18,8 @@ export default function Create(){
             
             window.location.replace('/')
           }else{
+            setName(user.user_metadata.name)
+            
           setEmail(user.email)
           setImage(user.user_metadata.avatar_url)
           }
@@ -51,11 +53,11 @@ export default function Create(){
    }
     return(
         
-     <div className={`flex flex-col justify-center h-screen flex-1 gap-2 px-8 `}>
+     <div className={`flex flex-col items-center max-w-lg px-10 mx-auto justify-center w-full h-screen `}>
   
        
      <form
-       className="flex flex-col justify-center max-w-lg gap-2 my-auto x-auto animate-in text-foreground"
+       className="flex flex-col justify-center w-full gap-2 my-auto ml-auto animate-in text-foreground"
        action={create}>
        
        <label className="text-md" htmlFor="name">
