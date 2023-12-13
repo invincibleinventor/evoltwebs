@@ -1,0 +1,51 @@
+'use client'
+import { createClient } from "@/utils/supabase/client"
+import { redirect } from "next/navigation"
+import Link from "next/link"
+import { useState } from "react"
+export default function Create(){
+    const supabase = createClient()
+    
+    const [content,setContent] = useState('')
+    async function create(){
+        
+        const {data,error} = await supabase.from('posts').insert({content:content})
+        if(error){
+            alert(error.message)
+console.log(error)
+        }
+        else{
+            redirect('/')
+        }
+    }
+    return(
+          
+     <div className={`flex flex-col justify-center h-screen  flex-1 gap-2 px-8 `}>
+  
+       
+     <form
+       className="flex flex-col justify-center flex-1 w-full gap-2 my-auto animate-in text-foreground"
+       action={create}>
+       
+     
+       <label className="text-md" htmlFor="content">
+         Content
+       </label>
+       <textarea
+        onChange={(e:any)=>setContent(e.target.value)}
+         className="px-4 py-2 mb-6 border rounded-md h-4/6 bg-inherit"
+         name="content"
+         placeholder="Please Type Out Your Concern (30 - 100 Characters)"
+         required
+         maxLength={200}
+       />
+       
+       <button className="px-8 py-4 mb-2 text-white bg-red-400 rounded-full w-max text-foreground">
+         Submit The Complaint
+       </button>
+       
+      
+     </form>
+   </div>
+    )
+}
