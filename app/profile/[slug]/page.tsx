@@ -51,7 +51,10 @@ const [loading,setLoading]  = useState(true)
               }  }}
     get()
     },[imfollowing])
-    return !loading ? (<div className="flex flex-col">
+    return !loading ? (
+        
+  <div className='flex-1 flex-col h-screen p-0 overflow-x-hidden overflow-y-hidden'>
+    
         <div className="relative h-64">
         <div className="h-48 m-4 bg-red-200 rounded-lg shadow-lg w-[calc(100%)-32px]"></div>
         <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-2 md:left-12 left-6" src={image}></img>
