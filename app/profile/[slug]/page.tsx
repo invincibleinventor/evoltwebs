@@ -53,7 +53,7 @@ const [loading,setLoading]  = useState(true)
     },[imfollowing])
     return !loading ? (
         
-  <div className='flex-1 flex-col h-screen p-0 overflow-x-hidden overflow-y-hidden'>
+  <div className='flex-1 h-screen p-0 overflow-x-hidden overflow-y-hidden'>
     
         <div className="relative h-64">
         <div className="h-48 m-4 bg-red-200 rounded-lg shadow-lg w-[calc(100%)-32px]"></div>
