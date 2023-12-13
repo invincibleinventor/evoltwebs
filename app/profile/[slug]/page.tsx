@@ -68,7 +68,7 @@ const [loading,setLoading]  = useState(true)
         <h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
 </div>
 <h1 className="my-4 mb-1 ml-8 text-xl font-semibold">Posts</h1>
- <div className='h-full overflow-y-scroll hiddenscroll'>
+ <div className='h-screen overflow-y-scroll hiddenscroll'>
         <div className='flex flex-col gap-2 animate-in mb-20 hiddenscroll'>
     
     {!loading ? ( posts.map((post) => (
