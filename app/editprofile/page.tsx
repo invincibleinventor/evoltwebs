@@ -18,7 +18,7 @@ export default function Create(){
             
             window.location.replace('/')
           }else{
-            setName(user.user_metadata.name)
+           
             
           setEmail(user.email)
           setImage(user.user_metadata.avatar_url)
@@ -81,7 +81,7 @@ export default function Create(){
          name="handke"
          placeholder="Please Type Out Your Handle"
          required
-         minLength={5}
+         minLength={4}
          maxLength={20}
        />
          <label className="text-md" htmlFor="content">

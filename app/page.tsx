@@ -38,7 +38,7 @@ async function get(){
       ds[index].name = data[0].name
       ds[index].handle = data[0].handle
       ds[index].dp = data[0].image
-      if (index === ds.length -1){ setLoading(false);resolve();
+      if (index === data.length -1){ setLoading(false);resolve();
       }
       
     
