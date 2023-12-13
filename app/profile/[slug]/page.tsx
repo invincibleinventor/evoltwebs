@@ -65,10 +65,11 @@ const [loading,setLoading]  = useState(true)
         <h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
 </div>
 <h1 className="my-4 mb-1 ml-8 text-xl font-semibold">Posts</h1>
-<div className='flex flex-col gap-2 animate-in hiddenscroll'>
+ <div className='h-full overflow-y-scroll hiddenscroll'>
+        <div className='flex flex-col gap-2 animate-in mb-20 hiddenscroll'>
     
     {!loading ? ( posts.map((post) => (
   <PostComponent id={post.id} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
-   ))):<h1>Loading...</h1>} </div> 
+   ))):<h1>Loading...</h1>} </div> </div>
     </div>) : (<>Loading...</>)
 }
