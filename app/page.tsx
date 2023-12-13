@@ -31,21 +31,7 @@ async function get(){
   else{
     console.log(data)
    let ds = data
-   var bar = new Promise<void>((resolve, reject) => {
-    ds.forEach(async (post,index)=>{
-   
-      const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
-      ds[index].name = data[0].name
-      ds[index].handle = data[0].handle
-      ds[index].dp = data[0].image
-      if (index === data.length -1){ setLoading(false);resolve();
-      }
-      
-    
-   
-    })
-  })
-      bar.then(()=>{setPosts(ds)})
+  
     
     console.log(ds)
     console.log(posts)

@@ -8,8 +8,10 @@ export default function Create(){
     
     const [content,setContent] = useState('')
     async function create(){
-        
-        const {data,error} = await supabase.from('posts').insert({content:content})
+      const {data:{user}} = await supabase.auth.getUser()
+      const {data:D} = await supabase.from('user').select('*').eq('id',user.id)
+      
+        const {data,error} = await supabase.from('posts').insert({name:D[0].name,dp:D[0].image,handle:D[0].handle,content:content})
         if(error){
             alert(error.message)
 console.log(error)
