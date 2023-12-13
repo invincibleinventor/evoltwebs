@@ -37,7 +37,7 @@ console.log(error)
         onChange={(e:any)=>setContent(e.target.value)}
          className="w-full px-4 py-2 mb-6 mr-4 border rounded-md h-2/6 bg-inherit"
          name="content"
-         placeholder="Please Type Out Your Concern (30 - 100 Characters)"
+         placeholder="Please Type Out Your Content (30 - 100 Characters)"
          required
          maxLength={200}
        />
