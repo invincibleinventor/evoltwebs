@@ -93,8 +93,8 @@ export default function Create(){
          name="content"
          placeholder="Please Type About Yourself"
          required
-         minLength={4}
-         maxLength={200}
+         minLength={24}
+         maxLength={100}
        />
       
        <button className="px-8 py-4 mb-2 text-white bg-red-400 rounded-full w-max text-foreground">

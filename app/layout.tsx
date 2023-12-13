@@ -37,7 +37,7 @@ export default function RootLayout({
 <div className="w-full mt-0 ">
     
 
-    <div className="items-center content-center flex-1 w-full h-screen p-2 px-0 bg-white border-x border-x-neutral-100 bg-opacity-80 filter backdrop-blue-md overflow-y-scoll">
+    <div className="items-center content-center flex-1 w-full h-screen px-0 bg-white border-x border-x-neutral-100 bg-opacity-80 filter backdrop-blue-md overflow-y-scoll">
      <Suspense fallback={<Loading></Loading>}>
           {children}
           </Suspense>
