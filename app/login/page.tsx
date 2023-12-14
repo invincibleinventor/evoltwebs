@@ -41,7 +41,7 @@ export default function Login(){
 
 
 
-  return loading? (
+  return (
     <div className="flex flex-col justify-center h-screen">
       
       <form
@@ -56,19 +56,5 @@ export default function Login(){
        
       </form>
     </div>
-  ) : (<div className="flex items-center content-center w-full h-screen">
-  <Oval
-    height={80}
-    width={80}
-    color="#dc2626"
-    wrapperStyle={{}}
-    wrapperClass="mx-auto"
-    visible={true}
-    ariaLabel='oval-loading'
-    secondaryColor="#f87171"
-    strokeWidth={2}
-    strokeWidthSecondary={2}
-    
-    />
- </div>)
+  ) 
 }
