@@ -4,7 +4,9 @@ import PostComponent from "@/components/PostComponent"
 import { createClient } from "@/utils/supabase/client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { redirect, useRouter } from "next/navigation"
 export default function Page({ params }: { params: { slug: string } }) {
+    const router = useRouter()
     const supabase = createClient()
     const [image,setImage] = useState('')
 const [about,setAbout] = useState('')
@@ -60,6 +62,10 @@ const [loading,setLoading]  = useState(true)
     get()
     },[imfollowing])
     async function onfollow(){
+        if(myself){
+            router.push('/customize')
+        }
+        else{
         if(followerlist.includes(myId)){
             console.log('uesuesues')
             let arr = followerlist
@@ -79,6 +85,7 @@ const [loading,setLoading]  = useState(true)
         console.log(data)
     }
     setFollowerList(arr)
+    setFollowingList(arr2)
     setImFollowing(false)}
     else{
         let arr = followerlist
@@ -95,7 +102,9 @@ const [loading,setLoading]  = useState(true)
             console.log(data)
         }    setImFollowing(true)
     setFollowerList(arr)
-}
+    setFollowingList(arr2)
+
+}}
 }
     return !loading ? (
         

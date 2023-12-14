@@ -7,7 +7,7 @@ import { Oval } from  'react-loader-spinner'
 import { useEffect, useState } from "react"
 export default function Create(){
     const supabase = createClient()
-   const [loading,setLoading] = useState(true)
+   const [loading,setLoading] = useState(false)
     useEffect(()=>{
       async function get(){
         const {data:{user},error} = await supabase.auth.getUser()
@@ -15,20 +15,20 @@ export default function Create(){
           redirect('/login')
         }
         else{
-          const {data,error} = await supabase.from('user').select('*').eq('id',user.id)
-          if(data && data.length>0){
+         
             
-            window.location.replace('/')
-          }else{
-           
-            setLoading(false)
-          setEmail(user.email)
-          setImage(user.user_metadata.avatar_url)
+          const {data,error} = await supabase.from('user').select('*').eq('id',user.id)
+          setName(data[0]["name"])
+          setHandle(data[0]["handle"])
+          setAbout(data[0]["about"])
+          setImage(data[0]["image"])
+          
           }
-        }
+        
       }
       get()
-    })
+      
+    },[])
    
     
     const [handle,setHandle] = useState('')
@@ -37,23 +37,19 @@ export default function Create(){
     const [about,setAbout] = useState('')
     const [image,setImage] = useState('')
     
-    const [content,setContent] = useState('')
+  
    async function create(){
-    const {data,error} = await supabase.from('user').select('*').eq('handle',handle)
-    if(data.length>0){
-      alert('Handle Already Exists')
-    }
-    else{
-      const {data,error} = await supabase.from('user').insert({email:email,name:name,handle:handle,about:about,image:image,followers:[],following:[],bookmarks:[],liked:[],private:false})
+   
+      const {data,error} = await supabase.from('user').update({name:name,about:about}).eq('handle',handle)
     if(error){
       console.log(error)
     }
     else{
       window.location.replace('/')
     }
-    }
+    
    }
-    return loading ? (
+    return (
         
      <div className={`flex flex-col items-center max-w-lg px-10 mx-auto justify-center w-full h-screen `}>
   
@@ -69,27 +65,19 @@ export default function Create(){
         onChange={(e:any)=>setName(e.target.value)}
          className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
          name="name"
+         defaultValue={name}
          placeholder="Please Type Out Your Display Name"
          required
          minLength={4}
          maxLength={20}
        />
-       <label className="text-md" htmlFor="name">
-         Handle - You cannot change this later
-       </label>
-       <textarea
-        onChange={(e:any)=>setHandle(e.target.value)}
-         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
-         name="handke"
-         placeholder="Please Type Out Your Handle"
-         required
-         minLength={4}
-         maxLength={20}
-       />
+    
          <label className="text-md" htmlFor="content">
          About
        </label>
        <textarea
+                defaultValue={about}
+
         onChange={(e:any)=>setAbout(e.target.value)}
          className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
          name="content"
@@ -100,25 +88,11 @@ export default function Create(){
        />
       
        <button className="px-8 py-4 mb-2 text-white bg-red-400 rounded-full w-max text-foreground">
-         Setup Your Account
+         Save Your Changes
        </button>
        
       
      </form>
    </div>
-    ) : (<div className="flex items-center content-center w-full h-screen">
-      <Oval
-  height={80}
-  width={80}
-  color="#4fa94d"
-  wrapperStyle={{}}
-  wrapperClass="mx-auto"
-  visible={true}
-  ariaLabel='oval-loading'
-  secondaryColor="#4fa94d"
-  strokeWidth={2}
-  strokeWidthSecondary={2}
-
-/>
-    </div>)
+    )
 }

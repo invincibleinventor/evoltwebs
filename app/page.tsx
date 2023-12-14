@@ -22,22 +22,35 @@ const isSupabaseConnected = canInitSupabaseClient()
 const [posts,setPosts] = useState([])
 const [loading,setLoading] = useState(true)
 useEffect(()=>{
-async function get(){
+  async function get(){
     
-  const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false})
-  if(error){
-    console.log(error)
-  }
-  else{
-    console.log(data)
-   let ds = data
- setPosts(ds)
-    
-    console.log(ds)
-    console.log(posts)
-    setLoading(false)
-  }
-  }
+    const {data,error} = await supabase.from('posts').select('*')  
+    if(error){
+      console.log(error)
+    }
+    else{
+      console.log(data)
+     let ds = data
+     var bar = new Promise<void>((resolve, reject) => {
+      ds.forEach(async (post,index)=>{
+     
+        const {data,error} = await supabase.from('user').select('*').eq('id',post.poster).order('id',{ascending:false})
+        ds[index].name = data[0].name
+        ds[index].handle = data[0].handle
+        ds[index].dp = data[0].image
+        if (index === ds.length -1){ setLoading(false);resolve();
+        }
+        
+      
+     
+      })
+    })
+        bar.then(()=>{setPosts(ds)})
+      
+      console.log(ds)
+      console.log(posts)
+    }
+    }
 get()},[])
   if(isSupabaseConnected){
   
