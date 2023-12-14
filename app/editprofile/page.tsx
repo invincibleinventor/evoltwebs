@@ -2,12 +2,12 @@
 import { createClient } from "@/utils/supabase/client"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { Oval } from  'react-loader-spinner'
+
 
 import { useEffect, useState } from "react"
 export default function Create(){
     const supabase = createClient()
-   const [loading,setLoading] = useState(true)
+   
     useEffect(()=>{
       async function get(){
         const {data:{user},error} = await supabase.auth.getUser()
@@ -21,7 +21,7 @@ export default function Create(){
             window.location.replace('/')
           }else{
            
-            setLoading(false)
+        
           setEmail(user.email)
           setImage(user.user_metadata.avatar_url)
           }
@@ -53,7 +53,7 @@ export default function Create(){
     }
     }
    }
-    return loading ? (
+    return (
         
      <div className={`flex flex-col items-center max-w-lg px-10 mx-auto justify-center w-full h-screen `}>
   
@@ -106,19 +106,5 @@ export default function Create(){
       
      </form>
    </div>
-    ) : (<div className="flex items-center content-center w-full h-screen">
-      <Oval
-  height={80}
-  width={80}
-  color="#4fa94d"
-  wrapperStyle={{}}
-  wrapperClass="mx-auto"
-  visible={true}
-  ariaLabel='oval-loading'
-  secondaryColor="#4fa94d"
-  strokeWidth={2}
-  strokeWidthSecondary={2}
-
-/>
-    </div>)
+    ) 
 }
