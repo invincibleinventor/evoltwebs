@@ -31,26 +31,18 @@ async function get(){
   else{
     console.log(data)
    let ds = data
-   var bar = new Promise<void>((resolve, reject) => {
-    ds.forEach(async (post,index)=>{
+   for await (const [index,post] of ds.entries()) {
+     
+    const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
+    ds[index].name = data[0].name
+    ds[index].handle = data[0].handle
+    ds[index].dp = data[0].image
    
-      const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
-      ds[index].name = data[0].name
-      ds[index].handle = data[0].handle
-      ds[index].dp = data[0].image
-      if (index === ds.length-1){ resolve();
-      }
-      
     
-   
-    })
-  })
-  await Promise.all([bar]);setLoading(false);setPosts(ds)
-    
-    
-    console.log(ds)
-    console.log(posts)
-    setLoading(false)
+  
+ 
+  }
+   setPosts(ds);setLoading(false)
   }
   }
 get()},[])
