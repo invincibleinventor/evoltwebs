@@ -2,10 +2,12 @@
 import { createClient } from "@/utils/supabase/client"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import { Oval } from  'react-loader-spinner'
+
 import { useEffect, useState } from "react"
 export default function Create(){
     const supabase = createClient()
-   
+   const [loading,setLoading] = useState(true)
     useEffect(()=>{
       async function get(){
         const {data:{user},error} = await supabase.auth.getUser()
@@ -19,7 +21,7 @@ export default function Create(){
             window.location.replace('/')
           }else{
            
-            
+            setLoading(false)
           setEmail(user.email)
           setImage(user.user_metadata.avatar_url)
           }
@@ -51,13 +53,13 @@ export default function Create(){
     }
     }
    }
-    return(
+    return loading ? (
         
      <div className={`flex flex-col items-center max-w-lg px-10 mx-auto justify-center w-full h-screen `}>
   
        
      <form
-       className="flex flex-col justify-center w-full gap-2 my-auto ml-auto pr-10 animate-in text-foreground"
+       className="flex flex-col justify-center w-full gap-2 pr-10 my-auto ml-auto animate-in text-foreground"
        action={create}>
        
        <label className="text-md" htmlFor="name">
@@ -77,7 +79,7 @@ export default function Create(){
        </label>
        <textarea
         onChange={(e:any)=>setHandle(e.target.value)}
-         className="px-4 py-2 mb-6 border mr-4 rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
          name="handke"
          placeholder="Please Type Out Your Handle"
          required
@@ -89,7 +91,7 @@ export default function Create(){
        </label>
        <textarea
         onChange={(e:any)=>setAbout(e.target.value)}
-         className="px-4 py-2 mb-6 border mr-4 rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
          name="content"
          placeholder="Please Type About Yourself"
          required
@@ -104,5 +106,19 @@ export default function Create(){
       
      </form>
    </div>
-    )
+    ) : (<div className="flex items-center content-center w-full h-screen">
+      <Oval
+  height={80}
+  width={80}
+  color="#4fa94d"
+  wrapperStyle={{}}
+  wrapperClass="mx-auto"
+  visible={true}
+  ariaLabel='oval-loading'
+  secondaryColor="#4fa94d"
+  strokeWidth={2}
+  strokeWidthSecondary={2}
+
+/>
+    </div>)
 }

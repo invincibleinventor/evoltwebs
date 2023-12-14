@@ -1,8 +1,11 @@
 'use client';
 
 import Headeritem from "@/components/HeaderItem"
+import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 export default function App$(){
+  
     return(
       <div className="md:w-[420px]  h-screen bg-white flex flex-col py-0 px-0 md:pr-0 items-start">
       <Link className="flex flex-row mt-1" href="/">
@@ -14,7 +17,7 @@ export default function App$(){
      <Headeritem link="/notifications" url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M18.831 10.256c0-3.701-2.46-7.256-6.813-7.256s-6.813 3.555-6.813 7.256c0 1.502-.988 2.654-1.818 3.859c-3.73 5.971 20.807 5.703 17.262 0c-.83-1.205-1.818-2.357-1.818-3.859"/><path d="M8.643 18.368C9.272 19.92 10.07 21 12 21c1.929 0 2.728-1.08 3.357-2.632"/></g>} name="Notifications"></Headeritem>
      <Headeritem  link="/messages" url={<path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 11v-.5m4 .5v-.5M8 11v-.5m-4.536 6.328C2 15.657 2 14.771 2 11c0-3.771 0-5.657 1.464-6.828C4.93 3 7.286 3 12 3c4.714 0 7.071 0 8.535 1.172C22 5.343 22 7.229 22 11c0 3.771 0 4.657-1.465 5.828C19.072 18 16.714 18 12 18c-2.51 0-3.8 1.738-6 3v-3.212c-1.094-.163-1.899-.45-2.536-.96"/>} name="Messages"></Headeritem>
      <Headeritem link="/bookmarks"  url={<path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7.527 20.841C6.861 21.274 6 20.772 6 19.952V3.942c0-.52.336-.942.75-.942h10.5c.414 0 .75.422.75.942v16.01c0 .82-.861 1.322-1.527.89l-3.946-2.562a.962.962 0 0 0-1.054 0l-3.946 2.56Z"/>} name="Bookmarks"></Headeritem>
-     <Headeritem link="/lists"  url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><circle cx="12" cy="9.1" r="2.5"/><circle cx="12" cy="12" r="9"/><path d="M17 19.2c-.317-6.187-9.683-6.187-10 0"/></g>} name="Profile"></Headeritem>
+     <Headeritem link="/myself"  url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><circle cx="12" cy="9.1" r="2.5"/><circle cx="12" cy="12" r="9"/><path d="M17 19.2c-.317-6.187-9.683-6.187-10 0"/></g>} name="Profile"></Headeritem>
      <Headeritem link="/more" url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M12 12.25v-.5m4 .5v-.5m-8 .5v-.5"/><circle cx="12" cy="12" r="9"/></g>} name="More"></Headeritem>
      <Link href="/create" className="pt-5">
      <div className="flex flex-row rounded-full  md:w-[calc(220px)]  mx-auto md:mr-auto  md:py-[14px] p-3 w-[52px] h-[52px] bg-red-400 transition-all ease-linear duration-100 cursor-pointer hover:bg-red-600 items-center content-center">

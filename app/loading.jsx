@@ -1,3 +1,19 @@
+'use client'
+import { Oval } from "react-loader-spinner"
 export default function Loading(){
-    return(<>Loading</>)
+    return(<div className="flex items-center content-center w-full h-screen">
+    <Oval
+   height={80}
+   width={80}
+   color="#dc2626"
+   wrapperStyle={{}}
+   wrapperClass="mx-auto"
+   visible={true}
+   ariaLabel='oval-loading'
+   secondaryColor="#f87171"
+   strokeWidth={2}
+   strokeWidthSecondary={2}
+   
+   />
+   </div>)
 }

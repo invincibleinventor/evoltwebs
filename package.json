@@ -28,6 +28,7 @@
     "encoding": "^0.1.13",
     "heroicons": "^2.0.18",
     "react-insta-stories": "^2.6.2",
+    "react-loader-spinner": "^6.1.0",
     "zuck.js": "^2.1.0"
   }
 }
