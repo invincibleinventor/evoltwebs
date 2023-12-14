@@ -7,16 +7,14 @@ import { useRouter } from 'next/navigation'
 import { NextResponse } from 'next/server'
 import { useState } from 'react';
 export default function Login(){
-  const [loading,setLoading] = useState(true)
+  
     const supabase = createClient()
   async function check(){
     const {data:{user}} = await supabase.auth.getUser()
     if(user){
       return window.location.replace('/editprofile')
     }
-    else{
-      setLoading(false)
-    }
+    
    }
    check()
 
@@ -41,7 +39,7 @@ export default function Login(){
 
 
 
-  return loading ? (
+  return (
     <div className="flex flex-col justify-center h-screen">
       
       <form
@@ -56,5 +54,5 @@ export default function Login(){
        
       </form>
     </div>
-  ) : (<></>)
+  ) 
 }
