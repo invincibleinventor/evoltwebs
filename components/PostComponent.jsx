@@ -20,7 +20,7 @@ export default function Post(props){
                     <h1 className="text-xs font-medium text-black">{props.name}</h1>
                     <h1 className="text-xs font-normal text-gray-500">@{props.handle}</h1>
                     </div>
-                <Link href={'/profile/'+props.handle} className="flex flex-row justify-between my-1 ">
+                <Link href={'/profile/'+props.handle} className="flex flex-row justify-between my-1 mb-0 ">
                 <h1 className="font-semibold ">{props.title}</h1>
 
                 </Link>
