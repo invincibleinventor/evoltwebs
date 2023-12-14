@@ -118,7 +118,7 @@ const [loading,setLoading]  = useState(true)
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
         <div className="flex flex-row items-center content-center gap-2 ">
             <h1 className="text-xl font-semibold">{name}</h1>
-            <h1 className="text-xs font-normal text-neutral-400">@{params.slug}</h1>
+            <h1 className="text-sm font-normal text-neutral-400">@{params.slug}</h1>
         </div>
         <h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
 </div>
