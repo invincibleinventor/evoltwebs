@@ -18,7 +18,7 @@ export default function Post(props){
                     
                    <div className="flex flex-row items-center content-center flex-1 gap-2 py-0 rounded-lg">
                     <h1 className="text-xs font-medium text-black">{props.name}</h1>
-                    <h1 className="text-xs font-normal text-gray-500">@{props.handle}</h1>
+                    <h1 className="text-xs font-normal text-gray-600">@{props.handle}</h1>
                     </div>
                 <Link href={'/profile/'+props.handle} className="flex flex-row justify-between my-1 mb-0 ">
                 <h1 className="font-semibold ">{props.title}</h1>
