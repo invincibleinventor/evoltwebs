@@ -112,7 +112,7 @@ const [loading,setLoading]  = useState(true)
     
         <div className="relative h-64">
         <div className="h-48 m-4 bg-red-200 rounded-lg shadow-lg w-[calc(100%)-32px]"></div>
-        <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-6" src={image}></img>
+        <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-7" src={image}></img>
         <button onClick={()=>onfollow()}className={`absolute rounded-full text-xs font-bold bottom-10 md:right-12 right-6 px-8 py-3 shadow-lg ${!(imfollowing || myself)?'bg-red-400 text-white border-2 border-red-400':'bg-white text-red-500 border-2 border-red-400'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
