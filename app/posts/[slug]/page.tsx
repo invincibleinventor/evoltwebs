@@ -23,7 +23,7 @@ const [posts,setPosts] = useState([])
 const [loading,setLoading] = useState(true)
 useEffect(()=>{
 async function get(){
-    
+  
   const {data,error} = await supabase.from('posts').select('*').eq('handle',params.slug).order('id',{ascending:false})
   if(error){
     console.log(error)
@@ -35,7 +35,7 @@ async function get(){
      
     const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
     ds[index].name = data[0].name
-    ds[index].handle = data[0].handle
+    
     ds[index].dp = data[0].image
    
     

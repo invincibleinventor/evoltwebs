@@ -35,7 +35,7 @@ useEffect(()=>{
      
         const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
         ds[index].name = data[0].name
-        ds[index].handle = data[0].handle
+      
         ds[index].dp = data[0].image
        
         
