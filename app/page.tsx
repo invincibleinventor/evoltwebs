@@ -24,7 +24,7 @@ const [loading,setLoading] = useState(true)
 useEffect(()=>{
   async function get(){
     
-    const {data,error} = await supabase.from('posts').select('*')  
+    const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false})  
     if(error){
       console.log(error)
     }
@@ -34,7 +34,7 @@ useEffect(()=>{
      var bar = new Promise<void>((resolve, reject) => {
       ds.forEach(async (post,index)=>{
      
-        const {data,error} = await supabase.from('user').select('*').eq('id',post.poster).order('id',{ascending:false})
+        const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
         ds[index].name = data[0].name
         ds[index].handle = data[0].handle
         ds[index].dp = data[0].image
