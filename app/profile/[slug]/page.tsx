@@ -25,12 +25,15 @@ const [loading,setLoading]  = useState(true)
             const {data:{session}} = await supabase.auth.getSession()
         
         const {data:pd,error:pe} = await supabase.from('user').select('*').eq('handle',params.slug)
-            if(pe){
+            if(pe || pd.length==0){
                 
                 setFound(false)
+                setLoading(false)
+                setAbout('That user does not exist or you do not have access to view their profile')
+
             }
-            else{if(pd){
- {               
+            else{if(pd.length>0){
+ {               setFound(true)
                 setName(pd[0].name)
                 setAbout(pd[0].about)
                 setImage(pd[0].image)
@@ -112,16 +115,18 @@ const [loading,setLoading]  = useState(true)
     
         <div className="relative h-64">
         <div className="h-48 m-4 bg-red-200 rounded-lg shadow-lg w-[calc(100%)-32px]"></div>
-        <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-7" src={image}></img>
-        <button onClick={()=>onfollow()}className={`absolute rounded-full text-xs font-bold bottom-10 md:right-12 right-6 px-8 py-3 shadow-lg ${!(imfollowing || myself)?'bg-red-400 text-white border-2 border-red-400':'bg-white text-red-500 border-2 border-red-400'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
+        <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
+        {found && <button onClick={()=>onfollow()}className={`absolute rounded-full text-xs font-bold bottom-10 md:right-12 right-6 px-8 py-3 shadow-lg ${!(imfollowing || myself)?'bg-red-400 text-white border-2 border-red-400':'bg-white text-red-500 border-2 border-red-400'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
+}
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
-        <div className="flex flex-row items-center content-center gap-2 ">
+       {found && <div className="flex flex-row items-center content-center gap-2 ">
             <h1 className="text-xl font-semibold">{name}</h1>
             <h1 className="text-sm font-normal text-neutral-400">@{params.slug}</h1>
         </div>
-        <h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
+       }<h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
 </div>
+{found && <>
 <div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-8 my-4 mb-1 border rounded-lg md:mx-14 border-neutral-700">
 <div className="flex flex-row w-full md:mx-auto">
 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
@@ -142,7 +147,7 @@ const [loading,setLoading]  = useState(true)
 <h1 className="text-sm font-medium text-neutral-900">View All Posts By {name}{"⠀"}&gt;</h1>
 
 </div>
-</Link>
+</Link> </> }
     </div>) :(<div className="flex items-center content-center w-full h-screen">
  <Oval
    height={80}

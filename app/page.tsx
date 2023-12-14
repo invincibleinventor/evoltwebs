@@ -38,14 +38,14 @@ useEffect(()=>{
         ds[index].name = data[0].name
         ds[index].handle = data[0].handle
         ds[index].dp = data[0].image
-        if (index === ds.length -1){ setLoading(false);resolve();
+        if (index === ds.length-1){ resolve();
         }
         
       
      
       })
     })
-        bar.then(()=>{setPosts(ds)})
+    await Promise.all([bar]);setLoading(false);setPosts(ds)
       
       console.log(ds)
       console.log(posts)
@@ -55,7 +55,7 @@ get()},[])
   if(isSupabaseConnected){
   
 
-  return(<div className='flex-1 h-screen p-2 overflow-x-hidden overflow-y-hidden'>
+  return(<div className='flex-1 h-screen p-0 py-2 overflow-x-hidden overflow-y-hidden'>
   <div className="p-4 py-2 pb-4 mx-2 bg-white bg-opacity-50 ">
     <div className="relative items-center content-center">
     <svg viewBox="0 0 24 24" aria-hidden="true" className=" top-0 bottom-0 my-auto absolute ml-6 w-[18px] h-[18px] text-red-400"><g><path fill="currentColor" d="M10.25 3.75c-3.59 0-6.5 2.91-6.5 6.5s2.91 6.5 6.5 6.5c1.795 0 3.419-.726 4.596-1.904 1.178-1.177 1.904-2.801 1.904-4.596 0-3.59-2.91-6.5-6.5-6.5zm-8.5 6.5c0-4.694 3.806-8.5 8.5-8.5s8.5 3.806 8.5 8.5c0 1.986-.682 3.815-1.824 5.262l4.781 4.781-1.414 1.414-4.781-4.781c-1.447 1.142-3.276 1.824-5.262 1.824-4.694 0-8.5-3.806-8.5-8.5z"></path></g></svg>
@@ -67,7 +67,7 @@ get()},[])
   <div className='flex flex-col gap-2 mb-20 animate-in hiddenscroll'>
     
   {!loading ? ( posts.map((post) => (
-<PostComponent id={post.id} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
+<PostComponent id={post.id} title={post.title} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
  ))):(<div className="flex items-center content-center w-full h-screen">
  <Oval
    height={80}
