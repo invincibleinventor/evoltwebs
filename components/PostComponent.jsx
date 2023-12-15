@@ -16,7 +16,7 @@ export default function Post(props){
                 
                 <div className="flex flex-col gap-[2px]">
                     
-                   <div className="flex flex-row items-center content-center flex-1 gap-2 py-0 rounded-lg">
+                   <div className="flex flex-row items-center content-center flex-1 gap-1 py-0 rounded-lg">
                     <h1 className="text-xs font-medium text-black">{props.name}</h1>
                     <h1 className="text-xs font-normal text-gray-600">@{props.handle}</h1>
                     </div>
