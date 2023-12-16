@@ -17,7 +17,13 @@ export default function App (props:pros) {
         console.log(props.link)
         a.opened=true
     }
-    const link = props.link
+    else if(props.link=='/myself' && loc.startsWith('/profile'){
+        a.opened=true
+    }
+    else{
+        console.log('')
+    }
+    
 
     return(
         <Link href={link} className={`flex flex-row rounded-full px-3 md:px-[14px] md:pr-8 w-max md:w-full py-[10px] mx-2 md:mx-0 md:space-x-[16px] rounded-lg transition-all ease-linear duration-100 cursor-pointer items-center content-center  ${a.opened?'':''}`}>
