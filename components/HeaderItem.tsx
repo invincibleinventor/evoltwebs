@@ -14,7 +14,7 @@ export default function App (props:pros) {
    let a = {'opened': false}
 
     if(loc==props.link){
-        alert(props.link)
+        console.log(props.link)
         a.opened=true
     }
     const link = props.link
