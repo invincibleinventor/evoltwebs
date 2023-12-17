@@ -47,8 +47,10 @@ useEffect(()=>{
      
       }
       ds.forEach((post,index)=>{
-        if(l.includes(post.handle)==false || post.handle!=h){
+        if(l.includes(post.handle)==false){
+          if(post.handle!=h){
           ds.splice(index,1)
+          }
         }
       })
        setPosts(ds);setLoading(false)
