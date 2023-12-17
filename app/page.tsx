@@ -49,13 +49,14 @@ useEffect(()=>{
       
      
       }
+      if(ds.length>0)(
       ds.forEach((post,index)=>{
         if(l.includes(post.handle)==false){
           if(post.handle!=h){
           ds.splice(index,1)
           }
         }
-      })
+      })}
       if(ds.length>0){
         setEmpty(false)
       }
