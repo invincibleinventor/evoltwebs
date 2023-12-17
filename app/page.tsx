@@ -23,6 +23,10 @@ const [posts,setPosts] = useState([])
 const [loading,setLoading] = useState(true)
 useEffect(()=>{
   async function get(){
+    const {data:user} = await supabase.auth.getUser()
+    let s = user.user.id
+    const {data:u} = await supabase.from('user').select('*').eq('id',s)
+    let l = u[0]["following"]
     
     const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false})  
     if(error){
@@ -42,6 +46,11 @@ useEffect(()=>{
       
      
       }
+      ds.forEach((post,index)=>{
+        if(l.includes(post.handle))==false){
+          ds.splice(index,1)
+        }
+      })
        setPosts(ds);setLoading(false)
       
       console.log(ds)
