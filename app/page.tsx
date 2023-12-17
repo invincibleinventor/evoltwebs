@@ -57,6 +57,7 @@ useEffect(()=>{
           }
         }
       })}
+    console.log(ds)
       if(ds.length>0){
         setEmpty(false)
       }
