@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 import { Oval } from 'react-loader-spinner'
   import { createClient } from '@/utils/supabase/client' 
 import StoriesView from '@/components/StoriesView'
