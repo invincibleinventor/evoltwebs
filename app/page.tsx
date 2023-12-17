@@ -27,7 +27,7 @@ useEffect(()=>{
     let s = user.user.id
     const {data:u} = await supabase.from('user').select('*').eq('id',s)
     let l = u[0]["following"]
-    
+    let h = u[0]["handle"]
     const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false})  
     if(error){
       console.log(error)
@@ -47,7 +47,7 @@ useEffect(()=>{
      
       }
       ds.forEach((post,index)=>{
-        if(l.includes(post.handle)==false){
+        if(l.includes(post.handle)==false || post.handle!=h){
           ds.splice(index,1)
         }
       })
