@@ -20,7 +20,7 @@ const canInitSupabaseClient = () => {
 }
 
 const isSupabaseConnected = canInitSupabaseClient()
-const [empty,setEmpty] = useState(false)
+const [empty,setEmpty] = useState(true)
   const [posts,setPosts] = useState([])
 const [loading,setLoading] = useState(true)
 useEffect(()=>{
