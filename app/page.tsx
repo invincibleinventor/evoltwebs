@@ -30,13 +30,22 @@ useEffect(()=>{
     const {data:u} = await supabase.from('user').select('*').eq('id',s)
     let l = u[0]["following"]
     let h = u[0]["handle"]
-    const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false})  
+    let ds=[]
+    if(l.length==[]){
+      ds=[]
+      setEmpty(true)
+      setPosts(ds)
+      setLoading(false)
+    }
+    else{
+      l.push(h)
+    const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false}).in('handle',l) 
     if(error){
       console.log(error)
     }
     else{
       console.log(data)
-     let ds = data
+     ds = data
       
      for await (const [index,post] of ds.entries()) {
      
@@ -49,14 +58,7 @@ useEffect(()=>{
       
      
       }
-      if(ds.length>0)(
-      ds.forEach((post,index)=>{
-        if(l.length==0 || l.includes(post.handle)==false){
-          if(post.handle!=h){
-          ds.splice(index,1)
-          }
-        }
-      })}
+      
     
       if(ds.length>0){
         setEmpty(false)
@@ -68,6 +70,9 @@ useEffect(()=>{
       
       console.log(ds)
       console.log(posts)
+    }
+
+
     }
     }
 get()},[])
