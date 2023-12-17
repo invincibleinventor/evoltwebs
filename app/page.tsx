@@ -31,13 +31,7 @@ useEffect(()=>{
     let l = u[0]["following"]
     let h = u[0]["handle"]
     let ds=[]
-    if(l.length==0){
-      ds=[]
-      setEmpty(true)
-      setPosts(ds)
-      setLoading(false)
-    }
-    else{
+    
       l.push(h)
     const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false}).in('handle',l) 
     if(error){
@@ -73,7 +67,7 @@ useEffect(()=>{
     }
 
 
-    }
+    
     }
 get()},[])
   if(isSupabaseConnected){
