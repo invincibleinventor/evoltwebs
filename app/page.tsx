@@ -19,7 +19,8 @@ const canInitSupabaseClient = () => {
 }
 
 const isSupabaseConnected = canInitSupabaseClient()
-const [posts,setPosts] = useState([])
+const [empty,setEmpty] = useState(false)
+  const [posts,setPosts] = useState([])
 const [loading,setLoading] = useState(true)
 useEffect(()=>{
   async function get(){
@@ -35,6 +36,12 @@ useEffect(()=>{
     else{
       console.log(data)
      let ds = data
+      if(ds.length>0){
+        setEmpty(false)
+      }
+      else{
+        setEmpty(true)
+      }
      for await (const [index,post] of ds.entries()) {
      
         const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
@@ -74,9 +81,21 @@ get()},[])
   
   <div className='flex flex-col gap-2 mb-20 animate-in hiddenscroll'>
     
-  {!loading ? ( posts.map((post) => (
+  {!loading ? !empty ? ( posts.map((post) => (
 <PostComponent id={post.id} title={post.title} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
- ))):(<div className="flex items-center content-center w-full h-screen">
+ ))) : 
+    (
+      <div className="flex items-center content-center w-full h-full px-10 lg:px-24 sm:px-24 md:px-16">
+            <div className="flex flex-col gap-2 mx-auto max-w-max">
+            <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
+            <h1 className="mx-auto text-sm text-center text-neutral-400">Follow people to view their posts on your home feed. The more people you follow, the more posts on your feed</h1>
+            <Link href="/explore" className={`w-max mx-auto rounded-full text-xs font-bold mt-3 px-8 py-3 shadow-lg ${(1==1)?'bg-red-400 text-white border-2 border-red-400':'bg-white text-red-500 border-2 border-red-400'}`}>Explore People</Link>
+      
+            </div>
+            
+          </div>
+    )
+    :(<div className="flex items-center content-center w-full h-screen">
  <Oval
    height={80}
    width={80}
