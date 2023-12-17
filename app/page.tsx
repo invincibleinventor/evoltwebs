@@ -31,7 +31,7 @@ useEffect(()=>{
     let l = u[0]["following"]
     let h = u[0]["handle"]
     let ds=[]
-    if(l.length==[]){
+    if(l.length==0){
       ds=[]
       setEmpty(true)
       setPosts(ds)
