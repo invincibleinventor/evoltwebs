@@ -37,12 +37,7 @@ useEffect(()=>{
     else{
       console.log(data)
      let ds = data
-      if(ds.length>0){
-        setEmpty(false)
-      }
-      else{
-        setEmpty(true)
-      }
+      
      for await (const [index,post] of ds.entries()) {
      
         const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
@@ -61,6 +56,12 @@ useEffect(()=>{
           }
         }
       })
+      if(ds.length>0){
+        setEmpty(false)
+      }
+      else{
+        setEmpty(true)
+      }
        setPosts(ds);setLoading(false)
       
       console.log(ds)
