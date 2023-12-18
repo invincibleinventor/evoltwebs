@@ -27,7 +27,7 @@ export default function Create(){
       return
       
     }else{
-        const {error:es} = await supabase.from('user').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/covers/public/'+handle+'.jpg'}.eq('handle',handle)
+        const {error:es} = await supabase.from('user').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/covers/public/'+handle+'.jpg'}).eq('handle',handle)
     if(es){alert(es.message)}
 return
     }
