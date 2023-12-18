@@ -77,10 +77,10 @@ return
    }
     return (
         
-     <div className={`flex flex-col relative items-center mx-auto justify-center w-full h-screen `}>
+     <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
     <div className="absolute top-0 w-full h-64 max-w-full px-4 py-4">
       <div className="relative w-full h-64">
-        <div className="absolute top-0 bg-red-200 w-full rounded-lg h-[calc(52*4px)]">
+        <div className="absolute top-0 bg-red-200 w-[calc(100%-32px)] rounded-lg h-[calc(52*4px)]">
           <img src={cover?cover:''} className="h-[calc(52*4px)] rounded-lg"></img>
         </div>
         <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black bg-opacity-50 rounded-lg cursor-pointer w-max drop-shadow-lg top-3 right-3">      <input id="fupload" className="hidden"/>
