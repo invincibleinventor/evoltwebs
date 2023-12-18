@@ -14,7 +14,7 @@ export default function Create(){
    const [loading,setLoading] = useState(false)
    async function coverChange(file){
     const bucket = "covers"
-    alert('reached')
+    
     
     // Call Storage API to upload file
     const { data, error } = await supabase.storage
@@ -26,11 +26,11 @@ export default function Create(){
       alert('Error uploading file.');
       return
       
+    }else{
+        const {error:es} = await supabase.from('user').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/covers/public/'+handle+'.jpg'}.eq('handle',handle)
+    if(es){alert(es.message)}
+return
     }
-
-    alert('File uploaded successfully!');
-    return
-  
    }
     useEffect(()=>{
       async function get(){
