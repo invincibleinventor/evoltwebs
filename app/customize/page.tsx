@@ -19,7 +19,7 @@ export default function Create(){
     // Call Storage API to upload file
     const { data, error } = await supabase.storage
       .from(bucket)
-      .upload('/public/'+handle+'.jpg', file);
+      .upload('/public/'+handle+'.jpg', file, {upsert:true});
 
     // Handle error if upload failed
     if(error) {
