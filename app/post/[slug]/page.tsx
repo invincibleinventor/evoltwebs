@@ -8,6 +8,8 @@ export default function App({ params }: { params: { slug: string } }) {
     const [post,setPost] = useState({})
     const [error,setError] = useState(false)
     const [loading,setLoading] = useState(false)
+
+
     useEffect(()=>{
         async function set(){
         const {data,error} = await supabase.from('posts').select('*').eq('id',params.slug)

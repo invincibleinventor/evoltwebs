@@ -1,4 +1,6 @@
 'use client'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 import { Oval } from 'react-loader-spinner'
   import { createClient } from '@/utils/supabase/client' 
 import StoriesView from '@/components/StoriesView'
@@ -21,6 +23,10 @@ const canInitSupabaseClient = () => {
 const isSupabaseConnected = canInitSupabaseClient()
 const [posts,setPosts] = useState([])
 const [loading,setLoading] = useState(true)
+TimeAgo.locale(en)
+
+const timeAgo = new TimeAgo('en-US')
+const date1 = new Date();
 useEffect(()=>{
 async function get(){
   
@@ -38,7 +44,8 @@ async function get(){
     
     ds[index].dp = data[0].image
    
-    
+    let date2 = new Date(ds[index].created_at)
+    ds[index].diff = date1.getTime()-date2.getTime()
   
  
   }
@@ -61,7 +68,7 @@ get()},[])
   <div className='flex flex-col gap-2 mb-20 animate-in hiddenscroll'>
     
   {!loading ? ( posts.map((post) => (
-<PostComponent id={post.id} title={post.title} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
+<PostComponent id={post.id} title={post.title} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
  ))):(<div className="flex items-center content-center w-full h-screen">
  <Oval
    height={80}

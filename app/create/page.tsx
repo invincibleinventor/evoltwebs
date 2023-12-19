@@ -40,6 +40,7 @@ console.log(error)
          placeholder="Please Type Out Your Title (120 Characters)"
          required
          maxLength={120}
+         minLength={15}
        />
        <label className="text-md" htmlFor="content">
          Content
@@ -51,6 +52,7 @@ console.log(error)
          placeholder="Please Type Out Your Content"
          required
          maxLength={2000}
+         minLength={50}
        />
        
        <button className="px-8 py-4 mb-2 text-white bg-red-400 rounded-full w-max text-foreground">
