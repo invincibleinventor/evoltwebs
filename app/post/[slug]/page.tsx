@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
+import Markdown from "react-markdown";
 import MarkdownRenderer from 'react-markdown-renderer';
 export default function App({ params }: { params: { slug: string } }) {
     const supabase = createClient()
@@ -70,7 +71,7 @@ const components = {
                 </div>
                 </div>
             </div>
-            <MarkdownRenderer components={components} className="w-full h-full max-w-full px-8 py-8 overflow-hidden hiddenscroll" markdown={content}></MarkdownRenderer>
+            <Markdown components={components} className="w-full h-full max-w-full px-8 py-8 overflow-hidden hiddenscroll" >{content}</Markdown>
             </div>
         }
             </div>

@@ -129,7 +129,7 @@ Change Cover Picture</div>
        />
       
        <button className="px-8 py-4 mx-auto mb-2 text-white bg-red-400 rounded-full w-max text-foreground">
-         Save Your Changes
+         Save{" "}<span className="hidden md:inline-block">Your Changes</span>
        </button>
        
       
