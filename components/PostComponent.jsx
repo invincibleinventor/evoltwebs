@@ -1,8 +1,13 @@
 import Link from "next/link"
 export default function Post(props){
     let s = props.description;
-    if(s.length>120){
-        s=s.slice(0,120)
+    let count = s.split(" ").length - 1
+    if(count<=3){
+        var parts = s.match(/.{1,10}/g);
+        s = parts.join(" ");
+    }
+    if(s.length>100){
+        s=s.slice(0,100)
         s+="..."
     }
    return(
@@ -15,7 +20,7 @@ export default function Post(props){
 </div>
                 <div className="flex flex-col gap-[8px] px-2">
                 <Link href={`/profile/${props.handle}`} className="flex flex-row items-center content-center gap-2 shrink-0">
-                    <img className="w-5 h-5 rounded-md shrink-0" src={props.dp}></img>
+                    <img className="w-5 h-5 rounded-full shrink-0" src={props.dp}></img>
                 
                     <div className="flex flex-row gap-[2px]">
                     
@@ -28,7 +33,7 @@ export default function Post(props){
                 </Link>
                 
                     <div>
-                <div className="flex flex-row justify-between my-2 ">
+                <div className="flex flex-row justify-between my-2 mb-[6px] ">
                 <h1 className="font-semibold ">{props.title}</h1>   
 
                 </div>
