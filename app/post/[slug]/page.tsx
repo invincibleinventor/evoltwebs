@@ -40,6 +40,13 @@ export default function App({ params }: { params: { slug: string } }) {
     
 set()    }
 )
+function ClickableImage(props) {
+    
+    return <img {...props} className="w-full max-w-full"/>
+  }
+const components = {
+    img: ClickableImage
+  }
     return !loading ? (
         <div>
         {error &&
@@ -63,7 +70,7 @@ set()    }
                 </div>
                 </div>
             </div>
-            <Markdown className="w-full h-full max-w-full px-5 py-5 overflow-hidden hiddenscroll">{content}</Markdown>
+            <Markdown components={components} className="w-full h-full max-w-full px-8 py-8 overflow-hidden hiddenscroll">{content}</Markdown>
             </div>
         }
             </div>
