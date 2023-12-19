@@ -12,6 +12,8 @@
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.15",
     "geist": "^1.0.0",
+    "javascript-time-ago": "^1.0.16",
+    "moment": "^2.29.4",
     "next": "latest",
     "postcss": "8.4.29",
     "react": "18.2.0",

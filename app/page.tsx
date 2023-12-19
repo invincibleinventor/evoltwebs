@@ -1,4 +1,6 @@
 'use client'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 import Link from "next/link";
 import { Oval } from 'react-loader-spinner'
   import { createClient } from '@/utils/supabase/client' 
@@ -18,7 +20,10 @@ const canInitSupabaseClient = () => {
     return false
   }
 }
+TimeAgo.locale(en)
 
+const timeAgo = new TimeAgo('en-US')
+const date1 = new Date();
 const isSupabaseConnected = canInitSupabaseClient()
 const [empty,setEmpty] = useState(true)
   const [posts,setPosts] = useState([])
@@ -45,8 +50,10 @@ useEffect(()=>{
      
         const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
         ds[index].name = data[0].name
-      
+        let date2 = new Date(ds[index].created_at)
+        ds[index].diff = date1.getTime()-date2.getTime()
         ds[index].dp = data[0].image
+        
        
         
       
@@ -85,10 +92,10 @@ get()},[])
   <div className='flex flex-col gap-2 mb-20 animate-in hiddenscroll'>
     
   {!loading ? !empty ? ( posts.map((post) => (
-<PostComponent id={post.id} title={post.title} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
+<PostComponent id={post.id} title={post.title} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.content}/>
  ))) : 
     (
-      <div className="flex items-center content-center w-full mt-24 px-10 lg:px-24 sm:px-24 md:px-16">
+      <div className="flex items-center content-center w-full px-10 mt-24 lg:px-24 sm:px-24 md:px-16">
             <div className="flex flex-col gap-2 mx-auto max-w-max">
             <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
             <h1 className="mx-auto text-sm text-center text-neutral-400">Follow people to view their posts on your home feed. The more people you follow, the more posts on your feed</h1>
