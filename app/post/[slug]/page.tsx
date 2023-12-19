@@ -49,7 +49,7 @@ const components = {
     img: ClickableImage
   }
     return !loading ? (
-        <div>
+        <div className="flex flex-col flex-1 h-screen overflow-x-hidden overflow-y-hidden">
         {error &&
             <div className="flex items-center content-center w-full h-screen px-10 lg:px-24 sm:px-24 md:px-16">
             <div className="flex flex-col gap-2 mx-auto max-w-max">
@@ -62,16 +62,16 @@ const components = {
           </div>
         }
         {!error &&
-        <div className="flex flex-col flex-1 w-full h-screen overflow-x-hidden overflow-y-hidden">
-            <div className="relative w-full h-64" >
+        <div className="w-full max-w-full overflow-hidden hiddenscroll">
+        <div className="relative w-full h-64" >
                 <img src={cover?cover:'https://picsum.photos/2000/3000'} className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-64"></img>
                 <div className="flex flex-col items-center content-center w-full h-64 px-10 bg-black bg-opacity-50 backdrop-blur-md">
-                   <div className="flex flex-col items-center content-center gap-4 my-auto"> <h1 className="mx-auto text-2xl font-semibold leading-9 text-center text-gray-200">{title}</h1>
+                   <div className="flex flex-col items-center content-center gap-6 my-auto"> <h1 className="mx-auto text-2xl font-semibold leading-9 text-center text-gray-200">{title}</h1>
                    <Link href={'/profile/'+author} className="flex flex-row items-center content-center gap-2 px-4 py-2 bg-white rounded-lg bg-opacity-90 w-max"><img className="w-5 h-5 rounded-lg" src={profile}></img><h1 className="text-xs">{name}</h1></Link>
                 </div>
                 </div>
             </div>
-            <Markdown components={components} className="w-full h-full max-w-full px-8 py-8 overflow-hidden hiddenscroll" >{content}</Markdown>
+            <Markdown components={components}  className="w-full max-w-full px-8 py-8">{content}</Markdown>
             </div>
         }
             </div>
