@@ -54,8 +54,8 @@ set()    }
           </div>
         }
         {!error &&
-        <div>
-            <div className="relative w-full h-64 h-screen overflow-x-hidden overflow-y-hidden"  >
+        <div className="flex flex-col flex-1 w-full h-screen overflow-x-hidden overflow-y-hidden">
+            <div className="relative w-full h-64" >
                 <img src={cover?cover:'https://picsum.photos/2000/3000'} className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-64"></img>
                 <div className="flex flex-col items-center content-center w-full h-64 px-10 bg-black bg-opacity-50 backdrop-blur-md">
                    <div className="flex flex-col items-center content-center gap-4 my-auto"> <h1 className="mx-auto text-2xl font-semibold leading-9 text-center text-gray-200">{title}</h1>
@@ -63,7 +63,7 @@ set()    }
                 </div>
                 </div>
             </div>
-            <Markdown className="w-full h-full overflow-x-hidden overflow-y-scroll hiddenscroll">{content}</Markdown>
+            <Markdown className="w-full h-full max-w-full px-5 py-5 overflow-hidden hiddenscroll">{content}</Markdown>
             </div>
         }
             </div>
