@@ -71,8 +71,9 @@ const components = {
                 </div>
                 </div>
             </div>
-            <Markdown components={components}  className="w-full max-w-full px-8 py-8">{content}</Markdown>
-            </div>
+            <div className="max-w-full w-full flex-1">
+            <Markdown components={components}  className=" px-8 py-8">{content}</Markdown>
+           </div> </div>
         }
             </div>
     )
