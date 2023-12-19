@@ -15,7 +15,7 @@ export default function Create(){
    async function coverChange(file){
     const bucket = "covers"
     
-    
+  
     // Call Storage API to upload file
     const { data, error } = await supabase.storage
       .from(bucket)
@@ -27,6 +27,7 @@ export default function Create(){
       return
       
     }else{
+      
         const {error:es} = await supabase.from('user').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/covers/public/'+handle+'.jpg'}).eq('handle',handle)
     if(es){alert(es.message)}
 return
@@ -78,12 +79,12 @@ return
     return (
         
      <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
-    <div className="absolute top-0 w-[calc(100%-32px)] h-64 max-w-[calc(100%-32px)] px-4 py-4">
-      <div className="relative w-[calc(100%-32px)] h-64">
-        <div className="absolute top-0 bg-red-200 w-[calc(100%-32px)] rounded-lg h-[calc(52*4px)]">
-          <img src={cover?cover:''} className="h-[calc(52*4px)] rounded-lg"></img>
+    <div className="absolute top-0 w-[calc(100%-8px)] h-64 max-w-full px-4 py-4">
+      <div className="relative w-[calc(100%)] h-64">
+        <div className="absolute top-0 bg-red-200  w-[calc(100%)] rounded-lg h-[calc(52*4px)]">
+          <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover rounded-lg"></img>
         </div>
-        <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black bg-opacity-50 rounded-lg cursor-pointer w-max drop-shadow-lg top-3 right-3">      <input id="fupload" className="hidden"/>
+        <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black rounded-lg cursor-pointer bg-opacity-60 backdrop-blur-lg w-max drop-shadow-lg top-3 right-3">      <input id="fupload" className="hidden"/>
 Change Cover Picture</div>
    
       <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto rounded-lg h-28 w-28"/>

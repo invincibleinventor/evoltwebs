@@ -116,8 +116,11 @@ const [cover,setCover]  = useState('true')
   <div className='flex-1 h-screen p-0 overflow-x-hidden overflow-y-hidden'>
     
         <div className="relative h-64">
-        <img src={cover?cover:''} className="h-48 object-cover m-4 bg-red-200 rounded-lg shadow-lg w-[calc(100%)-32px]"></img>
-        <img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
+            <div className="bg-red-200 h-48 w-[calc(100%)-8px]  m-4 rounded-lg shadow-lg">
+                {cover &&
+        <img src={found?cover?cover:'':''} className="object-cover w-full h-48 rounded-lg"></img>
+                }
+        </div><img className="absolute w-24 h-24 rounded-lg shadow-lg bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
         {found && <button onClick={()=>onfollow()}className={`absolute rounded-full text-xs font-bold bottom-10 md:right-12 right-6 px-8 py-3 shadow-lg ${!(imfollowing || myself)?'bg-red-400 text-white border-2 border-red-400':'bg-white text-red-500 border-2 border-red-400'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
 }
         </div>
