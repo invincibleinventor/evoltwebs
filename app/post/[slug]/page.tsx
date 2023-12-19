@@ -40,7 +40,10 @@ set()    }
           </div>
         }
         {!error &&
-        <>okok</>
+        <div>
+            <div className="w-full h-48">
+            </div>
+            </div>
         }
             </div>
     )
