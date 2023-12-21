@@ -20,7 +20,7 @@ export default function Post(props){
 </div>
                 <div className="flex flex-col gap-[8px] px-2">
                 <Link href={`/profile/${props.handle}`} className="flex flex-row items-center content-center gap-2 shrink-0">
-                    <img className="w-5 h-5 rounded-lg shrink-0" src={props.dp}></img>
+                    <img className="w-5 h-5 rounded-md shrink-0" src={props.dp}></img>
                 
                     <div className="flex flex-row gap-[2px]">
                     
