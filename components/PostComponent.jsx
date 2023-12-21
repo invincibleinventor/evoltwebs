@@ -12,7 +12,7 @@ export default function Post(props){
     }
    return(
       <Link className="" href={`/post/${props.id}`}>
-        <div className="w-full px-3 py-0">
+        <div className="w-full px-5 py-0">
             
             <div className="grid items-center px-5 py-6 rounded-lg content-center gap-6 bg-white md:gap-10 sm:grid-cols-2">
 <div className="bg-black rounded-lg ">
