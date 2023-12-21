@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 export default function App$(){
   const loc = UsePathname()
     return(
-      <div className={`md:w-[420px]  h-screen bg-white flex flex-col py-0 px-0 md:pr-0 items-start ${loc.pathname.startsWith('/post/')?"hidden":""}`}>
+      <div className={`md:w-[420px]  h-screen bg-white flex flex-col py-0 px-0 md:pr-0 items-start ${loc.pathname.startsWith('/post/')?"hidden md:flex":""}`}>
       <Link className="flex flex-row mt-1" href="/">
     <svg className="w-[51px] mt-[2px] ml-[10px] mr-2 md:mr-0 md:ml-[4px] transition-all ease-linear duration-100 hover:bg-red-100  cursor-pointer rounded-full p-[10px] h-[51px] text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/></svg>
      </Link>
