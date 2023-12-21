@@ -25,7 +25,7 @@ export default function RootLayout({
   
   return (
     
-    <html lang="en" className="font-poppins">
+    <html lang="en" className="noSelect font-poppins">
       <head>
       <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
       </head>
