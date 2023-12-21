@@ -20,7 +20,7 @@ export default function App$(){
      <Headeritem link="/myself"  url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><circle cx="12" cy="9.1" r="2.5"/><circle cx="12" cy="12" r="9"/><path d="M17 19.2c-.317-6.187-9.683-6.187-10 0"/></g>} name="Profile"></Headeritem>
      <Headeritem link="/more" url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M12 12.25v-.5m4 .5v-.5m-8 .5v-.5"/><circle cx="12" cy="12" r="9"/></g>} name="More"></Headeritem>
      <Link href="/create" className="pt-5">
-     <div className="flex flex-row rounded-full  md:w-[calc(220px)]  mx-auto md:mr-auto  md:py-[14px] p-3 w-[52px] h-[52px] bg-red-400 transition-all ease-linear duration-100 cursor-pointer hover:bg-red-600 items-center content-center">
+     <div className="flex flex-row rounded-lg md:rounded-lg  md:w-[calc(220px)]  mx-auto md:mr-auto  md:py-[14px] p-3 w-[52px] h-[52px] bg-red-400 transition-all ease-linear duration-100 cursor-pointer hover:bg-red-600 items-center content-center">
         <span className={`text-white md:inline-block hidden text-sm text-center mx-auto  font-semibold pt-[0px]`}>New Post</span>
         <svg viewBox="0 0 24 24" aria-hidden="true" className="md:hidden w-[22px] h-[22px] text-white mx-auto my-auto" style={{fill:'white'}}><g><path d="M23 3c-6.62-.1-10.38 2.421-13.05 6.03C7.29 12.61 6 17.331 6 22h2c0-1.007.07-2.012.19-3H12c4.1 0 7.48-3.082 7.94-7.054C22.79 10.147 23.17 6.359 23 3zm-7 8h-1.5v2H16c.63-.016 1.2-.08 1.72-.188C16.95 15.24 14.68 17 12 17H8.55c.57-2.512 1.57-4.851 3-6.78 2.16-2.912 5.29-4.911 9.45-5.187C20.95 8.079 19.9 11 16 11zM4 9V6H1V4h3V1h2v3h3v2H6v3H4z"></path></g></svg>
       </div>
