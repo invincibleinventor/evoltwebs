@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 export default function App$(){
-  const loc = UsePathname()
+  const loc = usePathname()
     return(
       <div className={`md:w-[420px]  h-screen bg-white flex flex-col py-0 px-0 md:pr-0 items-start ${loc.pathname.startsWith('/post/')?"hidden md:flex":""}`}>
       <Link className="flex flex-row mt-1" href="/">
