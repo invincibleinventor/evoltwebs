@@ -12,9 +12,9 @@ export default function Post(props){
     }
    return(
       <Link className="" href={`/post/${props.id}`}>
-        <div className="w-full px-8 py-6">
+        <div className="w-full px-3 py-2">
             
-            <div className="grid items-center content-center gap-6 bg-white md:gap-10 sm:grid-cols-2">
+            <div className="grid items-center px-8 py-6 content-center gap-6 bg-white md:gap-10 sm:grid-cols-2">
 <div className="bg-black rounded-lg ">
     <img className="object-cover w-full rounded-lg h-44" src="https://picsum.photos/300/400"></img>
 </div>
@@ -43,8 +43,7 @@ export default function Post(props){
                 </div>
                 
             </div>
-            <div className="border-b-[1px] border-b-gray-300 mt-1 rounded-b-lg shadow-lg h-[1px] w-full"></div>
-        </div>
+              </div>
       </Link>
       )
 }
