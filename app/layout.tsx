@@ -30,7 +30,7 @@ export default function RootLayout({
       <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
       </head>
         
-      <body className="bg-gray-50 bg-cover" lang="en">
+      <body className="bg-cover bg-gray-50" lang="en">
       <main>
         <section className="relative h-screen md:w-[810px] sm:w-screen lg:w-[770px] xl:w-[1000px] my-auto mx-auto items-center content-center overflow-hidden flex flex-row">
 <NavBar></NavBar>
