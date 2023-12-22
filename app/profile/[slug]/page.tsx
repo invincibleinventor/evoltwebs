@@ -116,12 +116,12 @@ const [cover,setCover]  = useState('true')
   <div className='flex-1 h-screen p-0 overflow-x-hidden overflow-y-hidden'>
     
         <div className="relative h-64">
-            <div className="bg-gray-200 h-48 w-[calc(100%)-8px]  m-4 rounded-md ">
+            <div className="bg-gray-200 h-48 w-[calc(100%)-8px]  m-4 ">
                 {cover &&
-        <img src={found?cover?cover:'':''} className="object-cover w-full h-48 rounded-md"></img>
+        <img src={found?cover?cover:'':''} className="object-cover w-full h-48 "></img>
                 }
-        </div><img className="absolute w-24 h-24 rounded-lg bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
-        {found && <button onClick={()=>onfollow()}className={`absolute rounded-lg text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
+        </div><img className="absolute w-24 h-24 bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
+        {found && <button onClick={()=>onfollow()}className={`absolute  text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
 }
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
@@ -132,7 +132,7 @@ const [cover,setCover]  = useState('true')
        }<h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
 </div>
 {found && <>
-<div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-8 my-4 mb-1 border rounded-lg md:mx-14 border-neutral-700">
+<div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-8 my-4 mb-1 border  md:mx-14 border-neutral-700">
 <div className="flex flex-row w-full md:mx-auto">
 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
 <h1 className="text-xs font-semibold">Followers</h1>
@@ -148,7 +148,7 @@ const [cover,setCover]  = useState('true')
 </div>
 <h1 className="my-4 mb-1 ml-8 text-xl font-semibold md:ml-14">Posts</h1>
 <Link href={'/posts/'+params.slug}>
-<div className="px-6 py-3 mx-8 my-4 border rounded-lg border-neutral-400 md:mx-14">
+<div className="px-6 py-3 mx-8 my-4 border border-neutral-400 md:mx-14">
 <h1 style={{fontFamily: "Poppins"}}className="text-sm font-medium text-neutral-900">View All Posts By {name}{"⠀"}&gt;</h1>
 
 </div>
