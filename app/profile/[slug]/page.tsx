@@ -149,7 +149,7 @@ const [cover,setCover]  = useState('true')
 <h1 className="my-4 mb-1 ml-8 text-xl font-semibold md:ml-14">Posts</h1>
 <Link href={'/posts/'+params.slug}>
 <div className="px-6 py-3 mx-8 my-4 border rounded-lg border-neutral-400 md:mx-14">
-<h1 className="text-sm font-medium text-neutral-900">View All Posts By {name}{"⠀"}&gt;</h1>
+<h1 style={{fontFamily: "Poppins"}}className="text-sm font-medium text-neutral-900">View All Posts By {name}{"⠀"}&gt;</h1>
 
 </div>
 </Link> </> }

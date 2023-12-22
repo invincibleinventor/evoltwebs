@@ -128,7 +128,7 @@ Change Cover Picture</div>
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mx-auto mb-2 text-white bg-black rounded-full w-max text-foreground">
+       <button className="px-8 py-4 mx-auto mb-2 text-sm text-white bg-black rounded-lg w-max text-foreground">
          Save{" "}<span className="hidden md:inline-block">Your Changes</span>
        </button>
        

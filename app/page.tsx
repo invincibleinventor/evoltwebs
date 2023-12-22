@@ -99,7 +99,7 @@ get()},[])
             <div className="flex flex-col gap-2 mx-auto max-w-max">
             <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
             <h1 className="mx-auto text-sm text-center text-neutral-400">Follow people to view their posts on your home feed. The more people you follow, the more posts on your feed</h1>
-            <Link href="/explore" className={`w-max mx-auto rounded-full text-xs font-bold mt-3 px-8 py-3  ${(1==1)?'bg-black text-white':'bg-white border-2'}`}>Explore People</Link>
+            <Link href="/explore" className={`w-max mx-auto rounded-lg text-xs font-bold mt-3 px-8 py-3  ${(1==1)?'bg-black text-white':'bg-white border-2'}`}>Explore People</Link>
       
             </div>
             

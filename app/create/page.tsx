@@ -66,7 +66,7 @@ console.log(error)
        </label>
        <input
         onChange={(e:any)=>setTitle(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 bg-white border rounded-md"
+         className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md"
          name="content"
          placeholder="Please Type Out Your Title"
          required
@@ -78,7 +78,7 @@ console.log(error)
        </label>
        <textarea
         onChange={(e:any)=>setExcerpt(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 bg-white border rounded-md"
+         className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md"
          name="content"
          placeholder="Please Type Out Your Excerpt"
          required
@@ -101,7 +101,7 @@ console.log(error)
       />
       </div>
        
-       <button className="px-8 py-4 mb-2 text-white bg-black rounded-full w-max text-foreground">
+       <button className="px-8 py-4 mb-2 text-sm text-white bg-black rounded-lg w-max text-foreground">
          Publish This Post
        </button>
        
