@@ -13,8 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Evolt - A Modern Social Network',
-  description: 'Evolt is a modern open source social network aimed at providing modern features while still staying close to legacy specifications.',
+  title: 'Evolt - A Modern E-Journal',
+  description: 'Evolt is a modern open source internet journal aimed at empowering authors with content freedom and ownership',
 }
 
 export default function RootLayout({
