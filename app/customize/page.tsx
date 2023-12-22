@@ -81,13 +81,13 @@ return
      <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
     <div className="absolute top-0 w-[calc(100%-8px)] h-64 md:w-full max-w-full md:px-4 py-4">
       <div className="relative w-[calc(100%)] h-64">
-        <div className="absolute top-0 bg-gray-200  w-[calc(100%)] rounded-lg h-[calc(52*4px)]">
-          <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover rounded-lg"></img>
+        <div className="absolute top-0 bg-gray-200  w-[calc(100%)] h-[calc(52*4px)]">
+          <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover "></img>
         </div>
-        <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black rounded-lg cursor-pointer bg-opacity-60 backdrop-blur-lg w-max drop-shadow-lg top-2 left-2">      <input id="fupload" className="hidden"/>
+        <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black cursor-pointer bg-opacity-60 backdrop-blur-lg w-max drop-shadow-lg top-2 left-2">      <input id="fupload" className="hidden"/>
 Change Cover Picture</div>
    
-      <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto rounded-lg h-28 w-28"/>
+      <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto  h-28 w-28"/>
    
     <input onChange={(e)=>(coverChange(e.target.files[0]))} className="absolute bottom-0 left-0 right-0 hidden mx-auto" type="file" ref={hiddenFileInput}/> 
       </div>
@@ -104,7 +104,7 @@ Change Cover Picture</div>
        </label>
        <input
         onChange={(e:any)=>setName(e.target.value)}
-         className="px-4 py-2 mb-6 bg-white border rounded-md"
+         className="px-4 py-2 mb-6 bg-white border"
          name="name"
          defaultValue={name}
          placeholder="Please Type Out Your Display Name"
@@ -120,7 +120,7 @@ Change Cover Picture</div>
                 defaultValue={about}
 
         onChange={(e:any)=>setAbout(e.target.value)}
-         className="px-4 py-2 mb-6 bg-white border rounded-md"
+         className="px-4 py-2 mb-6 bg-white border"
          name="content"
          placeholder="Please Type About Yourself"
          required
@@ -128,7 +128,7 @@ Change Cover Picture</div>
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mx-auto mb-2 text-sm text-white bg-black rounded-lg w-max text-foreground">
+       <button className="px-8 py-4 mx-auto mb-2 text-sm text-white bg-black w-max text-foreground">
          Save{" "}<span className="hidden md:inline-block">Your Changes</span>
        </button>
        
