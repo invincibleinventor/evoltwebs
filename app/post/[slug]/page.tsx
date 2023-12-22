@@ -72,7 +72,7 @@ const components = {
                 </div>
             </div>
             <div className="flex-1 w-full max-w-full">
-            <Markdown components={components}  className="px-8 py-8 prose multiLineLabel">{content}</Markdown>
+            <Markdown components={components}  className="px-8 py-8 prose">{content}</Markdown>
            </div> </div>
         }
             </div>

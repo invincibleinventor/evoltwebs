@@ -11,6 +11,7 @@
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
+    "@tailwindcss/typography": "^0.5.10",
     "@uiw/react-md-editor": "^4.0.1",
     "autoprefixer": "10.4.15",
     "geist": "^1.0.0",

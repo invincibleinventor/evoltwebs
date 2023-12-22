@@ -1405,6 +1405,16 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tailwindcss/typography@^0.5.10":
+  version "0.5.10"
+  resolved "https://registry.npmjs.org/@tailwindcss/typography/-/typography-0.5.10.tgz"
+  integrity sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==
+  dependencies:
+    lodash.castarray "^4.4.0"
+    lodash.isplainobject "^4.0.6"
+    lodash.merge "^4.6.2"
+    postcss-selector-parser "6.0.10"
+
 "@types/acorn@^4.0.0":
   version "4.0.6"
   resolved "https://registry.npmjs.org/@types/acorn/-/acorn-4.0.6.tgz"
@@ -2793,6 +2803,21 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.npmjs.org/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz"
   integrity sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==
 
+lodash.castarray@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.npmjs.org/lodash.castarray/-/lodash.castarray-4.4.0.tgz"
+  integrity sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==
+
+lodash.isplainobject@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz"
+  integrity sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==
+
+lodash.merge@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
+  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
 lodash.template@^4.4.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/lodash.template/-/lodash.template-4.5.0.tgz"
@@ -4034,6 +4059,14 @@ postcss-selector-parser@^6.0.11:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
 
+postcss-selector-parser@6.0.10:
+  version "6.0.10"
+  resolved "https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-6.0.10.tgz"
+  integrity sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==
+  dependencies:
+    cssesc "^3.0.0"
+    util-deprecate "^1.0.2"
+
 postcss-value-parser@^4.0.0, postcss-value-parser@^4.0.2, postcss-value-parser@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
@@ -4626,7 +4659,7 @@ tailwind-merge@1.8.1:
   resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-1.8.1.tgz"
   integrity sha512-+fflfPxvHFr81hTJpQ3MIwtqgvefHZFUHFiIHpVIRXvG/nX9+gu2P7JNlFu2bfDMJ+uHhi/pUgzaYacMoXv+Ww==
 
-tailwindcss@3.3.3:
+"tailwindcss@>=3.0.0 || insiders", tailwindcss@3.3.3:
   version "3.3.3"
   resolved "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.3.3.tgz"
   integrity sha512-A0KgSkef7eE4Mf+nKJ83i75TMyq8HqY3qmFIJSWy8bNt0v1lG7jUcpGpoTFxAwYcWOphcTBLPPJg+bDfhDf52w==
