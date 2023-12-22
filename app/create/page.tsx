@@ -66,7 +66,7 @@ console.log(error)
        </label>
        <input
         onChange={(e:any)=>setTitle(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md"
+         className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
          name="content"
          placeholder="Please Type Out Your Title"
          required
@@ -78,7 +78,7 @@ console.log(error)
        </label>
        <textarea
         onChange={(e:any)=>setExcerpt(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border rounded-md"
+         className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
          name="content"
          placeholder="Please Type Out Your Excerpt"
          required
@@ -92,7 +92,7 @@ console.log(error)
        <div className="wmde-markdown-var"> </div>
 
        <MDEditor
-       className='mx-[2px] mb-6 rounded-lg'
+       className='mx-[2px] mb-6 '
         value={content}
         onChange={setContent}
         previewOptions={{
