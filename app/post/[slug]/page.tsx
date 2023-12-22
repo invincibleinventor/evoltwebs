@@ -71,7 +71,7 @@ const components = {
           </div>
         }
         {!error &&
-        <div className="w-[calc(100vw-68px)] overflow-hidden md:max-w-full md:w-full hiddenscroll">
+        <div className="w-[calc(100vw-68px)] md:border-x md:border-x-gray-150 overflow-hidden md:max-w-full md:w-full hiddenscroll">
         <div className="relative w-full h-64" >
                 <img src={cover?cover:'https://picsum.photos/2000/3000'} className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-64"></img>
                
