@@ -67,7 +67,7 @@ export default function Create(){
        </label>
        <textarea
         onChange={(e:any)=>setName(e.target.value)}
-         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border  bg-inherit"
          name="name"
          placeholder="Please Type Out Your Display Name"
          required
@@ -79,7 +79,7 @@ export default function Create(){
        </label>
        <textarea
         onChange={(e:any)=>setHandle(e.target.value)}
-         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border bg-inherit"
          name="handke"
          placeholder="Please Type Out Your Handle"
          required
@@ -91,7 +91,7 @@ export default function Create(){
        </label>
        <textarea
         onChange={(e:any)=>setAbout(e.target.value)}
-         className="px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border bg-inherit"
          name="content"
          placeholder="Please Type About Yourself"
          required
@@ -99,7 +99,7 @@ export default function Create(){
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mb-2 text-sm text-white bg-black rounded-lg w-max text-foreground">
+       <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max text-foreground">
          Setup Your Account
        </button>
        
