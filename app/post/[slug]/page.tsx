@@ -77,7 +77,7 @@ const components = {
                
             </div>
             <div className="flex flex-col flex-1 w-full max-w-full px-8 py-8 ">
-              <h1 className="text-4xl font-extrabold md:leading-[calc(15*4px)] md:text-5xl">{title}</h1>
+              <h1 className="text-3xl font-extrabold md:leading-[calc(15*4px)] md:text-5xl">{title}</h1>
               <div className="flex flex-row items-center content-center justify-between mt-6 text-md">
                 <Link  href={"/profile/"+author} className="flex flex-row items-center content-center">
                 <img className="mr-3  w-6 h-6" src={profile}></img>
