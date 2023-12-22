@@ -1,6 +1,7 @@
 'use client';
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
+import remarkGfm from 'remark-gfm'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import { useEffect, useState } from "react";
@@ -84,7 +85,7 @@ const components = {
                 </Link>
                 <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
               </div>
-            <Markdown components={components}  className="mt-10 prose font-inter">{content}</Markdown>
+            <Markdown remarkPlugins={[remarkGfm]} components={components}  className="mt-10 prose font-inter">{content}</Markdown>
            </div> </div>
         }
             </div>
