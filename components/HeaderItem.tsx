@@ -26,8 +26,8 @@ export default function App (props:pros) {
     
 
     return(
-        <Link href={props.link} className={`flex flex-row rounded-lg px-3 md:px-[6px] md:pr-8 w-max md:w-full py-[10px] md:py-[6px] mx-2 md:mx-0 md:space-x-[16px] rounded-lg transition-all ease-linear duration-100 cursor-pointer items-center content-center  ${a.opened?'':''}`}>
-  <svg className={`w-[26px] stroke-2 p-[2px] text-black h-[26px] ${a.opened?'text-black':'text-gray-600'}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">{props.url}</svg>
+        <Link href={props.link} className={`flex flex-row rounded-lg px-3 md:px-[6px] md:pr-8 w-max md:w-full py-[10px] md:py-[8px] mx-2 md:mx-0 md:space-x-[16px] rounded-lg transition-all ease-linear duration-100 cursor-pointer items-center content-center  ${a.opened?'':''}`}>
+  <svg className={`w-[26px] stroke-[6px] p-[2px] text-black h-[26px] ${a.opened?'text-black':'text-gray-600'}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">{props.url}</svg>
     <span className={`text-black text-xs md:inline-block hidden font-pops ${a.opened?'font-medium text-black':'font-normal text-gray-600'} pt-[0px]`}>{props.name}</span>
   </Link>
     )
