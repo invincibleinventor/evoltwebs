@@ -79,7 +79,7 @@ return
     return (
         
      <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
-    <div className="absolute top-0 w-[calc(100%-12px)] h-64 max-w-full px-4 py-4">
+    <div className="absolute top-0 w-[calc(100%-32px)] h-64 max-w-full px-4 py-4">
       <div className="relative w-[calc(100%)] h-64">
         <div className="absolute top-0 bg-gray-200  w-[calc(100%)] rounded-lg h-[calc(52*4px)]">
           <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover rounded-lg"></img>
