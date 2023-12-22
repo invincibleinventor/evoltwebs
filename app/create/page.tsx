@@ -101,7 +101,7 @@ console.log(error)
       />
       </div>
        
-       <button className="px-8 py-4 mb-2 text-sm text-white bg-black rounded-lg w-max text-foreground">
+       <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max text-foreground">
          Publish This Post
        </button>
        
