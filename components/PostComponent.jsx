@@ -11,7 +11,7 @@ export default function Post(props){
         s+="..."
     }
    return(
-      <Link className="" href={`/post/${props.id}`}>
+      <Link className="animate-in" href={`/post/${props.id}`}>
         <div className="w-full px-5 py-[6px]">
             
             <div className="grid items-center px-4 py-5 rounded-md border border-gray-100 content-center gap-6 bg-white md:gap-10 sm:grid-cols-2">
