@@ -47,7 +47,7 @@ export default function Login(){
         action={signWithGoogle}
       >
         
-        <button className="px-10 py-4 mx-auto mb-2 text-sm text-white bg-black rounded-lg w-max text-foreground">
+        <button className="px-10 py-4 mx-auto mb-2 text-sm text-white bg-black w-max text-foreground">
           Sign In With Google
         </button>
        
