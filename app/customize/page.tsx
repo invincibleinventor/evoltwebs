@@ -79,7 +79,7 @@ return
     return (
         
      <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
-    <div className="absolute top-0 w-[calc(100%-16px)] h-64 md:w-full max-w-full md:px-4 py-4">
+    <div className="absolute top-0 w-[calc(100%-20px)] h-64 md:w-full max-w-full md:px-4 py-4">
       <div className="relative w-[calc(100%)] h-64">
         <div className="absolute top-0 bg-gray-200  w-[calc(100%)] h-[calc(52*4px)]">
           <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover "></img>
@@ -128,8 +128,8 @@ Change Cover Picture</div>
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max text-foreground">
-         Save{" "}<span className="hidden md:inline-block">Your Changes</span>
+       <button className="px-8 py-4 mb-2 mx-4 text-sm text-white bg-black w-max text-foreground">
+         Save Your Changes
        </button>
        
       
