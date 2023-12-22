@@ -79,7 +79,7 @@ return
     return (
         
      <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
-    <div className="absolute top-0 w-[calc(100%-8px)] h-64 md:w-full max-w-full md:px-4 py-4">
+    <div className="absolute top-0 w-[calc(100%-16px)] h-64 md:w-full max-w-full md:px-4 py-4">
       <div className="relative w-[calc(100%)] h-64">
         <div className="absolute top-0 bg-gray-200  w-[calc(100%)] h-[calc(52*4px)]">
           <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover "></img>
@@ -99,7 +99,7 @@ Change Cover Picture</div>
        className="flex flex-col justify-center w-full max-w-lg gap-2 md:px-10 mx-auto mt-24 md:mt-28 animate-in text-foreground"
        action={create}>
        
-       <label className="text-md" htmlFor="name">
+       <label className="text-md mx-4" htmlFor="name">
          Name
        </label>
        <input
@@ -113,7 +113,7 @@ Change Cover Picture</div>
          maxLength={20}
        />
     
-         <label className="text-md" htmlFor="content">
+         <label className="text-md mx-4" htmlFor="content">
          About
        </label>
        <textarea
@@ -128,7 +128,7 @@ Change Cover Picture</div>
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mx-auto mb-2 text-sm text-white bg-black w-max text-foreground">
+       <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max text-foreground">
          Save{" "}<span className="hidden md:inline-block">Your Changes</span>
        </button>
        
