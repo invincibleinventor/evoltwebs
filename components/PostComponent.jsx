@@ -14,7 +14,7 @@ export default function Post(props){
       <Link className="animate-in" href={`/post/${props.id}`}>
         <div className="w-full px-5 py-[6px]">
             
-            <div className="grid items-center content-center gap-[4px] bg-white border border-gray-150 md:gap-4 sm:grid-cols-2">
+            <div className="grid items-center content-center gap-[4px] bg-white border border-gray-100 md:gap-4 sm:grid-cols-2">
 <div className="bg-black rounded-md ">
     <img className="object-cover w-full h-[204px]" src={props.cover?props.cover:"https://picsum.photos/300/400"}></img>
 </div>
