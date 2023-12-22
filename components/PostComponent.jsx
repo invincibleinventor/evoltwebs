@@ -34,7 +34,7 @@ export default function Post(props){
                 
                     <div>
                 <div className="flex flex-row justify-between my-2 mb-[6px] ">
-                <h1 className="font-bold md:font-semibold ">{props.title}</h1>   
+                <h1 className="text-lg font-bold md:text-base md:font-semibold ">{props.title}</h1>   
 
                 </div>
 
