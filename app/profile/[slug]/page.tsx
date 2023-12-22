@@ -121,7 +121,7 @@ const [cover,setCover]  = useState('true')
         <img src={found?cover?cover:'':''} className="object-cover w-full h-48 rounded-md"></img>
                 }
         </div><img className="absolute w-24 h-24 rounded-lg bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
-        {found && <button onClick={()=>onfollow()}className={`absolute rounded-lg text-xs font-bold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border-1 border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
+        {found && <button onClick={()=>onfollow()}className={`absolute rounded-lg text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
 }
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
