@@ -66,8 +66,8 @@ const components = {
         <div className="relative w-full h-64" >
                 <img src={cover?cover:'https://picsum.photos/2000/3000'} className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-64"></img>
                 <div className="flex flex-col items-center content-center w-full h-64 px-10 bg-black bg-opacity-50 backdrop-blur-md">
-                   <div className="flex flex-col items-center content-center gap-6 my-auto"> <h1 className="mx-auto text-2xl font-semibold leading-9 text-center text-gray-200">{title}</h1>
-                   <Link href={'/profile/'+author} className="flex flex-row items-center content-center gap-2 px-4 py-2 bg-white rounded-lg bg-opacity-90 w-max"><img className="w-5 h-5 rounded-lg" src={profile}></img><h1 className="text-xs">{name}</h1></Link>
+                   <div className="flex flex-col items-center content-center gap-6 my-auto"> <h1 className="mx-auto text-3xl font-semibold leading-9 text-center text-gray-200">{title}</h1>
+                   <Link href={'/profile/'+author} className="flex flex-row items-center content-center gap-2 px-4 py-2 bg-white rounded-md bg-opacity-90 w-max"><img className="w-5 h-5 rounded-sm" src={profile}></img><h1 className="text-xs">{name}</h1></Link>
                 </div>
                 </div>
             </div>
