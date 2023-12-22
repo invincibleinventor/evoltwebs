@@ -82,7 +82,7 @@ console.log(error)
          name="content"
          placeholder="Please Type Out Your Excerpt"
          required
-         maxLength={200}
+         maxLength={150}
          minLength={90}
        />
         <label className="text-md" htmlFor="content">
