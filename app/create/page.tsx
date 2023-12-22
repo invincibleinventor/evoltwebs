@@ -92,7 +92,7 @@ console.log(error)
        <div className="wmde-markdown-var"> </div>
 
        <MDEditor
-       className='mx-[2px] mb-6 '
+       className='mx-[2px] mb-6 rounded-none'
         value={content}
         onChange={setContent}
         previewOptions={{
