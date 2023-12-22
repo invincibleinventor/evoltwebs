@@ -77,15 +77,15 @@ const components = {
                
             </div>
             <div className="flex flex-col flex-1 w-full max-w-full px-8 py-8 ">
-              <h1 className="text-4xl font-extrabold md:leading-[calc(15*4px)] md:text-5xl">{title}</h1>
+              <h1 className="text-5xl font-extrabold md:leading-[calc(15*4px)] md:text-5xl">{title}</h1>
               <div className="flex flex-row items-center content-center justify-between mt-6 text-md">
                 <Link  href={"/profile/"+author} className="flex flex-row items-center content-center">
-                <img className="mr-3  w-7 h-7" src={profile}></img>
+                <img className="mr-3  w-6 h-6" src={profile}></img>
                 <h1 className="font-semibold">{name}</h1>
                 </Link>
                 <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
               </div>
-            <Markdown remarkPlugins={[remarkGfm]} components={components}  className="mt-10 prose font-inter">{content}</Markdown>
+            <Markdown remarkPlugins={[remarkGfm]} components={components}  className="mt-12 prose font-inter">{content}</Markdown>
            </div> </div>
         }
             </div>
