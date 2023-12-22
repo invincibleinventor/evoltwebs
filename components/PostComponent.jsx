@@ -6,8 +6,8 @@ export default function Post(props){
         var parts = s.match(/.{1,10}/g);
         s = parts.join(" ");
     }
-    if(s.length>100){
-        s=s.slice(0,100)
+    if(s.length>147){
+        s=s.slice(0,147)
         s+="..."
     }
    return(
