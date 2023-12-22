@@ -79,7 +79,7 @@ return
     return (
         
      <div className={`flex flex-col relative items-center mx-auto justify-center flex-1 overflow-x-hidden overflow-y-hidden h-screen`}>
-    <div className="absolute top-0 w-[calc(100%-8px)] h-64 md:w-full max-w-full pr-6 md:px-4 py-4">
+    <div className="absolute top-0 w-[calc(100%-8px)] h-64 md:w-full max-w-full md:px-4 py-4">
       <div className="relative w-[calc(100%)] h-64">
         <div className="absolute top-0 bg-gray-200  w-[calc(100%)] rounded-lg h-[calc(52*4px)]">
           <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover rounded-lg"></img>
@@ -96,7 +96,7 @@ Change Cover Picture</div>
 
        
      <form
-       className="flex flex-col justify-center w-full max-w-lg gap-2 px-10 mx-auto mt-24 md:mt-28 animate-in text-foreground"
+       className="flex flex-col justify-center w-full max-w-lg gap-2 md:px-10 mx-auto mt-24 md:mt-28 animate-in text-foreground"
        action={create}>
        
        <label className="text-md" htmlFor="name">
