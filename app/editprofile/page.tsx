@@ -99,7 +99,7 @@ export default function Create(){
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mb-2 text-white bg-red-400 rounded-full w-max text-foreground">
+       <button className="px-8 py-4 mb-2 text-white bg-black rounded-full w-max text-foreground">
          Setup Your Account
        </button>
        
