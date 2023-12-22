@@ -10,7 +10,7 @@ export default function App$(){
       <div className="md:w-[400px] mb-auto">
       <div className={`  w-max flex flex-col py-0 px-0 md:pr-0 items-start ${loc.startsWith('/post/')?"md:flex":""}`}>
       <Link className="flex flex-row mt-1" href="/">
-    <svg className="w-[51px] mt-[2px] ml-[8px] mr-2 md:mr-0 md:ml-[4px] transition-all ease-linear duration-100 hover:bg-gray-200  cursor-pointer rounded-full p-[10px] h-[51px] text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/></svg>
+    <svg className="w-[51px] mt-[2px] ml-[8px] mr-2 md:mr-0 md:ml-[4px] transition-all ease-linear duration-100 hover:bg-gray-400  cursor-pointer rounded-full p-[10px] h-[51px] text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/></svg>
      </Link>
      <div className="py-4 md:bg-white md:rounded-lg md:px-4 md:border md:border-gray-150 pt-[14px] md:pt-[4px] md:mt-7 flex flex-col md:space-y-[0px] space-y-1">
      <Headeritem  link="/" url={<g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M6.133 21C4.955 21 4 20.02 4 18.81v-8.802c0-.665.295-1.295.8-1.71l5.867-4.818a2.09 2.09 0 0 1 2.666 0l5.866 4.818c.506.415.801 1.045.801 1.71v8.802c0 1.21-.955 2.19-2.133 2.19z"/><path d="M9.5 21v-5.5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2V21"/></g>} name="Home"></Headeritem>
