@@ -66,7 +66,7 @@ console.log(error)
        </label>
        <input
         onChange={(e:any)=>setTitle(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
+         className="w-full px-4 py-2 mb-6 mr-4 bg-white border rounded-md"
          name="content"
          placeholder="Please Type Out Your Title"
          required
@@ -78,7 +78,7 @@ console.log(error)
        </label>
        <textarea
         onChange={(e:any)=>setExcerpt(e.target.value)}
-         className="w-full px-4 py-2 mb-6 mr-4 border rounded-md bg-inherit"
+         className="w-full px-4 py-2 mb-6 mr-4 bg-white border rounded-md"
          name="content"
          placeholder="Please Type Out Your Excerpt"
          required

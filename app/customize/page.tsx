@@ -104,7 +104,7 @@ Change Cover Picture</div>
        </label>
        <input
         onChange={(e:any)=>setName(e.target.value)}
-         className="px-4 py-2 mb-6 border rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 bg-white border rounded-md"
          name="name"
          defaultValue={name}
          placeholder="Please Type Out Your Display Name"
@@ -120,7 +120,7 @@ Change Cover Picture</div>
                 defaultValue={about}
 
         onChange={(e:any)=>setAbout(e.target.value)}
-         className="px-4 py-2 mb-6 border rounded-md bg-inherit"
+         className="px-4 py-2 mb-6 bg-white border rounded-md"
          name="content"
          placeholder="Please Type About Yourself"
          required
