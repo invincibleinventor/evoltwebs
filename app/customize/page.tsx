@@ -84,7 +84,7 @@ return
         <div className="absolute top-0 bg-gray-200  w-[calc(100%)] rounded-lg h-[calc(52*4px)]">
           <img src={cover?cover:''} className="h-[calc(52*4px)] border border-gray-500 w-full object-cover rounded-lg"></img>
         </div>
-        <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black rounded-lg cursor-pointer bg-opacity-60 backdrop-blur-lg w-max drop-shadow-lg top-3 right-3">      <input id="fupload" className="hidden"/>
+        <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black rounded-lg cursor-pointer bg-opacity-60 backdrop-blur-lg w-max drop-shadow-lg top-3 left-3">      <input id="fupload" className="hidden"/>
 Change Cover Picture</div>
    
       <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto rounded-lg h-28 w-28"/>
