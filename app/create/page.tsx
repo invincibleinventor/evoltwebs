@@ -72,7 +72,7 @@ console.log(error)
             let newCover = await coverChange(data[0]["id"])
           
             const {error:es} = await supabase.from('posts').upsert({'cover':newCover,'id':data[0]["id"]})
-if(es){alert(es)}
+if(es){alert(es.message)}
             redirect('/')
           }
         }
