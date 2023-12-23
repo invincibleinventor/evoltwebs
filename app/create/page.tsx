@@ -66,8 +66,9 @@ console.log(error)
         }
         else{
           if(changed){
-            const {data,error} = await supabase.from('posts').select('id').eq('handle',u[0]["handle"]).order('id',{ascending:false}).limit(1)
-    
+            
+            const {data,error} = await supabase.from('posts').select('*').eq('poster',user.id).order('id',{ascending:false}).limit(1)
+    if(data){alert(data[0]["id"]}
             let newCover = await coverChange(data[0]["id"])
             const {error:es} = await supabase.from('posts').update({'cover':newCover}).eq('id',data[0]["id"])
 if(es){alert(es)}else{redirect('/')}
@@ -109,14 +110,14 @@ if(es){alert(es)}else{redirect('/')}
          maxLength={150}
          minLength={90}
        />
-       <input onChange={(e)=>(setCover(URL.createObjectURL(e.target.files[0])),setChanged(true),setFile(e.target.files[0]))} className="bottom-0 left-0 right-0 hidden mx-auto" type="file" ref={hiddenFileInput}/> 
+       <input onChange={(e)=>(setCover(URL.createObjectURL(e.target.files[0])),setFile(e.target.files[0]))} className="bottom-0 left-0 right-0 hidden mx-auto" type="file" ref={hiddenFileInput}/> 
        <label className="mb-1 text-md" htmlFor="content">
          Cover Image
        </label>
 <div className='relative w-full h-40 px-4 py-2 mb-6 mr-4 border shrink-0'>
 <img src={cover} className='absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-40 shrink-0'>
 </img>
-<button onClick={(e:any)=>handleClick(e)} className='absolute top-0 bottom-0 left-0 right-0 px-6 py-3 mx-auto my-auto text-xs text-white bg-black bg-opacity-60 backdrop-blur-sm w-max h-max'>Change Cover</button>
+<button onClick={(e:any)=>(setChanged(true),handleClick(e))} className='absolute top-0 bottom-0 left-0 right-0 px-6 py-3 mx-auto my-auto text-xs text-white bg-black bg-opacity-60 backdrop-blur-sm w-max h-max'>Change Cover</button>
 
 </div>
         <label className="mb-1 text-md" htmlFor="content">
