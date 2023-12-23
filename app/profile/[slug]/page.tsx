@@ -28,7 +28,8 @@ const [cover,setCover]  = useState('true')
     useEffect(()=>{
         async function get(){
             const {data:{session}} = await supabase.auth.getSession()
-        
+        if(session){
+                    setloggedin(true)}
         const {data:pd,error:pe} = await supabase.from('user').select('*').eq('handle',params.slug)
             if(pe || pd.length==0){
                 
@@ -47,7 +48,7 @@ const [cover,setCover]  = useState('true')
                 setFollowing(pd[0].following.length)
                 
                 if(session){
-                    setloggedin(false)
+                    
                     const {data,error} = await supabase.from('user').select('*').eq('id',session.user.id)
                     
                         setMyId(data[0].handle)
