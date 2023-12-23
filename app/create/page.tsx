@@ -66,7 +66,7 @@ console.log(error)
         }
         else{
           if(changed){
-            
+            alert('rched')
             const {data,error} = await supabase.from('posts').select('*').eq('poster',user.id).order('id',{ascending:false}).limit(1)
     if(data){alert(data[0]["id"]}
             let newCover = await coverChange(data[0]["id"])
