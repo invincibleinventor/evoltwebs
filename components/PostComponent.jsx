@@ -49,11 +49,11 @@ else{
                 
                     <div>
                 <div className="flex flex-row justify-between my-2 mb-[6px] ">
-                <h1 className="text-lg font-bold md:text-base md:font-semibold ">{a}</h1>   
+                <h1 className="text-lg font-bold md:text-base multiLineLabel md:font-semibold ">{a}</h1>   
 
                 </div>
 
-                <h1 className="text-xs font-normal leading-[20px] text-gray-900 md:leading-[25px] md:text-sm">{s}</h1>
+                <h1 className="text-xs font-normal leading-[20px] multiLineLabel text-gray-900 md:leading-[25px] md:text-sm">{s}</h1>
             </div>
                 </div>
                 
