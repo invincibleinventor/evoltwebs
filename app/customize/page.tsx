@@ -11,8 +11,11 @@ export default function Create(){
     const handleClick = (event:any) => {
       hiddenFileInput.current.click();
     };
+    const [changed,setChanged]  = useState(false)
    const [loading,setLoading] = useState(false)
-   async function coverChange(file){
+   const [file,setFile] = useState<File>()
+   async function coverChange(){
+    console.log('here here')
     const bucket = "covers"
     
   
@@ -66,6 +69,9 @@ return
     
   
    async function create(){
+   if(changed){
+    await coverChange()
+   }
    
       const {data,error} = await supabase.from('user').update({name:name,about:about}).eq('handle',handle)
     if(error){
@@ -87,24 +93,24 @@ return
         <div onClick={handleClick} className="absolute px-6 py-3 text-xs text-white bg-black cursor-pointer bg-opacity-60 backdrop-blur-lg w-max drop-shadow-lg top-2 left-2">      <input id="fupload" className="hidden"/>
 Change Cover Picture</div>
    
-      <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto  h-28 w-28"/>
+      <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto h-28 w-28"/>
    
-    <input onChange={(e)=>(coverChange(e.target.files[0]))} className="absolute bottom-0 left-0 right-0 hidden mx-auto" type="file" ref={hiddenFileInput}/> 
+    <input onChange={(e)=>(setCover(URL.createObjectURL(e.target.files[0])),setChanged(true),setFile(e.target.files[0]))} className="absolute bottom-0 left-0 right-0 hidden mx-auto" type="file" ref={hiddenFileInput}/> 
       </div>
       
     </div>
 
        
      <form
-       className="flex flex-col justify-center w-full max-w-lg gap-2 md:px-10 mx-auto mt-24 md:mt-28 animate-in text-foreground"
+       className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-0 md:px-10 md:mt-28 animate-in text-foreground"
        action={create}>
        
-       <label className="text-md mx-4" htmlFor="name">
+       <label className="mx-6 text-md" htmlFor="name">
          Name
        </label>
        <input
         onChange={(e:any)=>setName(e.target.value)}
-         className="px-4 py-2 mb-6 mx-4 bg-white border"
+         className="px-4 py-2 mx-6 mb-4 bg-white border"
          name="name"
          defaultValue={name}
          placeholder="Please Type Out Your Display Name"
@@ -113,14 +119,14 @@ Change Cover Picture</div>
          maxLength={20}
        />
     
-         <label className="text-md mx-4" htmlFor="content">
+         <label className="mx-6 text-md" htmlFor="content">
          About
        </label>
        <textarea
                 defaultValue={about}
 
         onChange={(e:any)=>setAbout(e.target.value)}
-         className="px-4 py-2 mb-6 mx-4 bg-white border"
+         className="px-4 py-2 mx-6 mb-4 bg-white border"
          name="content"
          placeholder="Please Type About Yourself"
          required
@@ -128,7 +134,7 @@ Change Cover Picture</div>
          maxLength={100}
        />
       
-       <button className="px-8 py-4 mb-2 mx-4 text-sm text-white bg-black w-max text-foreground">
+       <button className="px-8 py-4 mx-6 mb-2 text-xs text-white bg-black w-max text-foreground">
          Save Your Changes
        </button>
        

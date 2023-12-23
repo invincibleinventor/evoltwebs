@@ -58,7 +58,7 @@ console.log(error)
      <form
        className="flex flex-col justify-center w-full gap-2 pt-20 pr-5 my-auto overflow-x-hidden overflow-y-hidden animate-in text-foreground"
        action={create}>
-       <h1 className='mb-6 text-2xl font-extrabold text-black'>Publish New Post</h1>
+       <h1 className='mb-6 text-2xl font-bold text-black md:text-3xl'>Publish New Post</h1>
      
        <label className="text-md" htmlFor="content">
          Title
