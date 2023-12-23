@@ -64,7 +64,7 @@ else{
             alert(error.message)
 console.log(error)
         }
-        else{
+        
           if(changed){
             alert('rched')
             const {data,error} = await supabase.from('posts').select('*').eq('poster',user.id).order('id',{ascending:false}).limit(1)
@@ -74,7 +74,7 @@ console.log(error)
 if(es){alert(es)}else{redirect('/')}
           }
 
-        }
+        
     }
   }
     return(
