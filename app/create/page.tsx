@@ -75,10 +75,10 @@ console.log(error)
   }
     return(
           
-      <div className={`'flex-1 flex flex-col justify-center px-8 gap-2 overflow-y-hidden overflow-x-hidden`}>
-       
+      <div className={`flex-1 h-screen overflow-y-hidden px-8 gap-2 overflow-x-hidden`}>
+       <div className='h-full overflow-y-scroll hiddenscroll'>
      <form
-       className="flex flex-col justify-center w-full gap-2 pt-20 pr-5 my-auto overflow-x-hidden overflow-y-hidden animate-in text-foreground"
+       className="flex flex-col justify-center w-full gap-2 pt-10 pb-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground"
        action={create}>
        <h1 className='mb-6 text-2xl font-bold text-black md:text-3xl'>Publish New Post</h1>
      
@@ -110,8 +110,8 @@ console.log(error)
        <label className="mb-1 text-md" htmlFor="content">
          Cover Image
        </label>
-<div className='relative w-full h-32 px-4 py-2 mb-6 mr-4 border'>
-<img src={cover} className='absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-32'>
+<div className='relative w-full h-40 px-4 py-2 mb-6 mr-4 border shrink-0'>
+<img src={cover} className='absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-40 shrink-0'>
 </img>
 <button onClick={(e:any)=>handleClick(e)} className='absolute top-0 bottom-0 left-0 right-0 px-6 py-3 mx-auto my-auto text-xs text-white bg-black bg-opacity-60 backdrop-blur-sm w-max h-max'>Change Cover</button>
 
@@ -123,8 +123,8 @@ console.log(error)
        <div className="wmde-markdown-var"> </div>
 
        <MDEditor
-       className='mx-[2px] mb-6 rounded-none'
-       style={{borderRadius: '0px'}}
+       className='mx-[2px] mb-6 shrink-1 rounded-none'
+       style={{borderRadius: '0px',height:'100px !important'}}
         value={content}
         onChange={setContent}
         previewOptions={{
@@ -139,6 +139,6 @@ console.log(error)
        
       
      </form>
-   </div>
+   </div></div>
     )
 }
