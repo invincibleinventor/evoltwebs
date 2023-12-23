@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Evolt</string>
+    <string name="title_activity_main">Evolt</string>
+    <string name="package_name">com.evolt</string>
+    <string name="custom_url_scheme">com.evolt</string>
+</resources>
