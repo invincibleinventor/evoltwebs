@@ -132,7 +132,7 @@ const [cover,setCover]  = useState('true')
        }<h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
 </div>
 {found && <>
-<div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-8 my-4 mb-1 border  md:mx-14 border-neutral-700">
+<div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-8 my-4 mb-1 border md:mx-14 border-neutral-700">
 <div className="flex flex-row w-full md:mx-auto">
 <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
 <h1 className="text-xs font-semibold">Followers</h1>

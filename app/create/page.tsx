@@ -54,12 +54,11 @@ console.log(error)
     return(
           
       <div className={`'flex-1 flex flex-col justify-center px-8 gap-2 overflow-y-hidden overflow-x-hidden`}>
-  
        
      <form
        className="flex flex-col justify-center w-full gap-2 pt-20 pr-5 my-auto overflow-x-hidden overflow-y-hidden animate-in text-foreground"
        action={create}>
-       
+       <h1 className='mb-6 text-2xl font-extrabold text-black'>Publish New Post</h1>
      
        <label className="text-md" htmlFor="content">
          Title
@@ -93,6 +92,7 @@ console.log(error)
 
        <MDEditor
        className='mx-[2px] mb-6 rounded-none'
+       style={{borderRadius: '0px'}}
         value={content}
         onChange={setContent}
         previewOptions={{

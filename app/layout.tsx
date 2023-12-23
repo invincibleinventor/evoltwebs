@@ -30,7 +30,7 @@ export default function RootLayout({
       <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
       </head>
         
-      <body className="bg-cover bg-white" lang="en">
+      <body className="bg-white bg-cover" lang="en">
       <main>
         <section className="relative h-screen md:w-[810px] sm:w-screen lg:w-[770px] xl:w-[1000px] my-auto mx-auto items-center content-center overflow-hidden flex flex-row">
 <NavBar></NavBar>
@@ -38,9 +38,9 @@ export default function RootLayout({
     
 
     <div className="items-center content-center flex-1 w-full h-screen px-0 border-x border-x-neutral-100 md:border-none bg-opacity-80 filter backdrop-blue-md overflow-y-scoll">
-     <Suspense fallback={<Loading></Loading>}>
+    
           {children}
-          </Suspense>
+         
  </div></div>
           
         </section>
