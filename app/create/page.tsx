@@ -70,8 +70,9 @@ console.log(error)
     
             let newCover = await coverChange(data[0]["id"])
             const {error:es} = await supabase.from('posts').update({'cover':newCover}).eq('id',data[0]["id"])
+if(es){alert(es)}else{redirect('/')}
           }
-            redirect('/')
+
         }
     }
   }
