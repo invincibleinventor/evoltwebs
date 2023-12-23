@@ -22,13 +22,13 @@ export default function Create(){
     // Handle error if upload failed
     if(error) {
       alert('Error uploading file.');
-      return
+    
       
     }else{
       console.log(id)
-        const {error:es} = await supabase.from('posts').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/'+id+'.jpg'}).eq('id',id)
-    if(es){alert(es.message)}
-    else{console.log('updazted');return}
+      
+    
+    console.log('updazted');return 'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/'+id+'.jpg'
     }
    }
   const hiddenFileInput = useRef(null);
@@ -67,7 +67,8 @@ console.log(error)
         else{
           if(changed){
             const {data,error} = await supabase.from('posts').select('id').eq('handle',u[0]["handle"]).order('id',{ascending:false}).limit(1)
-            await coverChange(data[0]["id"])
+            let newCover = await coverChange(data[0]["id"])
+            const {error:es} = await supabase.from('posts').update({'cover':newCover}).eq('id',data[0]["id"])
           }
             redirect('/')
         }
