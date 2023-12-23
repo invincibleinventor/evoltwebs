@@ -59,7 +59,7 @@ else{
         }
         else{
         
-        const {data,error} = await supabase.from('posts').insert({handle:u[0]["handle"],excerpt:excerpt,content:content,title:title,cover:cover})
+        const {data,error} = await supabase.from('posts').insert({handle:u[0]["handle"],excerpt:excerpt,content:content,title:title})
         if(error){
             alert(error.message)
 console.log(error)
@@ -67,6 +67,7 @@ console.log(error)
         else{
           if(changed){
             const {data,error} = await supabase.from('posts').select('id').eq('handle',u[0]["handle"]).order('id',{ascending:false}).limit(1)
+    
             let newCover = await coverChange(data[0]["id"])
             const {error:es} = await supabase.from('posts').update({'cover':newCover}).eq('id',data[0]["id"])
           }
