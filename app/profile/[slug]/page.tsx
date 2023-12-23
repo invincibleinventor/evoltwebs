@@ -4,11 +4,15 @@ import PostComponent from "@/components/PostComponent"
 import { createClient } from "@/utils/supabase/client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 import { redirect, useRouter } from "next/navigation"
 export default function Page({ params }: { params: { slug: string } }) {
     const router = useRouter()
     const supabase = createClient()
     const [image,setImage] = useState('')
+    const [posts,setPosts] = useState([])
+const [loggedin,setloggedin] = useState(false)
 const [about,setAbout] = useState('')
 const [loading,setLoading]  = useState(true)
 const [cover,setCover]  = useState('true')
@@ -43,6 +47,7 @@ const [cover,setCover]  = useState('true')
                 setFollowing(pd[0].following.length)
                 
                 if(session){
+                    setloggedin(false)
                     const {data,error} = await supabase.from('user').select('*').eq('id',session.user.id)
                     
                         setMyId(data[0].handle)
@@ -66,6 +71,37 @@ const [cover,setCover]  = useState('true')
               }  }}
     get()
     },[imfollowing])
+
+    TimeAgo.locale(en)
+
+const timeAgo = new TimeAgo('en-US')
+const date1 = new Date();
+useEffect(()=>{
+async function get(){
+  
+  const {data,error} = await supabase.from('posts').select('*').eq('handle',params.slug).order('id',{ascending:false})
+  if(error){
+    console.log(error)
+  }
+  else{
+    console.log(data)
+   let ds = data
+   for await (const [index,post] of ds.entries()) {
+     
+    const {data,error} = await supabase.from('user').select('*').eq('id',post.poster)
+    ds[index].name = data[0].name
+    
+    ds[index].dp = data[0].image
+   
+    let date2 = new Date(ds[index].created_at)
+    ds[index].diff = date1.getTime()-date2.getTime()
+  
+ 
+  }
+   setPosts(ds);setLoading(false)
+  }
+  }
+get()},[])
     async function onfollow(){
         if(myself){
             router.push('/customize')
@@ -114,14 +150,14 @@ const [cover,setCover]  = useState('true')
     return !loading ? (
         
   <div className='flex-1 h-screen p-0 overflow-x-hidden overflow-y-hidden'>
-    
+    <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
         <div className="relative h-64">
             <div className="bg-gray-200 h-48 w-[calc(100%)-8px]  m-4 ">
                 {cover &&
         <img src={found?cover?cover:'':''} className="object-cover w-full h-48 "></img>
                 }
         </div><img className="absolute w-24 h-24 bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
-        {found && <button onClick={()=>onfollow()}className={`absolute  text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
+        {(found && loggedin) && <button onClick={()=>onfollow()}className={`absolute  text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>
 }
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
@@ -146,14 +182,15 @@ const [cover,setCover]  = useState('true')
     </div>
 </div>
 </div>
-<h1 className="my-4 mb-1 ml-8 text-xl font-semibold md:ml-14">Posts</h1>
-<Link href={'/posts/'+params.slug}>
-<div className="px-6 py-3 mx-8 my-4 border border-neutral-400 md:mx-14">
-<h1 style={{fontFamily: "Poppins"}}className="text-sm font-medium text-neutral-900">View All Posts By {name}{"⠀"}&gt;</h1>
-
-</div>
-</Link> </> }
-    </div>) :(<div className="flex items-center content-center w-full h-screen">
+<h1 className="px-8 mt-8 mb-4 text-xl font-bold md:mt-10 md:mb-4 md:px-14 ">{name}'s Posts</h1>
+<div className="px-3 md:px-9">
+    
+ {posts.length>0 ? posts.map((post) => (
+<PostComponent id={post.id} type="profile" title={post.title} cover={post.cover} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.excerpt}/>
+ )):<><h1 className="px-[22px] text-sm font-medium text-gray-700">No Posts To Display. {name} haven't posted anything yet.</h1>
+ </>} </div>
+ </> }
+    </div></div>) :(<div className="flex items-center content-center w-full h-screen">
  <Oval
    height={80}
    width={80}

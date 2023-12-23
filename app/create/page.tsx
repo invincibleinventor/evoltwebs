@@ -25,10 +25,10 @@ export default function Create(){
       return
       
     }else{
-      
+      console.log(id)
         const {error:es} = await supabase.from('posts').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/'+id+'.jpg'}).eq('id',id)
     if(es){alert(es.message)}
-return
+    else{console.log('updazted');return}
     }
    }
   const hiddenFileInput = useRef(null);

@@ -7,10 +7,18 @@ export default function Post(props){
         var parts = s.match(/.{1,10}/g);
         s = parts.join(" ");
     }
+    if(props.type=="profile"){
+    if(s.length>100){
+        s=s.slice(0,100)
+        s+="..."
+    }
+}
+else{
     if(s.length>147){
         s=s.slice(0,147)
         s+="..."
     }
+}
    return(
       <Link className="animate-in" href={`/post/${props.id}`}>
         <div className="w-full px-5 py-[6px]">
