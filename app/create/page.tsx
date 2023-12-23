@@ -9,22 +9,39 @@ import MDEditor from '@uiw/react-md-editor'
 import rehypeSanitize from 'rehype-sanitize'
 
 export default function Create(){
-  async function imageUploadHandler(image: File) {
-    const formData = new FormData()
-    formData.append('image', image)
-    // send the file to your server and return 
-    // the URL of the uploaded image in the response
-    const response = await fetch('/uploads/new', { 
-        method: 'POST', 
-        body: formData 
-    })
-    const json = (await response.json()) as { url: string }
-    return json.url
-  }
+  async function coverChange(id){
+    console.log('here here')
+    const bucket = "posts"
+    
   
+    // Call Storage API to upload file
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .upload('/covers/'+id+'.jpg', file, {upsert:true});
+
+    // Handle error if upload failed
+    if(error) {
+      alert('Error uploading file.');
+      return
+      
+    }else{
+      
+        const {error:es} = await supabase.from('posts').update({'cover':'https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/'+id+'.jpg'}).eq('id',id)
+    if(es){alert(es.message)}
+return
+    }
+   }
+  const hiddenFileInput = useRef(null);
+    const handleClick = (event:any) => {
+      event.preventDefault()
+      hiddenFileInput.current.click();
+    };
     const supabase = createClient()
     const [content,setContent] = useState('')
     const [excerpt,setExcerpt] = useState('')
+    const [cover,setCover] = useState('/bg.jpg')
+    const [file,setFile] = useState<File>()
+    const [changed,setChanged] = useState(false) 
     const [title,setTitle] = useState('')
     async function create(){
       const {data:{user}} = await supabase.auth.getUser()
@@ -41,12 +58,17 @@ else{
           return redirect('/');
         }
         else{
-        const {data,error} = await supabase.from('posts').insert({handle:u[0]["handle"],excerpt:excerpt,content:content,title:title})
+        
+        const {data,error} = await supabase.from('posts').insert({handle:u[0]["handle"],excerpt:excerpt,content:content,title:title,cover:cover})
         if(error){
             alert(error.message)
 console.log(error)
         }
         else{
+          if(changed){
+            const {data,error} = await supabase.from('posts').select('id').eq('handle',u[0]["handle"]).order('id',{ascending:false}).limit(1)
+            await coverChange(data[0]["id"])
+          }
             redirect('/')
         }
     }
@@ -60,7 +82,7 @@ console.log(error)
        action={create}>
        <h1 className='mb-6 text-2xl font-bold text-black md:text-3xl'>Publish New Post</h1>
      
-       <label className="text-md" htmlFor="content">
+       <label className="mb-1 text-md" htmlFor="content">
          Title
        </label>
        <input
@@ -72,7 +94,7 @@ console.log(error)
          maxLength={60}
          minLength={15}
        />
-       <label className="text-md" htmlFor="content">
+       <label className="mb-1 text-md" htmlFor="content">
          Excerpt
        </label>
        <textarea
@@ -84,7 +106,17 @@ console.log(error)
          maxLength={150}
          minLength={90}
        />
-        <label className="text-md" htmlFor="content">
+       <input onChange={(e)=>(setCover(URL.createObjectURL(e.target.files[0])),setChanged(true),setFile(e.target.files[0]))} className="bottom-0 left-0 right-0 hidden mx-auto" type="file" ref={hiddenFileInput}/> 
+       <label className="mb-1 text-md" htmlFor="content">
+         Cover Image
+       </label>
+<div className='relative w-full h-32 px-4 py-2 mb-6 mr-4 border'>
+<img src={cover} className='absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-32'>
+</img>
+<button onClick={(e:any)=>handleClick(e)} className='absolute top-0 bottom-0 left-0 right-0 px-6 py-3 mx-auto my-auto text-xs text-white bg-black bg-opacity-60 backdrop-blur-sm w-max h-max'>Change Cover</button>
+
+</div>
+        <label className="mb-1 text-md" htmlFor="content">
          Content
        </label>
        <div data-color-mode="light">

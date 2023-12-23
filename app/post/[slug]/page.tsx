@@ -59,8 +59,8 @@ const components = {
         {error &&
             <div className="flex items-center content-center w-full h-screen px-10 lg:px-24 sm:px-24 md:px-16">
             <div className="flex flex-col gap-2 mx-auto max-w-max">
-            <h1 className="mx-auto text-lg font-semibold text-center text-black">That Content Doesn't Exist</h1>
-            <h1 className="mx-auto text-sm text-center text-neutral-400">That page does not exist. It must have been moved or deleted. Please refresh if you think that is not the case</h1>
+            <h1 className="mx-auto text-lg font-semibold text-center text-black">That Post Doesn't Exist</h1>
+            <h1 className="mx-auto text-sm text-center text-neutral-400">That post does not exist. It must have been removed or deleted by the author. Please refresh if you think that is not the case</h1>
             <Link href="/" className={`w-max mx-auto text-xs font-bold mt-3 px-8 py-3 ${(1==1)?'bg-black text-white':'bg-white  border-2 '}`}>Return Back</Link>
       
             </div>
@@ -74,11 +74,11 @@ const components = {
                
             </div>
             <div className="flex flex-col flex-1 w-full max-w-full px-8 py-8 ">
-              <h1 className="text-3xl font-extrabold md:leading-[calc(15*4px)] md:text-5xl">{title}</h1>
+              <h1 className="text-3xl font-extrabold md:leading-[calc(13*4px)] md:text-4xl">{title}</h1>
               <div className="flex flex-row items-center content-center justify-between mt-6 text-md">
                 <Link  href={"/profile/"+author} className="flex flex-row items-center content-center">
                 <img className="w-6 h-6 mr-3" src={profile}></img>
-                <h1 className="font-semibold">{name}</h1>
+                <h1 className="font-medium">{name}</h1>
                 </Link>
                 <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
               </div>
