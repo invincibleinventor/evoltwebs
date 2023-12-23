@@ -7,6 +7,12 @@ export default function Post(props){
         var parts = s.match(/.{1,10}/g);
         s = parts.join(" ");
     }
+    let a = props.title;
+    let c = a.split(" ").length - 1
+    if(c<=2){
+        var parts = a.match(/.{1,10}/g);
+        a = parts.join(" ");
+    }
     if(props.type=="profile"){
     if(s.length>100){
         s=s.slice(0,100)
@@ -43,7 +49,7 @@ else{
                 
                     <div>
                 <div className="flex flex-row justify-between my-2 mb-[6px] ">
-                <h1 className="text-lg font-bold md:text-base md:font-semibold ">{props.title}</h1>   
+                <h1 className="text-lg font-bold md:text-base md:font-semibold ">{a}</h1>   
 
                 </div>
 
