@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import { redirect, useRouter } from "next/navigation"
+import More from "@/components/More"
 export default function Page({ params }: { params: { slug: string } }) {
     const router = useRouter()
     const supabase = createClient()
@@ -35,7 +36,7 @@ const [cover,setCover]  = useState('true')
             if(pe || pd.length==0){
                 
                 setFound(false)
-             setLoading(false)
+                setLoading(false)
                 setAbout('That user does not exist or you do not have access to view their profile')
 
             }
@@ -58,24 +59,25 @@ const [cover,setCover]  = useState('true')
                         if(data[0].handle==params.slug){
                             setMyself(true)
                             setLoading(false)
-
                         }
                     else if(pd[0].followers.includes(data[0].handle)){
-                        setLoading(false)
-
-                        setImFollowing(true)
                         
+                        setImFollowing(true)
+                        setLoading(false)
                     }
                     else{
                         setImFollowing(false)
                         setLoading(false)
-
                     }
+                }
+                else{
+                    setLoading(false)
                 }
             }
               }  }}
     get()
     },[imfollowing])
+
 
     TimeAgo.locale(en)
 
@@ -84,7 +86,7 @@ const date1 = new Date();
 useEffect(()=>{
 async function get(){
   
-  const {data,error} = await supabase.from('posts').select('*').eq('handle',params.slug).order('id',{ascending:false})
+  const {data,error} = await supabase.from('posts').select('*').eq('handle',params.slug).order('id',{ascending:false}).limit(5)
   if(error){
     console.log(error)
   }
@@ -193,7 +195,7 @@ get()},[])
  {!postloading ? posts.length>0 ? posts.map((post) => (
 <PostComponent id={post.id} type="profile" title={post.title} cover={post.cover} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.excerpt}/>
  )):<><h1 className="px-[22px] text-sm font-medium text-gray-700">No Posts To Display. {name} haven't posted anything yet.</h1>
- </> : <div className="mt-10">
+ </> : <div className="flex flex-col items-center content-center mt-10">
  <Oval
    height={80}
    width={80}
@@ -207,7 +209,7 @@ get()},[])
    strokeWidthSecondary={2}
    
    />
- </div>} </div>
+ </div>} <More/></div>
  </> }
     </div></div>) :(<div className="flex items-center content-center w-full h-screen">
  <Oval
