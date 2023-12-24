@@ -7,7 +7,6 @@ import {useInView} from 'react-intersection-observer'
 import { Oval } from 'react-loader-spinner';
 import PostComponent from './PostComponent';
 export default function More(props){
-    const [initial,setInitial] = useState(5)
     const supabase = createClient()
     const [offset, setOffset] = useState(1)
     const { ref, inView } = useInView();
@@ -20,10 +19,10 @@ const date1 = new Date();
     useEffect(()=>{
         if(!halt && inView){
             setOffset((prev) => prev + 1)
-            setInitial(initial+5)
+            
         }
     
-        const from = offset * PAGE_COUNT
+        const from = offset * PAGE_COUNT 
         const to = from + PAGE_COUNT - 1
         async function get(){
           if(props.handle){
@@ -47,10 +46,10 @@ const date1 = new Date();
           
          
           }
-           setPosts([...posts,...ds])
-          }
-          else{
+           setPosts((prev)=>[...prev,...ds])
+           if (ds.length < PAGE_COUNT) {
             setHalt(true)
+          }
           }
           }
         }
@@ -76,14 +75,15 @@ const date1 = new Date();
            
             }
              setPosts([...posts,...ds])
+             if (ds.length < PAGE_COUNT) {
+                setHalt(true)
+              }
             }
-            else{
-              setHalt(true)
-            }
+           
             }
           }
         }
-        get()},[halt,inView,posts])
+        get()},[inView,halt])
 return(<>
 <div  className="flex flex-col items-center content-center gap-2">
 {posts.map((post) => (
@@ -102,7 +102,7 @@ return(<>
    strokeWidthSecondary={2}
    
    />
-   <div ref={ref}></div>
+   <div className={!halt?'':'hidden'} ref={ref}></div>
  </div>
 </>)
 }
