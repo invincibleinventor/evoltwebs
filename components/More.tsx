@@ -16,15 +16,8 @@ export default function More(props){
 let PAGE_COUNT = 5
 const timeAgo = new TimeAgo('en-US')
 const date1 = new Date();
-    useEffect(()=>{
-        if(inView){
-            setOffset((prev) => prev + 1)
-            
-        
-    
-        const from = offset * PAGE_COUNT 
-        const to = from + PAGE_COUNT - 1
-        async function get(){
+
+    async function get(){
           if(props.handle){
           const {data,error} = await supabase.from('posts').select('*').eq('handle',props.handle).order('id',{ascending:false}).range(from,to)
           if(error){
@@ -82,7 +75,16 @@ const date1 = new Date();
            
             }
           }
-        }
+    }
+    useEffect(()=>{
+        if(inView){
+            setOffset((prev) => prev + 1)
+            
+        
+    
+        const from = offset * PAGE_COUNT 
+        const to = from + PAGE_COUNT - 1
+        
         get()}},[inView])
 return(<>
 <div  className="flex flex-col items-center content-center gap-2">
