@@ -6,6 +6,7 @@ import Link from "next/link";
 import StoriesView from '@/components/StoriesView'
 import PostComponent from '@/components/PostComponent'
 import { redirect } from 'next/navigation'
+import More from '@/components/More';
 export default async function Index() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
@@ -27,12 +28,12 @@ const isSupabaseConnected = canInitSupabaseClient()
 let empty = true
   let posts = []
 let loading = true
-
+let l=[]
   async function get(){
     const {data:user} = await supabase.auth.getUser()
     let s = user.user.id
     const {data:u} = await supabase.from('user').select('*').eq('id',s)
-    let l = u[0]["following"]
+    l = u[0]["following"]
     let h = u[0]["handle"]
     let ds=[]
     
@@ -104,6 +105,6 @@ await get()
     )
     :(<div className="flex items-center content-center w-full h-screen">
  
-</div>)} </div> </div></div></>
+</div>)}<More in={l}></More> </div> </div></div></>
 
   ) }else{return(<></>)}}

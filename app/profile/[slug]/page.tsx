@@ -36,9 +36,8 @@ const [cover,setCover]  = useState('true')
             if(pe || pd.length==0){
                 
                 setFound(false)
-                setLoading(false)
                 setAbout('That user does not exist or you do not have access to view their profile')
-
+                setLoading(false)
             }
             else{if(pd.length>0){
  {               setFound(true)
@@ -58,20 +57,16 @@ const [cover,setCover]  = useState('true')
                         setFollowingList(data[0].following)
                         if(data[0].handle==params.slug){
                             setMyself(true)
-                            setLoading(false)
                         }
                     else if(pd[0].followers.includes(data[0].handle)){
                         
                         setImFollowing(true)
-                        setLoading(false)
                     }
                     else{
                         setImFollowing(false)
-                        setLoading(false)
                     }
                 }
                 else{
-                    setLoading(false)
                 }
             }
               }  }}
@@ -105,7 +100,7 @@ async function get(){
   
  
   }
-   setPosts(ds);setPostLoading(false)
+   setPosts(ds);setLoading(false)
   }
   }
 get()},[])
@@ -192,7 +187,7 @@ get()},[])
 <h1 className="px-8 mt-8 mb-4 text-xl font-bold md:mt-10 md:mb-4 md:px-14 ">{name}'s Posts</h1>
 <div className="flex flex-col gap-2 px-3 md:px-9">
     
- {!postloading ? posts.length>0 ? posts.map((post) => (
+ {!loading ? posts.length>0 ? posts.map((post) => (
 <PostComponent id={post.id} type="profile" title={post.title} cover={post.cover} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.excerpt}/>
  )):<><h1 className="px-[22px] text-sm font-medium text-gray-700">No Posts To Display. {name} haven't posted anything yet.</h1>
  </> : <div className="flex flex-col items-center content-center mt-10">
@@ -209,7 +204,7 @@ get()},[])
    strokeWidthSecondary={2}
    
    />
- </div>} <More/></div>
+ </div>}<More handle={params.slug}/></div>
  </> }
     </div></div>) :(<div className="flex items-center content-center w-full h-screen">
  <Oval
