@@ -102,7 +102,7 @@ return(<>
    width={80}
    color="#000000"
    wrapperStyle={{}}
-   wrapperClass="mx-auto"
+   wrapperClass="mx-auto mt-5"
    visible={!halt?true:false}
    ariaLabel='oval-loading'
    secondaryColor="#808080"
