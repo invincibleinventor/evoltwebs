@@ -17,10 +17,10 @@ let PAGE_COUNT = 5
 const timeAgo = new TimeAgo('en-US')
 const date1 = new Date();
     useEffect(()=>{
-        if(!halt && inView){
+        if(inView){
             setOffset((prev) => prev + 1)
             
-        }
+        
     
         const from = offset * PAGE_COUNT 
         const to = from + PAGE_COUNT - 1
@@ -83,7 +83,7 @@ const date1 = new Date();
             }
           }
         }
-        get()},[inView,posts])
+        get()}},[inView])
 return(<>
 <div  className="flex flex-col items-center content-center gap-2">
 {posts.map((post) => (
