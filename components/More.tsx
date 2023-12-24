@@ -17,7 +17,7 @@ let PAGE_COUNT = 5
 const timeAgo = new TimeAgo('en-US')
 const date1 = new Date();
 
-    async function get(){
+    async function get(from,to){
           if(props.handle){
           const {data,error} = await supabase.from('posts').select('*').eq('handle',props.handle).order('id',{ascending:false}).range(from,to)
           if(error){
@@ -85,7 +85,7 @@ const date1 = new Date();
         const from = offset * PAGE_COUNT 
         const to = from + PAGE_COUNT - 1
         
-        get()}},[inView])
+        get(from,to)}},[inView])
 return(<>
 <div  className="flex flex-col items-center content-center gap-2">
 {posts.map((post) => (
