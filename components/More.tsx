@@ -9,23 +9,25 @@ import PostComponent from './PostComponent';
 export default function More(props){
     const [initial,setInitial] = useState(5)
     const supabase = createClient()
+    const [offset, setOffset] = useState(1)
     const { ref, inView } = useInView();
     const [halt,setHalt] = useState(false)
     const [posts,setPosts] = useState([])
     TimeAgo.locale(en)
-
+let PAGE_COUNT = 5
 const timeAgo = new TimeAgo('en-US')
 const date1 = new Date();
     useEffect(()=>{
         if(!halt && inView){
-         
+            setOffset((prev) => prev + 1)
             setInitial(initial+5)
         }
     
-  
+        const from = offset * PAGE_COUNT
+        const to = from + PAGE_COUNT - 1
         async function get(){
           if(props.handle){
-          const {data,error} = await supabase.from('posts').select('*').eq('handle',props.handle).order('id',{ascending:false}).range(initial,initial+4)
+          const {data,error} = await supabase.from('posts').select('*').eq('handle',props.handle).order('id',{ascending:false}).range(from,to)
           if(error){
             console.log(error)
           }
@@ -53,7 +55,7 @@ const date1 = new Date();
           }
         }
         else{
-            const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false}).in('handle',props.in).range(initial,initial+4)
+            const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false}).in('handle',props.in).range(from,to)
             if(error){
               console.log(error)
             }
