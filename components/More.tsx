@@ -83,7 +83,7 @@ const date1 = new Date();
             }
           }
         }
-        get()},[inView,halt])
+        get()},[inView,posts])
 return(<>
 <div  className="flex flex-col items-center content-center gap-2">
 {posts.map((post) => (
