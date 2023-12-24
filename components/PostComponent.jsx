@@ -2,17 +2,9 @@
 import Link from "next/link";
 export default function Post(props){
     let s = props.description;
-    let count = s.split(" ").length - 1
-    if(count<=3){
-        var parts = s.match(/.{1,10}/g);
-        s = parts.join(" ");
-    }
+    
     let a = props.title;
-    let c = a.split(" ").length - 1
-    if(c<=2){
-        var parts = a.match(/.{1,10}/g);
-        a = parts.join(" ");
-    }
+    
     if(props.type=="profile"){
     if(s.length>100){
         s=s.slice(0,100)
@@ -31,7 +23,7 @@ else{
             
             <div className="grid items-center content-center gap-[4px] bg-white border border-gray-150 md:gap-4 sm:grid-cols-2">
 <div className="bg-black rounded-md ">
-    <img className="object-cover w-full h-[228px]" src={props.cover?props.cover:"https://picsum.photos/300/400"}></img>
+    <img className="object-cover w-full max-h-full h-[228px]" src={props.cover?props.cover:"https://picsum.photos/300/400"}></img>
 </div>
                 <div className="flex flex-col    gap-[8px] px-6 py-5">
                 <div href={`/profile/${props.handle}`} className="flex flex-row items-center content-center gap-2 shrink-0">
@@ -48,12 +40,12 @@ else{
                 </div>
                 
                     <div>
-                <div className="flex flex-row justify-between my-2 mb-[6px] ">
-                <h1 className="text-lg font-bold md:text-base multiLineLabel md:font-semibold ">{a}</h1>   
+                <div className="flex flex-row w-full justify-between my-2 mb-[6px] ">
+                <h1 style={{wordBreak: 'break-word',whiteSpace:'normal'}} className="text-lg font-bold two-line-ellipsis md:text-base md:font-semibold ">{a}</h1>   
 
                 </div>
 
-                <h1 className="text-xs font-normal leading-[20px] multiLineLabel text-gray-900 md:leading-[25px] md:text-sm">{s}</h1>
+                <h1 style={{wordBreak: 'break-word',whiteSpace:'normal'}} className="text-xs font-normal leading-[20px] four-line-ellipsis text-gray-900 md:leading-[25px] md:text-sm">{s}</h1>
             </div>
                 </div>
                 

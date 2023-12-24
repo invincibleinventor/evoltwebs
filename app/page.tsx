@@ -37,7 +37,7 @@ let loading = true
     let ds=[]
     
       l.push(h)
-    const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false}).in('handle',l) 
+    const {data,error} = await supabase.from('posts').select('*').order('id',{ascending:false}).in('handle',l).limit(5)
     if(error){
     }
     else{

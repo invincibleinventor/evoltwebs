@@ -74,7 +74,7 @@ const components = {
                
             </div>
             <div className="flex flex-col flex-1 w-full max-w-full px-8 py-8 ">
-              <h1 className="text-3xl font-extrabold md:leading-[calc(13*4px)] md:text-4xl">{title}</h1>
+              <h1 className="text-3xl font-extrabold md:leading-[calc(13*4px)] md:text-4xl fix-overflow">{title}</h1>
               <div className="flex flex-row items-center content-center justify-between mt-6 text-md">
                 <Link  href={"/profile/"+author} className="flex flex-row items-center content-center">
                 <img className="w-6 h-6 mr-3" src={profile}></img>
@@ -82,7 +82,7 @@ const components = {
                 </Link>
                 <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
               </div>
-            <Markdown remarkPlugins={[remarkGfm]} components={components}  className="mt-12 prose font-inter">{content}</Markdown>
+            <Markdown remarkPlugins={[remarkGfm]} components={components}  className="mt-12 prose font-inter fix-overflow">{content}</Markdown>
            </div> </div>
         }
             </div>
