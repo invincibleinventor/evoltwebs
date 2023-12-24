@@ -44,6 +44,9 @@ const date1 = new Date();
             setHalt(true)
           }
           }
+              else{
+                    setHalt(true)
+                }
           }
         }
         else{
@@ -72,12 +75,15 @@ const date1 = new Date();
                 setHalt(true)
               }
             }
+                else{
+                    setHalt(true)
+                }
            
             }
           }
     }
     useEffect(()=>{
-        if(inView){
+        if(!halt && inView){
             setOffset((prev) => prev + 1)
             
         
