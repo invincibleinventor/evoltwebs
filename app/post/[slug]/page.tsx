@@ -22,15 +22,18 @@ export default async function App({ params }: { params: { slug: string } }) {
     let myname = ""
     let myphoto = ""
     let loggedin = false
+    let emptycomments = false
+    let comments = []
     TimeAgo.locale(en)
-
+let user = ''
     const timeAgo = new TimeAgo('en-US')
     const date1 = new Date();
   
         async function set(){
           const {data:u} = await supabase.auth.getSession()
-          let user = u.session.user.id
           if(u){
+            user = u.session.user.id
+
             loggedin = true
           const {data:users} = await supabase.from('user').select('*').eq('id',user)
           myphoto =  users[0]["image"]
@@ -58,6 +61,20 @@ export default async function App({ params }: { params: { slug: string } }) {
           }  }
     
 await set()    
+
+async function fetchcomments(){
+  const {data,error} = await supabase.from('comments').select('*').eq('id',params.slug)
+  if(data && data.length!=0){
+    comments = data
+  }
+  else if (!data || data.length==0){
+    comments  = []
+    emptycomments = true
+  }
+  else{
+    console.log(error.message)
+  }
+}
 function ClickableImage(props) {
     
     return <img {...props} className="w-full max-w-full"/>
