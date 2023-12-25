@@ -44,7 +44,7 @@ export default function Create(){
       alert('Handle Already Exists')
     }
     else{
-      const {data,error} = await supabase.from('user').insert({email:email,name:name,handle:handle,about:about,image:image,followers:[],following:['evolt'],bookmarks:[],liked:[],private:false})
+      const {data,error} = await supabase.from('user').insert({email:email,name:name,handle:handle.toLowerCase(),about:about,image:image,followers:[],following:['evolt'],bookmarks:[],liked:[],private:false})
     if(error){
       console.log(error)
     }
