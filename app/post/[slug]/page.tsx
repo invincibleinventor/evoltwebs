@@ -6,6 +6,7 @@ import en from 'javascript-time-ago/locale/en'
 import Markdown from "react-markdown";
 import { cookies } from "next/headers";
 import CommentComponent from "@/components/CommentComponent";
+import PostAComment from "@/components/PostAComment";
 export default async function App({ params }: { params: { slug: string } }) {
   let cookieStore = cookies()
     let supabase = createClient(cookieStore)
@@ -21,6 +22,7 @@ export default async function App({ params }: { params: { slug: string } }) {
     let loading = false
     let myname = ""
     let myphoto = ""
+    let myhandle = ""
     let loggedin = false
     let emptycomments = false
     let comments = []
@@ -31,13 +33,14 @@ let user = ''
   
         async function set(){
           const {data:u} = await supabase.auth.getSession()
-          if(u){
+          if(u.session){
             user = u.session.user.id
 
             loggedin = true
           const {data:users} = await supabase.from('user').select('*').eq('id',user)
           myphoto =  users[0]["image"]
             myname = users[0]["name"]
+            myhandle = users[0]["handle"]
           }        
         const {data,error:e} = await supabase.from('posts').select('*').eq('id',params.slug)
         if(data && data.length>0){
@@ -66,17 +69,28 @@ async function fetchcomments(){
   const {data,error} = await supabase.from('comments').select('*').eq('id',params.slug)
   if(data && data.length!=0){
     comments = data
-    comments.forEach((comment,index)=>{
-      async function set(){
-        const {data,error} = await supabase.from('user').select('*').eq('id',comment.poster)
-        if(data){
-          comments[index].name = data[0]["name"]
-          comments[index].profile = data[0]["image"]
-        } else{        comments.splice(index,1)
+    for await (const [index,comment] of comments.entries()) {
+      console.log(index,comment)
+      const {data,error} = await supabase.from('user').select('*').eq('id',comment.poster)
+      if(data){
+        comments[index].name = data[0]["name"]
+        comments[index].profile = data[0]["image"]
+        if(loggedin){
+        if(comments[index].liked.includes(myhandle)){
+          console.log(myhandle,index)
+          comments[index].likedbyme = true
+        }
+        else{
+          comments[index].likedbyme = false
+        }
       }
+      else{
+        comments[index].likedbyme = false
+      }
+        console.log(comments[index])
+      } else{        comments.splice(index,1)
     }
-      
-    })
+    }
   }
   else if (!data || data.length==0){
     comments  = []
@@ -94,7 +108,10 @@ function ClickableImage(props) {
 const components = {
     img: ClickableImage
   }
-    return !loading ? (
+  console.log('here')
+  console.log(comments)
+console.log('above')
+  return !loading ? (
         <div className="relative flex flex-col flex-1 h-screen overflow-x-hidden overflow-y-hidden">
         {error &&
             <div className="flex items-center content-center w-full h-screen px-10 lg:px-24 sm:px-24 md:px-16">
@@ -127,16 +144,11 @@ const components = {
   <section className="px-8 pt-0 pb-8" id="comments">
     <h1 className="mb-2 text-xl font-bold">Comments</h1>
     {loggedin &&
-    <div className="flex flex-row px-2 mt-4 mb-3 space-x-4">
-      <img src={myphoto} className="w-8 h-8 shrink-0"/>
-      <textarea className="w-full px-4 py-2 border outline-none focus:border-gray-700" placeholder={"Post a comment publicly as "+myname}>
-        
-      </textarea>
-    </div>
+   <PostAComment myname={myname} myphoto={myphoto} handle={myhandle} id={user}/>
 }
     <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
    { (comments.map((comment) => (
-    <CommentComponent handle="abishek.vh" likes={comment.likes} liked={true} name={comment.name} profile={comment.profile} content={comment.content}/>
+    <CommentComponent key={comment.comment_id} handle="abishek.vh" likes={comment.likes} likedbyme={comment.likedbyme} name={comment.name} profile={comment.profile} content={comment.content} loggedin={loggedin}/>
  
     )))}</div>
   </section>
