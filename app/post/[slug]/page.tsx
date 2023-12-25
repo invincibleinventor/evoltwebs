@@ -66,6 +66,17 @@ async function fetchcomments(){
   const {data,error} = await supabase.from('comments').select('*').eq('id',params.slug)
   if(data && data.length!=0){
     comments = data
+    comments.forEach((comment,index)=>{
+      async function set(){
+        const {data,error} = await supabase.from('user').select('*').eq('id',comment.poster)
+        if(data){
+          comments[index].name = data[0]["name"]
+          comments[index].profile = data[0]["image"]
+        } else{        comments.splice(index,1)
+      }
+    }
+      
+    })
   }
   else if (!data || data.length==0){
     comments  = []
@@ -75,6 +86,7 @@ async function fetchcomments(){
     console.log(error.message)
   }
 }
+await fetchcomments()
 function ClickableImage(props) {
     
     return <img {...props} className="w-full max-w-full"/>
@@ -117,16 +129,16 @@ const components = {
     {loggedin &&
     <div className="flex flex-row px-2 mt-4 mb-3 space-x-4">
       <img src={myphoto} className="w-8 h-8 shrink-0"/>
-      <textarea className="w-full px-4 py-2 border outline-none focus:border-gray-700" placeholder={"Post comment publicly as "+myname}>
+      <textarea className="w-full px-4 py-2 border outline-none focus:border-gray-700" placeholder={"Post a comment publicly as "+myname}>
         
       </textarea>
     </div>
 }
-    <div className="flex flex-col px-2 my-3 mt-6 space-y-4">
-    <CommentComponent handle="abishek.vh" likes={69} liked={true} name="Yuichi" profile="/bg.jpg" content="Hello World"/>
-    <CommentComponent handle="abishek.vh" likes={420} liked={false} name="Yuichi" profile="/bg.jpg" content="Hello World"/>
-    <CommentComponent handle="abishek.vh" likes={540} liked={true} name="Yuichi" profile="/bg.jpg" content="Hello World"/>
-  </div>
+    <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
+   { (comments.map((comment) => (
+    <CommentComponent handle="abishek.vh" likes={comment.likes} liked={true} name={comment.name} profile={comment.profile} content={comment.content}/>
+ 
+    )))}</div>
   </section>
             </div>
   
