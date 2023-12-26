@@ -102,7 +102,7 @@ get()},[search])
   <div className='flex flex-col gap-2 mb-20 animate-in hiddenscroll'>
     
   {!loading ? !empty ? ( posts.map((post) => (
-<PostComponent id={post.id} title={post.title} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} name={post.name} description={post.excerpt}/>
+<PostComponent id={post.id} title={post.title} time={timeAgo.format(Date.now() - post.diff)} key={post.id} image={post.image} dp={post.dp} handle={post.handle} cover={post.cover} name={post.name} description={post.excerpt}/>
  ))) : 
     (
       <div className="flex items-center content-center w-full px-10 mt-24 lg:px-24 sm:px-24 md:px-16">
