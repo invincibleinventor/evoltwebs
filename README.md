@@ -23,7 +23,7 @@ Evolt is an open source content based social publishing platform that provides c
 - Supabase as a serverless backend
 - Google OAuth for Google Sign In
 
-### Note
+### Note (NextJS 13+)
 
 - The project utilizes NextJS 13+ (Server Actions)
 - Client and Server components are seperated in proper bounds. Intensive tasks are loaded through the server and interactivity is done through client components
