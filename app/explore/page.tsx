@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation'
 import More from '@/components/More';
 import Search from '@/components/SearchComponent';
 import UserComponent from '@/components/UserComponent';
+import MoreUsers from '@/components/MoreUsers';
 export default async function Index() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
@@ -35,7 +36,7 @@ let userid = user.id
 let myhandle = ""
 let followinglist = []
   async function get(){
-    const {data,error} = await supabase.from('user').select('*').not('id','in',`(${userid})`)
+    const {data,error} = await supabase.from('user').select('*').not('id','in',`(${userid})`).limit(4)
     if(error){
         console.log(error)
     }
@@ -70,13 +71,13 @@ await get()
   if(isSupabaseConnected){
   
 
-  return(<><div className='flex-1 h-screen p-0 py-2 overflow-x-hidden overflow-y-hidden'>
+  return(<><div className='flex-1 h-screen p-0 py-2 pb-20 overflow-x-hidden overflow-y-hidden'>
   <div className="p-4 py-2 pb-4 mx-1 md:mx-1">
     <Search page="induvidual" text="Users"/>
 </div>
   <div className='h-full overflow-y-scroll hiddenscroll'>
   
-  <div className='grid items-center content-center grid-cols-1 gap-2 px-3 mb-20 xl:grid-cols-2 animate-in hiddenscroll'>
+  <div className='grid items-center content-center grid-cols-1 gap-2 px-3 xl:grid-cols-2 animate-in hiddenscroll'>
     
   {!loading ? !empty ? ( users.map((user) => (
 <UserComponent myID={myhandle} followerlist={user.followers} followinglist={followinglist} id={user.id} name={user.name} following={user.following.length} isfollowing={user.isfollowing} handle={user.handle} about={user.about} followers={user.followers.length} image={user.image}/>
@@ -94,6 +95,8 @@ await get()
     )
     :(<div className="flex items-center content-center w-full h-screen">
  
-</div>)}<>More Here</> </div> </div></div></>
+</div>)}</div>
+<MoreUsers></MoreUsers> 
+ </div></div></>
 
   ) }else{return(<></>)}}
