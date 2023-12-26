@@ -171,7 +171,7 @@ console.log('above')
             </div>
   
        }
-           <div className="absolute bottom-0 flex flex-row w-full bg-white border-t border-x border-x-150 h-14 border-t-gray-150">
+           <div className="absolute bottom-0 flex flex-row w-full bg-white border-t md:border-x md:border-x-150 h-14 border-t-gray-150">
            <BookMarksComponent userliked={userbookmarked} postid={params.slug} handle={myhandle} likedlist={bookmarkedlist} liked={bookmarked}></BookMarksComponent>
 
           <LikeComponent userliked={userliked} postid={params.slug} handle={myhandle} likedlist={likedlist} liked={liked} likes={likedlist.length}></LikeComponent>
