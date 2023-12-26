@@ -23,6 +23,7 @@ export default async function App({ params }: { params: { slug: string } }) {
     let error = false
     let time = 0
     let loading = false
+    let imauthor = false
     let myname = ""
     let myphoto = ""
     let myhandle = ""
@@ -69,6 +70,9 @@ let user = ''
             bookmarkedlist = x
             const {data:u} = await supabase.from('user').select('*').eq('id',data[0]["poster"])
             author  = u[0]["handle"]
+            if(author == myhandle){
+              imauthor =true
+            }
             name = u[0].name
             profile = u[0].image
             content = data[0]["content"]
@@ -154,11 +158,20 @@ console.log('above')
             </div>
             <div className="flex flex-col flex-1 w-full max-w-full px-8 py-8 ">
               <h1 className="text-3xl font-extrabold md:leading-[calc(13*4px)] md:text-4xl fix-overflow">{title}</h1>
+            {imauthor &&  <Link href={"/edit/"+params.slug} className="cursor-pointer flex flex-row items-center content-center  px-1 pr-0 my-4 mt-6  space-x-[16px]">
+       
+    <svg   xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m5 16l-1 4l4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0zM15 6l3 3m-5 11h8"/></svg>
+   
+        <h1 className="hidden text-sm md:inline-block">Edit Post</h1>
+    </Link>
+}
               <div className="flex flex-row items-center content-center justify-between mt-6 text-md">
                 <Link  href={"/profile/"+author} className="flex flex-row items-center content-center">
                 <img className="w-6 h-6 mr-3" src={profile}></img>
                 <h1 className="font-medium">{name}</h1>
+                
                 </Link>
+               
                 <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
               </div>
             <Markdown remarkPlugins={[remarkGfm]} components={components}  className="mt-12 prose font-inter fix-overflow">{content}</Markdown>

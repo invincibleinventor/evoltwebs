@@ -29,5 +29,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   // list all the pages you want protected here
-  matcher: ['/' ,'/explore','/explore','/create','/notifications','/settings','/messages','/myself','/bookmarks','/posts/:path*'],
+  matcher: ['/' ,'/explore','/explore','/create','/notifications','/settings','/messages','/myself','/bookmarks','/posts/:path*','/search/bookmarks/:path*'],
 };

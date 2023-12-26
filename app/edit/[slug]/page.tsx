@@ -3,13 +3,14 @@ import '@mdxeditor/editor/style.css'
 import { createClient } from "@/utils/supabase/client"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { MDXEditor, linkPlugin, MDXEditorMethods, headingsPlugin, UndoRedo , toolbarPlugin , BoldItalicUnderlineToggles} from "@mdxeditor/editor"
 import MDEditor from '@uiw/react-md-editor'
 import rehypeSanitize from 'rehype-sanitize'
+import { Oval } from 'react-loader-spinner'
 
-export default function Create(){
-  async function coverChange(id){
+export default function Page({ params }: { params: { slug: string } }) {
+    async function coverChange(id){
     console.log('here here')
     const bucket = "posts"
     
@@ -43,23 +44,40 @@ export default function Create(){
     const [file,setFile] = useState<File>()
     const [changed,setChanged] = useState(false) 
     const [title,setTitle] = useState('')
-    async function create(){
-      const {data:{user}} = await supabase.auth.getUser()
-      const {data:u} = await supabase.from('user').select('handle').eq('id',user.id)
-      const{data:check} = await supabase.from('posts').select('*').eq('poster',user.id).order('id',{ascending:false}).limit(1)
-let s;        
-if(check && check.length>0){
-  s=check[0]
-}
-else{
-  s=[]
-}
-        if(s && s.excerpt==excerpt && s.title==title && s.handle==u[0]["handle"] && s.content==content){
-          return redirect('/');
+    const [notfound,setNotFound] = useState(false)
+    const [author,setAuthor] = useState(false)
+    const [loading,setLoading] = useState(true)
+    const [defaulttitle,setdefaulttitle] = useState('')
+    const [defaultcover,setdefaultcover] = useState('')
+    const [defaultcontent,setdefaultcontent] =useState('')
+    const [defaultexcerpt,setdefaultexcerpt] = useState('')
+    useEffect(()=>{
+    async function check(){
+        const {data,error} = await supabase.from('posts').select('*').eq('id',params.slug)
+        if(error){
+            setNotFound(true)
+            setLoading(false)
+
         }
         else{
-        
-        const {data,error} = await supabase.from('posts').insert({handle:u[0]["handle"],excerpt:excerpt,content:content,title:title})
+            const {data:{user}} = await supabase.auth.getUser()
+            if(data[0]["poster"]==user.id){
+                setAuthor(true)
+                setContent(data[0]["content"])
+                setExcerpt(data[0]["excerpt"])
+                setTitle(data[0]["title"])
+                setCover(data[0]["cover"])
+            }
+            setLoading(false)
+
+        }
+    }
+    
+    check()},[])
+    async function create(){
+      const {data:{user}} = await supabase.auth.getUser()
+       
+        const {data,error} = await supabase.from('posts').upsert({id:params.slug,excerpt:excerpt,content:content,title:title})
         if(error){
             alert(error.message)
 console.log(error)
@@ -73,24 +91,23 @@ console.log(error)
         const {error:es} =  await supabase.from('posts').update({'cover':newCover}).eq('id',data[0]["id"])
             if(es){alert(es.message)}
             else{
-              window.location.replace('/')
-               }
-          }
-          else{
             window.location.replace('/')
              }
-        }
+             }
+             else{
+                window.location.replace('/')
+                 }
         
     }
   }
-    return (
+    return !loading ? author?(
           
       <div className={`flex-1 h-screen overflow-y-hidden px-8 gap-2 overflow-x-hidden`}>
        <div className='h-full overflow-y-scroll hiddenscroll'>
      <form
        className="flex flex-col justify-center w-full gap-2 pt-10 pb-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground"
        action={create}>
-       <h1 className='mb-6 text-2xl font-bold text-black md:text-3xl'>Publish New Post</h1>
+       <h1 className='mb-6 text-2xl font-bold text-black md:text-3xl'>Edit The Post</h1>
      
        <label className="mb-1 text-md" htmlFor="content">
          Title
@@ -101,6 +118,7 @@ console.log(error)
          name="content"
          placeholder="Please Type Out Your Title"
          required
+         defaultValue={title}
          maxLength={60}
          minLength={15}
        />
@@ -113,6 +131,7 @@ console.log(error)
          name="content"
          placeholder="Please Type Out Your Excerpt"
          required
+         defaultValue={excerpt}
          maxLength={150}
          minLength={90}
        />
@@ -150,5 +169,32 @@ console.log(error)
       
      </form>
    </div></div>
+    ) : (
+        <div className="flex items-center content-center w-full px-10 mt-24 lg:px-24 sm:px-24 md:px-16">
+        <div className="flex flex-col gap-2 mx-auto max-w-max">
+        <h1 className="mx-auto text-lg font-semibold text-center text-black">You are not allowed to edit this post.</h1>
+        <h1 className="mx-auto text-sm text-center text-neutral-400">Only the Author of the post is allowed to edit a post. Try from a different account or leave this page.</h1>
+        <Link href="/" className={`w-max mx-auto text-xs font-bold mt-3 px-8 py-3  ${(1==1)?'bg-black text-white':'bg-white border-2'}`}>Return To Home</Link>
+  
+        </div>
+        
+      </div>
+    ) 
+    :(
+        <div className='absolute flex flex-row items-center content-center w-full h-screen'>
+        <Oval
+        height={80}
+        width={80}
+        color="#000"
+        wrapperStyle={{}}
+        wrapperClass="mx-auto my-auto"
+        visible={true}
+        ariaLabel='oval-loading'
+        secondaryColor="#808080"
+        strokeWidth={2}
+        strokeWidthSecondary={2}
+        
+        />
+        </div>
     )
 }
