@@ -32,6 +32,8 @@ export default async function App({ params }: { params: { slug: string } }) {
     let likedlist = []
     let bookmarked = false
     let bookmarkedlist = []
+    let userliked = []
+    let userbookmarked = []
     let comments = []
     TimeAgo.locale(en)
 let user = ''
@@ -48,6 +50,8 @@ let user = ''
           myphoto =  users[0]["image"]
             myname = users[0]["name"]
             myhandle = users[0]["handle"]
+            userliked = users[0]["liked"]
+            userbookmarked = users[0]["bookmarks"]
           }        
         const {data,error:e} = await supabase.from('posts').select('*').eq('id',params.slug)
         if(data && data.length>0){
@@ -92,7 +96,7 @@ async function fetchcomments(){
       if(data){
         comments[index].name = data[0]["name"]
         comments[index].profile = data[0]["image"]
-       
+        
         if(loggedin){
         if(comments[index].liked.includes(myhandle)){
           console.log(myhandle,index)
@@ -168,9 +172,9 @@ console.log('above')
   
        }
            <div className="absolute bottom-0 flex flex-row w-full bg-white border-t border-x border-x-150 h-14 border-t-gray-150">
-           <BookMarksComponent postid={params.slug} handle={myhandle} likedlist={bookmarkedlist} liked={bookmarked}></BookMarksComponent>
+           <BookMarksComponent userliked={userbookmarked} postid={params.slug} handle={myhandle} likedlist={bookmarkedlist} liked={bookmarked}></BookMarksComponent>
 
-          <LikeComponent postid={params.slug} handle={myhandle} likedlist={likedlist} liked={liked} likes={likedlist.length}></LikeComponent>
+          <LikeComponent userliked={userliked} postid={params.slug} handle={myhandle} likedlist={likedlist} liked={liked} likes={likedlist.length}></LikeComponent>
           
            <Link href="#comments" className="flex flex-row items-center content-center px-6 ml-auto space-x-2">
            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="m4 11.29l1-1v1.42l-1.15 1.14L3 12.5V10H1.5L1 9.5v-8l.5-.5h12l.5.5V6h-1V2H2v7h1.5l.5.5zM10.29 13l1.86 1.85l.85-.35V13h1.5l.5-.5v-5l-.5-.5h-8l-.5.5v5l.5.5zm.21-1H7V8h7v4h-1.5l-.5.5v.79l-1.15-1.14z" clip-rule="evenodd"/></svg>          <h1 className="text-sm">Comments</h1>

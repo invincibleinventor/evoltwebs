@@ -84,7 +84,7 @@ useEffect(()=>{
     return(
         <>
       
-    <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
+    <div className="flex flex-col my-3 mt-6 space-y-4">
    {!loading  ? (comments.map((comment) => (
     <CommentComponent time={timeAgo.format(Date.now() - comment.newtime)} myhandle={props.myhandle} likedbypeople={comment.liked} comment_id={comment.comment_id} key={comment.comment_id} handle="abishek.vh" likes={comment.likes} likedbyme={comment.likedbyme} name={comment.name} profile={comment.profile} content={comment.content} loggedin={props.loggedin}/>
  

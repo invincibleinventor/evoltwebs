@@ -8,9 +8,10 @@ export default function CommentComponent(props){
     const supabase = createClient()
     const [liked,toggleLiked] = useState(props.likedbyme)
     const [likes,setLikes] = useState(props.likes)
-
+    const [disabled,setDisabled] = useState(false)
     async function setLiked(like)
     {
+        setDisabled(true)
         if(like==false){
             let l = props.likedbypeople
 console.log(l)
@@ -25,6 +26,8 @@ console.log(l)
         else{
             setLikes(likes-1)
             toggleLiked(false)
+            setDisabled(false)
+
         }
         }
         else{
@@ -40,6 +43,8 @@ console.log(l)
         else{
             setLikes(likes+1)
             toggleLiked(true)
+            setDisabled(false)
+
         }
     
         }
@@ -59,7 +64,7 @@ console.log(l)
     <h1 className="text-sm font-normal text-gray-800">{props.content}</h1>
     <div className="flex flex-row items-center content-center my-1 mt-2 space-x-[8px]">
         {props.loggedin &&
-    <svg onClick={()=>(toggleLiked(!liked),setLiked(!liked))} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 48 48">{liked?<path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"/>:<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"/>}</svg>
+    <svg onClick={()=>(!disabled?(toggleLiked(!liked),setLiked(!liked)):console.log('hold up!'))} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 48 48">{liked?<path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"/>:<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.987 10.987 0 0 0 15 8"/>}</svg>
    
         }<h1 className="text-xs">{likes} Likes</h1>
     </div>
