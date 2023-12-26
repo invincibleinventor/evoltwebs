@@ -65,9 +65,9 @@ export default function Create(){
        <label className="text-md" htmlFor="name">
          Name
        </label>
-       <textarea
+       <input
         onChange={(e:any)=>setName(e.target.value)}
-         className="px-4 py-2 mb-6 mr-4 border  bg-inherit"
+         className="px-4 py-2 mb-6 mr-4 border bg-inherit"
          name="name"
          placeholder="Please Type Out Your Display Name"
          required
@@ -77,7 +77,7 @@ export default function Create(){
        <label className="text-md" htmlFor="name">
          Handle - You cannot change this later
        </label>
-       <textarea
+       <input
         onChange={(e:any)=>setHandle(e.target.value)}
          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
          name="handke"
