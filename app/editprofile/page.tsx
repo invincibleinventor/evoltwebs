@@ -78,13 +78,13 @@ export default function Create(){
          Handle - You cannot change this later
        </label>
        <input
-        onChange={(e:any)=>setHandle(e.target.value)}
+        onChange={(e:any)=>setHandle(e.target.value.trim().replace(' ','_'))}
          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
          name="handke"
          placeholder="Please Type Out Your Handle"
          required
          minLength={4}
-         maxLength={20}
+         maxLength={12}
        />
          <label className="text-md" htmlFor="content">
          About
