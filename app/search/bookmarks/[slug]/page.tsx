@@ -92,9 +92,17 @@ get()},[search])
 <input onKeyDown={(e) => {
         if (e.key === "Enter")
         
+            {
+        if(tempsearch!=''){
             setSearch(tempsearch)
+        }
+  else{
+    setEmpty(true)
+  }
         
-        }} defaultValue={search} onChange={(e:any)=>setTempSearch(e.target.value)} minLength={4} maxLength={50} type="search" className="w-full h-12 pr-8 text-[14px] bg-white border border-gray-150 peer focus:outline-black focus:bg-white placeholder:text-neutral-600 font-poppins pl-14" placeholder={"Search Posts"}></input>
+        } 
+        
+        }} defaultValue={search} onChange={(e:any)=>setTempSearch(e.target.value.trim())} minLength={4} maxLength={50} type="search" className="w-full h-12 pr-8 text-[14px] bg-white border border-gray-150 peer focus:outline-black focus:bg-white placeholder:text-neutral-600 font-poppins pl-14" placeholder={"Search Posts"}></input>
 </div>
 </div>
   <div className='h-full overflow-y-scroll hiddenscroll'>
