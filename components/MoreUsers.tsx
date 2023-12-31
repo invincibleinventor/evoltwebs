@@ -39,8 +39,12 @@ async function get(from,to){
       if(data && data.length>0){
       console.log(data)
      let ds = data
+              const {data:{user}} = await supabase.auth.getUser()
+
+              const {data:x,error:xe} = await supabase.from('user').select('*').eq('id',user.id)
+
      for await (const [index,post] of ds.entries()) {
-        if(followinglist.includes(post.handle))
+        if(x[0]["following"].includes(post.handle))
         {
             ds[index]["isfollowing"]  = true
          }

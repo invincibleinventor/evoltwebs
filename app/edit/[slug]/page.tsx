@@ -66,7 +66,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 setContent(data[0]["content"])
                 setExcerpt(data[0]["excerpt"])
                 setTitle(data[0]["title"])
-                setCover(data[0]["cover"])
+                setCover(data[0]["cover"]+'?'+new Date().getTime())
             }
             setLoading(false)
 
@@ -181,20 +181,20 @@ console.log(error)
       </div>
     ) 
     :(
-        <div className='absolute flex flex-row items-center content-center w-full h-screen'>
-        <Oval
-        height={80}
-        width={80}
-        color="#000"
-        wrapperStyle={{}}
-        wrapperClass="mx-auto my-auto"
-        visible={true}
-        ariaLabel='oval-loading'
-        secondaryColor="#808080"
-        strokeWidth={2}
-        strokeWidthSecondary={2}
-        
-        />
-        </div>
+        <div className="flex items-center content-center w-full h-screen">
+    <Oval
+   height={80}
+   width={80}
+   color="#000"
+   wrapperStyle={{}}
+   wrapperClass="mx-auto"
+   visible={true}
+   ariaLabel='oval-loading'
+   secondaryColor="#808080"
+   strokeWidth={2}
+   strokeWidthSecondary={2}
+   
+   />
+   </div>
     )
 }

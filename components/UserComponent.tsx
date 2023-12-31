@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link';
 import { createClient } from "@/utils/supabase/client"
 import { useState } from "react"
 
@@ -51,19 +51,23 @@ export default function UserComponent(props){
     const [imfollowing,setImFollowing] = useState(props.isfollowing)
     const [followerlist,setFollowerList] = useState(props.followerlist)
     const [followinglist,setFollowingList] = useState(props.followinglist)
-  
+  let a = props.name
+    if(a.length>=11){
+a=a.slice(0,7)
+        a+="..."
+    }
     const [myId,setMyId] = useState(props.myID)
     return(
-        <div className="flex flex-col mx-auto xl:mx-2 my-2 border border-gray-150 h-[270.29px] xl:w-auto w-[303.86px] px-6 py-6">
+        <Link href={'/profile/'+props.handle} className="flex flex-col mx-auto xl:mx-2 my-2 border border-gray-150 h-[270.29px] xl:w-auto w-[303.86px] px-6 py-6">
             <div className="flex flex-row items-center content-center justify-between">
                 <div className="flex flex-row items-center content-center space-x-5">
-<img src={props.image} className="object-cover w-12 h-12 "/>
+<img src={props.image} className="object-cover w-10 h-10"/>
 <div className="flex flex-col space-y-[1px]">
-<h1 className="text-base font-bold">{props.name}</h1>
+<h1 className="text-base font-bold">{a}</h1>
 <h1 className="text-xs font-normal">@{props.handle}</h1>
 </div>
 </div>
-<button onClick={()=>onfollow(props.handle)} className={imfollowing?"px-5 py-2 h-max text-xs border border-black bg-white text-black":"px-5 py-2 h-max text-xs bg-black border border-black text-white"}>{imfollowing?'Unfollow':'Follow'}</button>
+<button onClick={(e:any)=>(e.stopPropagation(),e.preventDefault(),onfollow(props.handle))} className={imfollowing?"px-5 py-2 h-max text-xs border border-black bg-white text-black":"px-5 py-2 h-max text-xs bg-black border border-black text-white"}>{imfollowing?'Unfollow':'Follow'}</button>
 </div>
 <div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-0 my-6 mb-4 border border-neutral-700">
 <div className="flex flex-row w-full md:mx-auto">
@@ -83,6 +87,6 @@ export default function UserComponent(props){
 <h1 className="text-sm fix-overflow four-line-ellipsis">{props.about}</h1>
 </div>
             
-        </div>
+        </Link>
     )
 }

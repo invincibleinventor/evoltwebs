@@ -156,7 +156,7 @@ get()},[])
         <div className="relative h-64">
             <div className="bg-gray-200 h-48 w-[calc(100%)-8px]  m-4 ">
                 {cover &&
-        <img src={found?cover?cover:'/bg.jpg':'/bg.jpg'} className="object-cover w-full h-48 "></img>
+        <img src={found?cover?cover+'?'+new Date().getTime():'/bg.jpg':'/bg.jpg'} className="object-cover w-full h-48 "></img>
                 }
         </div><img className="absolute w-24 h-24 bottom-5 md:left-12 left-7" src={found?image:'/usernotfound.png'}></img>
         {(found && loggedin) && <button onClick={()=>onfollow()}className={`absolute  text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${!(imfollowing || myself)?'bg-black text-white border-1 border-black':'bg-white text-black border border-black'}`}>{myself?'Edit Profile':imfollowing?'Unfollow':'Follow'}</button>

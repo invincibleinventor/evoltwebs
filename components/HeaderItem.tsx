@@ -20,6 +20,9 @@ export default function App (props:pros) {
     else if(props.link=='/myself' && loc.startsWith('/profile')){
         a.opened=true
     }
+    else if(props.link=='/myself' && loc=='/customize'){
+        a.opened=true
+    }
     else{
         console.log('')
     }

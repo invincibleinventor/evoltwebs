@@ -50,7 +50,7 @@ return
           setHandle(data[0]["handle"])
           setAbout(data[0]["about"])
           setImage(data[0]["image"])
-          setCover(data[0]["cover"])
+          setCover(data[0]["cover"]+'?'+new Date().getTime())
           
           }
         
