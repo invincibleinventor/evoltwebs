@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier . -w"
   },
   "dependencies": {
     "@capacitor/android": "^5.6.0",
@@ -40,8 +42,16 @@
     "@types/node": "20.3.1",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.5",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "cssnano": "^6.0.2",
     "encoding": "^0.1.13",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-tailwindcss": "^3.13.1",
     "heroicons": "^2.0.18",
+    "prettier": "^3.1.1",
     "react-insta-stories": "^2.6.2",
     "react-loader-spinner": "^6.1.0",
     "zuck.js": "^2.1.0"

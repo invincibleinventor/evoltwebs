@@ -1,79 +1,82 @@
-'use client'
-import { createClient } from "@/utils/supabase/client"
-import { useState } from "react"
+"use client";
+import { createClient } from "@/utils/supabase/client";
+import { useState } from "react";
 
-export default function BookMarksComponent(props){
-    const supabase = createClient()
-    const [likedlist,setLikedList] = useState(props.likedlist)
-    
-    const [liked,toggleLiked] = useState(props.liked)
-    const [ulikedlist,setuLikedList] = useState(props.userliked)
-    const [disabled,setDisabled] = useState(false)
+export default function BookMarksComponent(props) {
+  const supabase = createClient();
+  const [likedlist, setLikedList] = useState(props.likedlist);
 
-    async function setLiked(like){
-        if(like==false){
-            let l = likedlist
-console.log(l)
-setDisabled(true)
+  const [liked, toggleLiked] = useState(props.liked);
+  const [ulikedlist, setuLikedList] = useState(props.userliked);
+  const [disabled, setDisabled] = useState(false);
 
-            l = l.filter(function(item) {
-                return item !== props.handle
-            })
-            let u = ulikedlist
-        
-            u = u.filter(function(item) {
-                return item !== props.postid
-            })
+  async function setLiked(like) {
+    if (like == false) {
+      let l = likedlist;
+      console.log(l);
+      setDisabled(true);
 
-            console.log(l)
-            const {error:e} = await supabase.from('user').update({bookmarks:u}).eq('handle',props.handle)
+      l = l.filter(function (item) {
+        return item !== props.handle;
+      });
+      let u = ulikedlist;
 
-            const {error} = await supabase.from('posts').update({bookmarked:l}).eq('id',props.postid)
-        if(error){
-            alert(error.message)
-        }
-        else{
-          const {data} = await supabase.from('posts').select('bookmarked').eq('id',props.postid)
-          setLikedList(data[0]["bookmarked"])
-            toggleLiked(false)
-            const {data:d} = await supabase.from('user').select('bookmarks').eq('handle',props.handle)
-            setuLikedList(d[0]["bookmarks"])
-            setDisabled(false)
+      u = u.filter(function (item) {
+        return item !== props.postid;
+      });
 
-        }
-        }
-        else{
-            let l = likedlist
-            setDisabled(true)
+      console.log(l);
+      const { error: e } = await supabase.from("user").update({ bookmarks: u }).eq("handle", props.handle);
 
-            l.push(props.handle)
-            let u = ulikedlist
-            u.push(props.postid)
-            console.log(l)
-            const {error:e} = await supabase.from('user').update({bookmarks:u}).eq('handle',props.handle)
+      const { error } = await supabase.from("posts").update({ bookmarked: l }).eq("id", props.postid);
+      if (error) {
+        alert(error.message);
+      } else {
+        const { data } = await supabase.from("posts").select("bookmarked").eq("id", props.postid);
+        setLikedList(data[0]["bookmarked"]);
+        toggleLiked(false);
+        const { data: d } = await supabase.from("user").select("bookmarks").eq("handle", props.handle);
+        setuLikedList(d[0]["bookmarks"]);
+        setDisabled(false);
+      }
+    } else {
+      let l = likedlist;
+      setDisabled(true);
 
-            const {error} = await supabase.from('posts').update({bookmarked:l}).eq('id',props.postid)
-            
-            if(error){
-            alert(error.message)
-        }
-        else{
-            const {data} = await supabase.from('posts').select('bookmarked').eq('id',props.postid)
-            setLikedList(data[0]["bookmarked"])
-            toggleLiked(true)
-            const {data:d} = await supabase.from('user').select('bookmarks').eq('handle',props.handle)
-            setuLikedList(d[0]["bookmarks"])
-            setDisabled(false)
+      l.push(props.handle);
+      let u = ulikedlist;
+      u.push(props.postid);
+      console.log(l);
+      const { error: e } = await supabase.from("user").update({ bookmarks: u }).eq("handle", props.handle);
 
-        }
-    
-        }
+      const { error } = await supabase.from("posts").update({ bookmarked: l }).eq("id", props.postid);
+
+      if (error) {
+        alert(error.message);
+      } else {
+        const { data } = await supabase.from("posts").select("bookmarked").eq("id", props.postid);
+        setLikedList(data[0]["bookmarked"]);
+        toggleLiked(true);
+        const { data: d } = await supabase.from("user").select("bookmarks").eq("handle", props.handle);
+        setuLikedList(d[0]["bookmarks"]);
+        setDisabled(false);
+      }
     }
-        return(<div onClick={()=>(!disabled?(toggleLiked(!liked),setLiked(!liked)):console.log('holdup'))} className="cursor-pointer flex flex-row items-center content-center  px-6 pr-0  space-x-[8px]">
-       
-    <svg   xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">{liked?<path fill="currentColor" d="M17 3H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2"/>:<path fill="currentColor" d="m17 18l-5-2.18L7 18V5h10m0-2H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2"/>}</svg>
-   
-        <h1 className="hidden text-sm md:inline-block">Bookmark</h1>
+  }
+  return (
+    <div
+      onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
+      className="cursor-pointer flex flex-row items-center content-center  px-6 pr-0  space-x-[8px]"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        {liked ? (
+          <path fill="currentColor" d="M17 3H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2" />
+        ) : (
+          <path fill="currentColor" d="m17 18l-5-2.18L7 18V5h10m0-2H7a2 2 0 0 0-2 2v16l7-3l7 3V5a2 2 0 0 0-2-2" />
+        )}
+      </svg>
+
+      <h1 className="hidden text-sm md:inline-block">Bookmark</h1>
     </div>
-    )
+  );
 }
