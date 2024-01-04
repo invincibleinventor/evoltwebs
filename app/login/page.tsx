@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { NextResponse } from "next/server";
 import { useState, useEffect } from "react";
 export default function Login() {
+  const router = useRouter()
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   async function login(){
@@ -15,7 +16,7 @@ export default function Login() {
       console.log(error);
     }
     else{
-    return redirect('/');
+    router.refresh()
     }
   }
   async function register(){
@@ -23,7 +24,7 @@ export default function Login() {
     if (error) {
       console.log(error);
     }else{
-    return redirect('/');
+    router.refresh();
     }
   }
   
