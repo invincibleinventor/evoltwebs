@@ -20,7 +20,7 @@ export default function CommentsComponent(props:any) {
 
   const [posted, setPosted] = useState(false);
   async function post() {
-    const { error } = await supabase.from("comments").insert({ content: text, id: props.slug });
+    const { error } = await supabase.from("comments").insert({ content: text, id: props.slug,handle:props.myhandle });
     if (error) {
       console.log(error.message);
     } else {
