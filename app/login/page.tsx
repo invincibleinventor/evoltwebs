@@ -68,8 +68,8 @@ export default function Login() {
           <input onChange={(e:any)=>{setEmail(e.target.value)}} type="email" className="px-5 py-3 my-4 mt-3 border outline-none w-max placeholder:text-gray-300 " placeholder="Your Email Address"></input>
           <h1 className="mt-4 text-xs font-medium pl-[1px] text-black">Password</h1>
           <input onChange={(e:any)=>{setPassword(e.target.value)}} type="password" className="px-5 py-3 my-4 mt-3 border outline-none w-max placeholder:text-gray-300 " placeholder="Your Password"></input>
-          <button onClick={()=>(console.log('login'),login())} className="px-5 py-3 mt-4 text-xs font-medium text-white bg-black">Sign In To Your Account</button>
-          <button onClick={()=>(console.log('register'),register())} className="px-5 py-3 mt-2 text-xs font-medium text-black bg-gray-100 border">Register Your Account</button>
+          <button onClick={(e:any)=>(e.preventDefault(),console.log('login'),login())} className="px-5 py-3 mt-4 text-xs font-medium text-white bg-black">Sign In To Your Account</button>
+          <button onClick={(e:any)=>(e.preventDefault(),console.log('register'),register())} className="px-5 py-3 mt-2 text-xs font-medium text-black bg-gray-100 border">Register Your Account</button>
           <button
         
       className="flex justify-center gap-4 px-5 py-3 mt-10 text-xs font-medium text-black bg-white border"
