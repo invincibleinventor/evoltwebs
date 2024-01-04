@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { NextResponse } from "next/server";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function Login() {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -28,6 +28,7 @@ export default function Login() {
   }
   
   const supabase = createClient();
+  useEffect(()=>{
   async function check() {
     const {
       data: { user },
@@ -36,8 +37,9 @@ export default function Login() {
       return window.location.replace("/editprofile");
     }
   }
+  
   check();
-
+  },[])
   const signWithGoogle = async () => {
     const origin = window.location.origin;
     const { data, error } = await supabase.auth.signInWithOAuth({
