@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-export default function Post(props) {
+export default function Post(props:any) {
   let s = props.description;
 
-  let a = props.title;
+  const a = props.title;
 
   if (props.type == "profile") {
     if (s.length > 100) {
@@ -27,7 +27,7 @@ export default function Post(props) {
             ></img>
           </div>
           <div className="flex flex-col    gap-[8px] px-6 py-5">
-            <div href={`/profile/${props.handle}`} className="flex flex-row items-center content-center gap-2 shrink-0">
+            <div className="flex flex-row items-center content-center gap-2 shrink-0">
               <img className="w-5 h-5 rounded-sm shrink-0" src={props.dp}></img>
 
               <div className="flex flex-row gap-[2px]">

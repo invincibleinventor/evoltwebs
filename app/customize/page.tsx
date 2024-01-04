@@ -7,13 +7,13 @@ import { Oval } from "react-loader-spinner";
 import { useEffect, useRef, useState } from "react";
 export default function Create() {
   const supabase = createClient();
-  const hiddenFileInput = useRef(null);
+  const hiddenFileInput = useRef<HTMLInputElement | any>();
   const handleClick = (event: any) => {
-    hiddenFileInput.current.click();
+    hiddenFileInput.current?.click();
   };
   const [changed, setChanged] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<any>();
   async function coverChange() {
     console.log("here here");
     const bucket = "covers";
@@ -49,13 +49,17 @@ export default function Create() {
       if (error) {
         redirect("/login");
       } else {
+        if(user){
         const { data, error } = await supabase.from("user").select("*").eq("id", user.id);
+        if(data){
         setName(data[0]["name"]);
         setHandle(data[0]["handle"]);
         setAbout(data[0]["about"]);
         setImage(data[0]["image"]);
         setCover(data[0]["cover"] + "?" + new Date().getTime());
       }
+    }
+    }
     }
     get();
   }, []);
@@ -103,7 +107,7 @@ export default function Create() {
           <img src={image} className="absolute bottom-0 left-0 right-0 mx-auto h-28 w-28" />
 
           <input
-            onChange={(e) => (
+            onChange={(e:any) => (
               setCover(URL.createObjectURL(e.target.files[0])), setChanged(true), setFile(e.target.files[0])
             )}
             className="absolute bottom-0 left-0 right-0 hidden mx-auto"

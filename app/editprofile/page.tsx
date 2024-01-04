@@ -16,13 +16,17 @@ export default function Create() {
       if (error) {
         redirect("/login");
       } else {
+        if(user){
         const { data, error } = await supabase.from("user").select("*").eq("id", user.id);
         if (data && data.length > 0) {
           window.location.replace("/");
         } else {
+          if(user.email){
           setEmail(user.email);
           setImage(user.user_metadata.avatar_url);
+          }
         }
+      }
       }
     }
     get();
@@ -37,7 +41,7 @@ export default function Create() {
   const [content, setContent] = useState("");
   async function create() {
     const { data, error } = await supabase.from("user").select("*").eq("handle", handle);
-    if (data.length > 0) {
+    if (data && data.length > 0) {
       alert("Handle Already Exists");
     } else {
       const { data, error } = await supabase.from("user").insert({

@@ -6,18 +6,18 @@ import en from "javascript-time-ago/locale/en";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function MoreSearchPosts(props) {
+export default function MoreSearchPosts(props:any) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   TimeAgo.locale(en);
   let PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
-  async function get(from, to) {
+  async function get(from: number, to: number) {
     const { data, error } = await supabase
       .from("posts")
       .select("*")
@@ -35,6 +35,7 @@ export default function MoreSearchPosts(props) {
         let ds = data;
         for await (const [index, post] of ds.entries()) {
           const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+          if(data){
           ds[index].name = data[0].name;
 
           ds[index].dp = data[0].image;
@@ -42,6 +43,7 @@ export default function MoreSearchPosts(props) {
           let date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
         }
+      }
         setPosts([...posts, ...ds]);
         if (ds.length < PAGE_COUNT) {
           setHalt(true);
@@ -64,7 +66,7 @@ export default function MoreSearchPosts(props) {
   return (
     <>
       <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post) => (
+        {posts.map((post:any) => (
           <PostComponent
             id={post.id}
             type="profile"

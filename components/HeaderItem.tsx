@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 interface pros {
   url?: any;
   name: string;
-  link?: string;
+  link?: any;
 }
 
 export default function App(props: pros) {

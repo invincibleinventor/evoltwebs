@@ -29,14 +29,14 @@ export default async function Index() {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   let empty = false;
-  let users = [];
+  let users: any[] = [];
   let loading = true;
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  let userid = user.id;
+  let userid = user?.id;
   let myhandle = "";
-  let followinglist = [];
+  let followinglist: never[] = [];
   async function get() {
     const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${userid})`).limit(4);
     if (error) {
@@ -44,9 +44,13 @@ export default async function Index() {
     } else {
       let ds = data;
       const { data: u, error: e } = await supabase.from("user").select("*").eq("id", userid);
-      let ifollow = u[0]["following"];
+      let ifollow;
+      if(u){
+      ifollow = u[0]["following"];
       followinglist = ifollow;
-      myhandle = u[0]["handle"];
+      myhandle = u[0]["handle"]; 
+    }
+      
       for await (const [index, user] of ds.entries()) {
         if (ifollow.includes(user.handle)) {
           ds[index]["isfollowing"] = true;
@@ -75,6 +79,7 @@ export default async function Index() {
                   users.map((user) => (
                     <UserComponent
                       myID={myhandle}
+                      key={user.id}
                       followerlist={user.followers}
                       followinglist={followinglist}
                       id={user.id}

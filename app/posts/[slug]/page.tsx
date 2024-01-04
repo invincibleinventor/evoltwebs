@@ -38,15 +38,17 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log(error);
       } else {
         console.log(data);
-        let ds = data;
+        let ds:any = data;
         for await (const [index, post] of ds.entries()) {
           const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+          if(data){
           ds[index].name = data[0].name;
 
           ds[index].dp = data[0].image;
 
           let date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
+          }
         }
         setPosts(ds);
         setLoading(false);
@@ -82,16 +84,16 @@ export default function Page({ params }: { params: { slug: string } }) {
             {!loading ? (
               posts.map((post) => (
                 <PostComponent
-                  id={post.id}
-                  title={post.title}
-                  cover={post.cover}
-                  time={timeAgo.format(Date.now() - post.diff)}
-                  key={post.id}
-                  image={post.image}
-                  dp={post.dp}
-                  handle={post.handle}
-                  name={post.name}
-                  description={post.excerpt}
+                  id={post["id"]}
+                  title={post["title"]}
+                  cover={post["cover"]}
+                  time={timeAgo.format(Date.now() - post["diff"])}
+                  key={post["id"]}
+                  image={post["image"]}
+                  dp={post["dp"]}
+                  handle={post["handle"]}
+                  name={post["name"]}
+                  description={post["excerpt"]}
                 />
               ))
             ) : (

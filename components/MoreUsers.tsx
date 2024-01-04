@@ -6,13 +6,13 @@ import { createClient } from "@/utils/supabase/client";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 
-export default function MoreUsers(props) {
-  const [users, setUsers] = useState([]);
+export default function MoreUsers(props:any) {
+  const [users, setUsers] = useState<any>([]);
   const [myhandle, setMyHandle] = useState("");
   const [userid, setUserId] = useState("");
   const supabase = createClient();
   const [followinglist, setFollowingList] = useState([]);
-  let PAGE_COUNT = 4;
+  const PAGE_COUNT = 4;
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [offset, setOffset] = useState(1);
@@ -23,19 +23,23 @@ export default function MoreUsers(props) {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+      if(user){
       setUserId(user.id);
-      const { data, error } = await supabase.from("user").select("*").eq("id", user.id);
+      }
+      const { data, error } = await supabase.from("user").select("*").eq("id", user?.id);
+      if(data){
       setMyHandle(data[0]["handle"]);
       setFollowingList(data[0]["following"]);
     }
+  }
     set();
   }, []);
 
-  async function get(from, to) {
+  async function get(from: number, to: number) {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data, error } = await supabase.from("user").select("*").range(from, to).not("id", "in", `(${user.id})`);
+    const { data, error } = await supabase.from("user").select("*").range(from, to).not("id", "in", `(${user?.id})`);
     if (error) {
       console.log(error);
     } else {
@@ -46,10 +50,10 @@ export default function MoreUsers(props) {
           data: { user },
         } = await supabase.auth.getUser();
 
-        const { data: x, error: xe } = await supabase.from("user").select("*").eq("id", user.id);
+        const { data: x, error: xe } = await supabase.from("user").select("*").eq("id", user?.id);
 
         for await (const [index, post] of ds.entries()) {
-          if (x[0]["following"].includes(post.handle)) {
+          if (x && x[0]["following"].includes(post.handle)) {
             ds[index]["isfollowing"] = true;
           } else {
             ds[index]["isfollowing"] = false;
@@ -77,14 +81,15 @@ export default function MoreUsers(props) {
   return (
     <div className="w-full">
       <div className="grid items-center content-center grid-cols-1 gap-2 px-3 xl:grid-cols-2 animate-in hiddenscroll">
-        {users.map((user) => (
+        {users.map((user:any) => (
           <UserComponent
             myID={myhandle}
-            followerlist={user.followers}
+            key={user["id"]}
+            followerlist={user["followers"]}
             followinglist={followinglist}
-            id={user.id}
-            name={user.name}
-            following={user.following.length}
+            id={user["id"]}
+            name={user["name"]}
+            following={user.following?.length}
             isfollowing={user.isfollowing}
             handle={user.handle}
             about={user.about}

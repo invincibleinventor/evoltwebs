@@ -1,19 +1,19 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
+import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from "react";
 
-export default function CommentComponent(props) {
+export default function CommentComponent(props: { likedbyme: any; likes: any; likedbypeople: any; myhandle: any; comment_id: any; profile: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; time: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; content: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; loggedin: any; }) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
   const [disabled, setDisabled] = useState(false);
-  async function setLiked(like) {
+  async function setLiked(like: boolean) {
     setDisabled(true);
     if (like == false) {
       let l = props.likedbypeople;
       console.log(l);
-      l = l.filter(function (item) {
+      l = l.filter(function (item: any) {
         return item !== props.myhandle;
       });
       console.log(l);

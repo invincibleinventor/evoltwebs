@@ -1,7 +1,7 @@
 "use client";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-export default function Search(props) {
+export default function Search(props:any) {
   const [value, setValue] = useState("");
   function search() {
     console.log("ok");

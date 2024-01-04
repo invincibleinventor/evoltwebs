@@ -6,18 +6,18 @@ import en from "javascript-time-ago/locale/en";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function More(props) {
+export default function More(props: any) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   TimeAgo.locale(en);
-  let PAGE_COUNT = 5;
+  const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
-  async function get(from, to) {
+  async function get(from: number, to: number) {
     if (props.handle) {
       const { data, error } = await supabase
         .from("posts")
@@ -33,6 +33,7 @@ export default function More(props) {
           let ds = data;
           for await (const [index, post] of ds.entries()) {
             const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+            if(data){
             ds[index].name = data[0].name;
 
             ds[index].dp = data[0].image;
@@ -40,7 +41,8 @@ export default function More(props) {
             let date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
           }
-          setPosts((prev) => [...prev, ...ds]);
+        }
+          setPosts((prev:any) => [...prev, ...ds]);
           if (ds.length < PAGE_COUNT) {
             setHalt(true);
           }
@@ -63,6 +65,7 @@ export default function More(props) {
           let ds = data;
           for await (const [index, post] of ds.entries()) {
             const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+            if(data){
             ds[index].name = data[0].name;
 
             ds[index].dp = data[0].image;
@@ -70,6 +73,7 @@ export default function More(props) {
             let date2 = new Date(ds[index].created_at);
             ds[index].diff = date1.getTime() - date2.getTime();
           }
+        }
           setPosts([...posts, ...ds]);
           if (ds.length < PAGE_COUNT) {
             setHalt(true);
@@ -93,7 +97,7 @@ export default function More(props) {
   return (
     <>
       <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post) => (
+        {posts.map((post:any) => (
           <PostComponent
             id={post.id}
             type="profile"

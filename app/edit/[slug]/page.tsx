@@ -18,7 +18,7 @@ import rehypeSanitize from "rehype-sanitize";
 import { Oval } from "react-loader-spinner";
 
 export default function Page({ params }: { params: { slug: string } }) {
-  async function coverChange(id) {
+  async function coverChange(id: string) {
     console.log("here here");
     const bucket = "posts";
 
@@ -37,7 +37,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       return "https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/" + id + ".jpg";
     }
   }
-  const hiddenFileInput = useRef(null);
+  const hiddenFileInput = useRef<HTMLInputElement | any>(null);
   const handleClick = (event: any) => {
     event.preventDefault();
     hiddenFileInput.current.click();
@@ -46,7 +46,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [cover, setCover] = useState("/bg.jpg");
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
   const [notfound, setNotFound] = useState(false);
@@ -66,7 +66,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         const {
           data: { user },
         } = await supabase.auth.getUser();
-        if (data[0]["poster"] == user.id) {
+        if (data[0]["poster"] == user?.id) {
           setAuthor(true);
           setContent(data[0]["content"]);
           setExcerpt(data[0]["excerpt"]);
@@ -91,14 +91,15 @@ export default function Page({ params }: { params: { slug: string } }) {
       alert(error.message);
       console.log(error);
     } else {
+      
       if (changed) {
         const { data, error } = await supabase
           .from("posts")
           .select("*")
-          .eq("poster", user.id)
+          .eq("poster", user?.id)
           .order("id", { ascending: false })
           .limit(1);
-
+          if(data){
         let newCover = await coverChange(data[0]["id"]);
         const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", data[0]["id"]);
         if (es) {
@@ -110,6 +111,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         window.location.replace("/");
       }
     }
+  }
   }
   return !loading ? (
     author ? (
@@ -148,7 +150,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               minLength={90}
             />
             <input
-              onChange={(e) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
+              onChange={(e:any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
               className="bottom-0 left-0 right-0 hidden mx-auto"
               type="file"
               ref={hiddenFileInput}
@@ -178,7 +180,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 className="mx-[2px] mb-6 shrink-1 rounded-none"
                 style={{ borderRadius: "0px", height: "100px !important" }}
                 value={content}
-                onChange={setContent}
+                onChange={()=>(setContent)}
                 previewOptions={{
                   rehypePlugins: [[rehypeSanitize]],
                 }}

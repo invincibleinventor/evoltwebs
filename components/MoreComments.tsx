@@ -7,20 +7,20 @@ import { Oval } from "react-loader-spinner";
 import { useInView } from "react-intersection-observer";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-export default function CommentsComponent(props) {
+export default function CommentsComponent(props:any) {
   const supabase = createClient();
   TimeAgo.locale(en);
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<any>([]);
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [text, setText] = useState("");
   const inputRef = useRef(null);
   let PAGE_COUNT = 5;
-  async function get(from, to) {
+  async function get(from: number, to: number) {
     //alert('reached')
     const { data, error } = await supabase
       .from("comments")
@@ -81,14 +81,14 @@ export default function CommentsComponent(props) {
     <>
       <div className="flex flex-col my-3 mt-6 space-y-4">
         {!loading ? (
-          comments.map((comment) => (
+          comments.map((comment:any) => (
             <CommentComponent
               time={timeAgo.format(Date.now() - comment.newtime)}
               myhandle={props.myhandle}
               likedbypeople={comment.liked}
               comment_id={comment.comment_id}
               key={comment.comment_id}
-              handle="abishek.vh"
+          
               likes={comment.likes}
               likedbyme={comment.likedbyme}
               name={comment.name}

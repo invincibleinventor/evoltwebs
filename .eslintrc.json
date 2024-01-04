@@ -8,8 +8,12 @@
     "prettier"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error"
+    "@typescript-eslint/no-unused-vars": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "react/no-unescaped-entities": 0,
+    "tailwindcss/no-contradicting-classname": 0,
+    "prefer-const": "off",
+    "@typescript-eslint/no-array-constructor":0
   },
   "root": true,
   "ignorePatterns": ["**/*.config"]

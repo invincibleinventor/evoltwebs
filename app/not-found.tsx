@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Error({ error, reset }) {
+export default function Error({  }) {
   return (
     <div className="flex items-center content-center w-full h-screen px-10 lg:px-24 sm:px-24 md:px-16">
       <div className="flex flex-col gap-2 mx-auto max-w-max">

@@ -17,7 +17,7 @@ import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
 
 export default function Create() {
-  async function coverChange(id) {
+  async function coverChange(id: string) {
     console.log("here here");
     const bucket = "posts";
 
@@ -36,7 +36,7 @@ export default function Create() {
       return "https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/" + id + ".jpg";
     }
   }
-  const hiddenFileInput = useRef(null);
+  const hiddenFileInput = useRef<HTMLInputElement | any>(null);
   const handleClick = (event: any) => {
     event.preventDefault();
     hiddenFileInput.current.click();
@@ -45,18 +45,18 @@ export default function Create() {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [cover, setCover] = useState("/bg.jpg");
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
   async function create() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data: u } = await supabase.from("user").select("handle").eq("id", user.id);
+    const { data: u } = await supabase.from("user").select("handle").eq("id", user?.id);
     const { data: check } = await supabase
       .from("posts")
       .select("*")
-      .eq("poster", user.id)
+      .eq("poster", user?.id)
       .order("id", { ascending: false })
       .limit(1);
     let s;
@@ -65,6 +65,7 @@ export default function Create() {
     } else {
       s = [];
     }
+    if(u){
     if (s && s.excerpt == excerpt && s.title == title && s.handle == u[0]["handle"] && s.content == content) {
       return redirect("/");
     } else {
@@ -79,10 +80,10 @@ export default function Create() {
           const { data, error } = await supabase
             .from("posts")
             .select("*")
-            .eq("poster", user.id)
+            .eq("poster", user?.id)
             .order("id", { ascending: false })
             .limit(1);
-
+          if(data){
           let newCover = await coverChange(data[0]["id"]);
           const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", data[0]["id"]);
           if (es) {
@@ -95,6 +96,8 @@ export default function Create() {
         }
       }
     }
+    }
+  }
   }
   return (
     <div className={`flex-1 h-screen overflow-y-hidden px-8 gap-2 overflow-x-hidden`}>
@@ -130,7 +133,7 @@ export default function Create() {
             minLength={90}
           />
           <input
-            onChange={(e) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
+            onChange={(e:any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
             className="bottom-0 left-0 right-0 hidden mx-auto"
             type="file"
             ref={hiddenFileInput}
@@ -157,7 +160,7 @@ export default function Create() {
               className="mx-[2px] mb-6 shrink-1 rounded-none"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={content}
-              onChange={setContent}
+              onChange={()=>(setContent)}
               previewOptions={{
                 rehypePlugins: [[rehypeSanitize]],
               }}

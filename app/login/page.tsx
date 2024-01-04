@@ -30,8 +30,9 @@ export default function Login() {
     if (error) {
       console.log(error);
     }
-
+    if(data.url){
     return redirect(data.url);
+    }
   };
 
   return (

@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import NavBar from "@/components/NavBar";
 import Loading from "@/app/loading";
 import { Suspense } from "react";
+import Script from "next/script";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata = {
@@ -18,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="noSelect font-poppins">
       <head>
-        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <Script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></Script>
       </head>
 
       <body className="bg-white bg-cover" lang="en">

@@ -29,15 +29,18 @@ export default function Page({ params }: { params: { slug: string } }) {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   const [empty, setEmpty] = useState(true);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function get() {
       setLoading(true);
       const { data: user } = await supabase.auth.getUser();
-      let s = user.user.id;
+      let s = user?.user?.id;
       const { data: u } = await supabase.from("user").select("*").eq("id", s);
-      let l = u[0]["bookmarks"];
+      let l=[];
+      if(u){ 
+      l = u[0]["bookmarks"];
+      }
       console.log("below");
       console.log(l);
       let ds = [];
@@ -57,12 +60,13 @@ export default function Page({ params }: { params: { slug: string } }) {
 
         for await (const [index, post] of ds.entries()) {
           const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+          if(data){
           ds[index].name = data[0].name;
           let date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
           ds[index].dp = data[0].image;
         }
-
+      }
         if (ds.length > 0) {
           setEmpty(false);
         } else {
@@ -118,7 +122,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
             {!loading ? (
               !empty ? (
-                posts.map((post) => (
+                posts.map((post: { id: any; title: any; diff: number; image: any; dp: any; handle: any; cover: any; name: any; excerpt: any; }) => (
                   <PostComponent
                     id={post.id}
                     title={post.title}

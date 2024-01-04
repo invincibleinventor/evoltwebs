@@ -27,14 +27,16 @@ export default async function Index() {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   let empty = true;
-  let posts = [];
+  let posts: any[] = [];
   let loading = true;
-  let l = [];
+  let l: readonly any[] = [];
   async function get() {
     const { data: user } = await supabase.auth.getUser();
-    let s = user.user.id;
+    let s = user?.user?.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
+    if(u){
     l = u[0]["bookmarks"];
+    }
     console.log("below");
     console.log(l);
     let ds = [];
@@ -51,12 +53,13 @@ export default async function Index() {
 
       for await (const [index, post] of ds.entries()) {
         const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+        if(data){
         ds[index].name = data[0].name;
         let date2 = new Date(ds[index].created_at);
         ds[index].diff = date1.getTime() - date2.getTime();
         ds[index].dp = data[0].image;
       }
-
+    }
       if (ds.length > 0) {
         empty = false;
       } else {

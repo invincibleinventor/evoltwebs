@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function LikeComponent(props) {
+export default function LikeComponent(props:any) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
   const [liked, toggleLiked] = useState(props.liked);
@@ -11,17 +11,17 @@ export default function LikeComponent(props) {
   const [likes, setLikes] = useState(props.likes);
   const postid = props.postid;
   const handle = props.handle;
-  async function setLiked(like) {
+  async function setLiked(like: boolean) {
     if (like == false) {
       let l = likedlist;
       setDisabled(true);
 
-      l = l.filter(function (item) {
+      l = l.filter(function (item: any) {
         return item !== props.handle;
       });
       let u = ulikedlist;
 
-      u = u.filter(function (item) {
+      u = u.filter(function (item: any) {
         return item !== props.postid;
       });
 
@@ -36,12 +36,16 @@ export default function LikeComponent(props) {
         toggleLiked(false);
 
         const { data } = await supabase.from("posts").select("liked").eq("id", props.postid);
+        if(data){
         setLikedList(data[0]["liked"]);
         const { data: d } = await supabase.from("user").select("liked").eq("handle", props.handle);
+        if(d){
         setuLikedList(d[0]["liked"]);
         setDisabled(false);
 
         setLikes(likes - 1);
+        } 
+      }
       }
     } else {
       let l = likedlist;
@@ -59,14 +63,19 @@ export default function LikeComponent(props) {
       if (error) {
         alert(error.message);
       } else {
+        
         const { data } = await supabase.from("posts").select("liked").eq("id", props.postid);
+        if(data){
         setLikedList(data[0]["liked"]);
         const { data: d } = await supabase.from("user").select("liked").eq("handle", props.handle);
+        if(d){
         setuLikedList(d[0]["liked"]);
+        }
         setDisabled(false);
         setLikes(likes + 1);
         toggleLiked(true);
       }
+    }
     }
   }
   return (

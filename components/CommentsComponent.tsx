@@ -7,15 +7,15 @@ import MoreComments from "./MoreComments";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import { Oval } from "react-loader-spinner";
-export default function CommentsComponent(props) {
+export default function CommentsComponent(props:any) {
   TimeAgo.locale(en);
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<any>([]);
   const [text, setText] = useState("");
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | any>(null);
   const [commentChange, setCommentChange] = useState(false);
 
   const [posted, setPosted] = useState(false);
@@ -38,7 +38,8 @@ export default function CommentsComponent(props) {
         .order("likes", { ascending: false })
         .limit(5);
       if (data && data.length != 0) {
-        let l = data;
+        let l = Array()
+        l = data;
         for await (const [index, comment] of l.entries()) {
           console.log(index, comment);
           const { data, error } = await supabase.from("user").select("*").eq("id", comment.poster);
@@ -68,7 +69,7 @@ export default function CommentsComponent(props) {
         setComments([]);
         setLoading(false);
       } else {
-        console.log(error.message);
+        console.log(error);
       }
     }
     fetchcomments();
@@ -100,14 +101,13 @@ export default function CommentsComponent(props) {
       <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
         {!loading ? (
           <>
-            {comments.map((comment) => (
+            {comments.map((comment:any) => (
               <CommentComponent
                 time={timeAgo.format(Date.now() - comment.newtime)}
                 myhandle={props.myhandle}
                 likedbypeople={comment.liked}
                 comment_id={comment.comment_id}
                 key={comment.comment_id}
-                handle="abishek.vh"
                 likes={comment.likes}
                 likedbyme={comment.likedbyme}
                 name={comment.name}

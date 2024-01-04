@@ -2,10 +2,10 @@
 import { createClient } from "@/utils/supabase/client";
 import { useRef, useState } from "react";
 
-export default function PostAComment(props) {
+export default function PostAComment(props:any) {
   const supabase = createClient();
   const [text, setText] = useState("");
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | any>(null);
 
   const [posted, setPosted] = useState(false);
   async function post() {

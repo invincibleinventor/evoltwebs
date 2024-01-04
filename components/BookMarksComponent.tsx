@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function BookMarksComponent(props) {
+export default function BookMarksComponent(props: { likedlist: any; liked: any; userliked: any; handle: any; postid: any; }) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
 
@@ -10,18 +10,18 @@ export default function BookMarksComponent(props) {
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
 
-  async function setLiked(like) {
+  async function setLiked(like: boolean) {
     if (like == false) {
       let l = likedlist;
       console.log(l);
       setDisabled(true);
 
-      l = l.filter(function (item) {
+      l = l.filter(function (item: any) {
         return item !== props.handle;
       });
       let u = ulikedlist;
 
-      u = u.filter(function (item) {
+      u = u.filter(function (item: any) {
         return item !== props.postid;
       });
 
@@ -33,12 +33,15 @@ export default function BookMarksComponent(props) {
         alert(error.message);
       } else {
         const { data } = await supabase.from("posts").select("bookmarked").eq("id", props.postid);
+        if(data){
         setLikedList(data[0]["bookmarked"]);
         toggleLiked(false);
         const { data: d } = await supabase.from("user").select("bookmarks").eq("handle", props.handle);
+        if(d)
         setuLikedList(d[0]["bookmarks"]);
         setDisabled(false);
       }
+    }
     } else {
       let l = likedlist;
       setDisabled(true);
@@ -55,12 +58,15 @@ export default function BookMarksComponent(props) {
         alert(error.message);
       } else {
         const { data } = await supabase.from("posts").select("bookmarked").eq("id", props.postid);
+        if(data){
         setLikedList(data[0]["bookmarked"]);
         toggleLiked(true);
         const { data: d } = await supabase.from("user").select("bookmarks").eq("handle", props.handle);
+        if(d)
         setuLikedList(d[0]["bookmarks"]);
         setDisabled(false);
       }
+    }
     }
   }
   return (

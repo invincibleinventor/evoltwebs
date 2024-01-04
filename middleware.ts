@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
     
     if (session) {
       const { data} = await supabase.from('user').select('*').eq('id',session.user.id)
-      if(data.length>0){
+      if(data && data.length>0){
       return response
       }
     }

@@ -22,11 +22,11 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [following, setFollowing] = useState(0);
   const [imfollowing, setImFollowing] = useState(false);
   const [followers, setFollowers] = useState(0);
-  const [followerlist, setFollowerList] = useState([]);
-  const [followinglist, setFollowingList] = useState([]);
+  const [followerlist, setFollowerList] = useState<any>([]);
+  const [followinglist, setFollowingList] = useState<any>([]);
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
-  const [myId, setMyId] = useState("");
+  const [myId, setMyId] = useState<string | any>();
   useEffect(() => {
     async function get() {
       const {
@@ -53,7 +53,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
             if (session) {
               const { data, error } = await supabase.from("user").select("*").eq("id", session.user.id);
-
+              if(data){
               setMyId(data[0].handle);
               setFollowerList(pd[0].followers);
               setFollowingList(data[0].following);
@@ -64,6 +64,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               } else {
                 setImFollowing(false);
               }
+            }
             } else {
             }
           }
@@ -89,9 +90,10 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log(error);
       } else {
         console.log(data);
-        let ds = data;
+        let ds:any = data;
         for await (const [index, post] of ds.entries()) {
           const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
+          if(data){
           ds[index].name = data[0].name;
 
           ds[index].dp = data[0].image;
@@ -99,6 +101,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           let date2 = new Date(ds[index].created_at);
           ds[index].diff = date1.getTime() - date2.getTime();
         }
+      }
         setPosts(ds);
         setLoading(false);
       }
@@ -114,9 +117,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         let arr = followerlist;
         console.log("before");
         console.log(arr);
-        arr = arr.filter((item) => item !== myId);
+        arr = arr.filter((item: any) => item !== myId);
         let arr2 = followinglist;
-        arr2 = arr2.filter((item) => item !== params.slug);
+        arr2 = arr2.filter((item: string) => item !== params.slug);
 
         console.log(arr);
         const { data, error } = await supabase
@@ -140,7 +143,8 @@ export default function Page({ params }: { params: { slug: string } }) {
       } else {
         let arr = followerlist;
         arr.push(myId);
-        let arr2 = followinglist;
+        let arr2 = Array();
+        arr2 = followinglist;
         arr2.push(params.slug);
         console.log(arr);
         const { data, error } = await supabase
@@ -222,17 +226,17 @@ export default function Page({ params }: { params: { slug: string } }) {
                 posts.length > 0 ? (
                   posts.map((post) => (
                     <PostComponent
-                      id={post.id}
+                      id={post["id"]}
                       type="profile"
-                      title={post.title}
-                      cover={post.cover}
-                      time={timeAgo.format(Date.now() - post.diff)}
-                      key={post.id}
-                      image={post.image}
-                      dp={post.dp}
-                      handle={post.handle}
-                      name={post.name}
-                      description={post.excerpt}
+                      title={post["title"]}
+                      cover={post["cover"]}
+                      time={timeAgo.format(Date.now() - post["diff"])}
+                      key={post["id"]}
+                      image={post["image"]}
+                      dp={post["dp"]}
+                      handle={post["handle"]}
+                      name={post["name"]}
+                      description={post["excerpt"]}
                     />
                   ))
                 ) : (

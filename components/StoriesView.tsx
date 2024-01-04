@@ -1,7 +1,7 @@
 "use client";
 import Stories from "react-insta-stories";
 import { useState } from "react";
-export default function StoriesView(props) {
+export default function StoriesView(props:any) {
   const [visible, setVisible] = useState(false);
 
   return (

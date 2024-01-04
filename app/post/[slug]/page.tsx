@@ -10,6 +10,7 @@ import PostAComment from "@/components/PostAComment";
 import CommentsComponent from "@/components/CommentsComponent";
 import LikeComponent from "@/components/LikeComponent";
 import BookMarksComponent from "@/components/BookMarksComponent";
+import { JSX, ClassAttributes, ImgHTMLAttributes } from "react";
 export default async function App({ params }: { params: { slug: string } }) {
   let cookieStore = cookies();
   let supabase = createClient(cookieStore);
@@ -30,12 +31,12 @@ export default async function App({ params }: { params: { slug: string } }) {
   let loggedin = false;
   let emptycomments = false;
   let liked = false;
-  let likedlist = [];
+  let likedlist: string | any[] = [];
   let bookmarked = false;
-  let bookmarkedlist = [];
-  let userliked = [];
-  let userbookmarked = [];
-  let comments = [];
+  let bookmarkedlist: never[] = [];
+  let userliked: never[] = [];
+  let userbookmarked: never[] = [];
+  let comments: any[] = [];
   TimeAgo.locale(en);
   let user = "";
   const timeAgo = new TimeAgo("en-US");
@@ -48,12 +49,14 @@ export default async function App({ params }: { params: { slug: string } }) {
 
       loggedin = true;
       const { data: users } = await supabase.from("user").select("*").eq("id", user);
+      if(users){
       myphoto = users[0]["image"];
       myname = users[0]["name"];
       myhandle = users[0]["handle"];
       userliked = users[0]["liked"];
       userbookmarked = users[0]["bookmarks"];
     }
+  }
     const { data, error: e } = await supabase.from("posts").select("*").eq("id", params.slug);
     if (data && data.length > 0) {
       error = false;
@@ -69,6 +72,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       }
       bookmarkedlist = x;
       const { data: u } = await supabase.from("user").select("*").eq("id", data[0]["poster"]);
+      if(u){
       author = u[0]["handle"];
       if (author == myhandle) {
         imauthor = true;
@@ -78,7 +82,7 @@ export default async function App({ params }: { params: { slug: string } }) {
       content = data[0]["content"];
       title = data[0]["title"];
       cover = data[0]["cover"];
-
+    }
       let date2 = new Date(data[0].created_at);
       time = date1.getTime() - date2.getTime();
       loading = false;
@@ -124,11 +128,13 @@ export default async function App({ params }: { params: { slug: string } }) {
       comments = [];
       emptycomments = true;
     } else {
-      console.log(error.message);
-    }
+      
+      console.log(error);
+    
+  }
   }
   await fetchcomments();
-  function ClickableImage(props) {
+  function ClickableImage(props: JSX.IntrinsicAttributes & ClassAttributes<HTMLImageElement> & ImgHTMLAttributes<HTMLImageElement>) {
     return <img {...props} className="w-full max-w-full" />;
   }
   const components = {
@@ -184,7 +190,7 @@ export default async function App({ params }: { params: { slug: string } }) {
                   />
                 </svg>
 
-                <h1 className="text-sm inline-block">Edit Post</h1>
+                <h1 className="inline-block text-sm">Edit Post</h1>
               </Link>
             )}
             <div className="flex flex-row items-center content-center justify-between mt-6 text-md">
