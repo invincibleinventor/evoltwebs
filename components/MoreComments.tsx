@@ -88,7 +88,7 @@ export default function CommentsComponent(props:any) {
               likedbypeople={comment.liked}
               comment_id={comment.comment_id}
               key={comment.comment_id}
-          
+              handle={comment.handle}
               likes={comment.likes}
               likedbyme={comment.likedbyme}
               name={comment.name}
