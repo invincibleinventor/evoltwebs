@@ -2,8 +2,8 @@
 
 import { createClient } from "@/utils/supabase/client";
 import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from "react";
-
-export default function CommentComponent(props: { likedbyme: any; likes: any; likedbypeople: any; myhandle: any; comment_id: any; profile: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; time: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; content: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; loggedin: any; }) {
+import Link from 'next/link';
+export default function CommentComponent(props: { handle:any; likedbyme: any; likes: any; likedbypeople: any; myhandle: any; comment_id: any; profile: string | undefined; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; time: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; content: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined; loggedin: any; }) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
@@ -50,12 +50,12 @@ export default function CommentComponent(props: { likedbyme: any; likes: any; li
 
   return (
     <div className="flex flex-row w-full gap-4 my-2">
-      <div className="w-10 h-10 shrink-0">
+      <Link href={`/profile/${props.handle}`} className="w-10 h-10 shrink-0">
         <img className="w-8 h-8 mx-auto my-auto border border-gray-150 shrink-0" src={props.profile} />
-      </div>
+      </Link>
       <div className="flex flex-col gap-[2px] w-full">
         <div className="flex flex-row items-center content-center w-full">
-          <h1 className="text-base font-semibold">{props.name}</h1>
+          <Link href={`/profile/${props.handle}`} className="text-base font-semibold">{props.name}</Link>
           <h1 className="ml-auto text-sm font-normal">{props.time}</h1>
         </div>
         <h1 className="text-sm font-normal text-gray-800">{props.content}</h1>
