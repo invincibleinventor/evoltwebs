@@ -111,6 +111,7 @@ export default function CommentsComponent(props:any) {
                 likes={comment.likes}
                 likedbyme={comment.likedbyme}
                 name={comment.name}
+                handle={comment.handle}
                 profile={comment.profile}
                 content={comment.content}
                 loggedin={props.loggedin}
