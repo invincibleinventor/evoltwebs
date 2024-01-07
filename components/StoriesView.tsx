@@ -1,7 +1,7 @@
 "use client";
-import Stories from "react-insta-stories";
+import Image from "next/image";
 import { useState } from "react";
-export default function StoriesView(props:any) {
+export default function StoriesView(props: any) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -9,10 +9,16 @@ export default function StoriesView(props:any) {
       <div
         onClick={() => setVisible(!visible)}
         style={{ background: `url('${props.image}')` }}
-        className="relative w-24 h-32 rounded-md bg-gradient-to-b from-black to-neutral-400"
+        className="relative h-32 w-24 rounded-md bg-gradient-to-b from-black to-current"
       >
-        <h1 className="absolute text-xs font-medium text-white bottom-2 left-3">{props.name}</h1>
-        <img className="absolute w-8 h-8 border border-white rounded-full top-2 left-3" src={props.profile}></img>
+        <h1 className="absolute bottom-2 left-3 text-xs font-medium text-white">{props.name}</h1>
+        <Image
+          width={32}
+          height={32}
+          className="absolute left-3 top-2 h-8 w-8 rounded-full border border-white"
+          src={props.profile}
+          alt="story"
+        />
       </div>
     </div>
   );

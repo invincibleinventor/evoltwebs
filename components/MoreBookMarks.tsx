@@ -1,29 +1,29 @@
 "use client";
 import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function MoreBookMarks(props: { slug: string; }) {
+export default function MoreBookMarks(props: { slug: string }) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [posts, setPosts] = useState<any>([]);
   TimeAgo.locale(en);
-  let PAGE_COUNT = 5;
+  const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
 
   async function get(from: number, to: number) {
     const { data: user } = await supabase.auth.getUser();
-    let s = user?.user?.id;
+    const s = user?.user?.id;
     const { data: u } = await supabase.from("user").select("*").eq("id", s);
-    let l = Array()
-    if(u){
-    l = u[0]["bookmarks"];
+    let l = [];
+    if (u) {
+      l = u[0]["bookmarks"];
     }
     const { data, error } = await supabase
       .from("posts")
@@ -40,18 +40,18 @@ export default function MoreBookMarks(props: { slug: string; }) {
     } else {
       if (data && data.length > 0) {
         console.log(data);
-        let ds = data;
+        const ds = data;
         for await (const [index, post] of ds.entries()) {
-          const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
-          if(data){
-          ds[index].name = data[0].name;
+          const { data } = await supabase.from("user").select("*").eq("id", post.poster);
+          if (data) {
+            ds[index].name = data[0].name;
 
-          ds[index].dp = data[0].image;
+            ds[index].dp = data[0].image;
 
-          let date2 = new Date(ds[index].created_at);
-          ds[index].diff = date1.getTime() - date2.getTime();
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
+          }
         }
-      }
         setPosts([...posts, ...ds]);
         if (ds.length < PAGE_COUNT) {
           setHalt(true);
@@ -73,8 +73,8 @@ export default function MoreBookMarks(props: { slug: string; }) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center gap-2">
-        {posts.map((post:any) => (
+      <div className="flex flex-col content-center items-center gap-2">
+        {posts.map((post: any) => (
           <PostComponent
             id={post.id}
             type="profile"

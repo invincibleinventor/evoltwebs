@@ -1,19 +1,15 @@
 "use client";
-import { usePathname } from "next/navigation";
 import Headeritem from "@/components/HeaderItem";
-import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 export default function App$() {
   const loc = usePathname();
   return (
-    <div className="md:w-[400px] mb-auto">
-      <div
-        className={`  w-max flex flex-col py-0 px-0 md:pr-0 items-start ${loc.startsWith("/post/") ? "md:flex" : ""}`}
-      >
-        <Link className="flex flex-row mt-1" href="/">
+    <div className="mb-auto md:w-[400px]">
+      <div className={`  flex w-max flex-col items-start p-0 md:pr-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
+        <Link className="mt-1 flex flex-row" href="/">
           <svg
-            className="w-[51px] mt-[2px] ml-[8px] mr-2 md:mr-0 md:ml-[4px] transition-all ease-linear duration-100 hover:bg-gray-400  cursor-pointer rounded-full p-[10px] h-[51px] text-black"
+            className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px] text-black transition-all  duration-100 ease-linear hover:bg-gray-400 md:ml-[4px] md:mr-0"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -31,15 +27,15 @@ export default function App$() {
             />
           </svg>
         </Link>
-        <div className="py-4 md:bg-white md:px-4 pt-[14px] md:pt-[4px] md:mt-7 flex flex-col md:space-y-[0px] space-y-1">
+        <div className="flex flex-col space-y-1 py-4 pt-[14px] md:mt-7 md:space-y-[0px] md:bg-white md:px-4 md:pt-[4px]">
           <Headeritem
             link="/"
             url={
               <path
                 fill="currentColor"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="m8.36 1.37l6.36 5.8l-.71.71L13 6.964v6.526l-.5.5h-3l-.5-.5v-3.5H7v3.5l-.5.5h-3l-.5-.5V6.972L2 7.88l-.71-.71l6.35-5.8zM4 6.063v6.927h2v-3.5l.5-.5h3l.5.5v3.5h2V6.057L8 2.43z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             }
             name="Home"
@@ -99,22 +95,22 @@ export default function App$() {
             url={
               <path
                 fill="currentColor"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M3.5 2h-1v5h1zm6.1 5H6.4L6 6.45v-1L6.4 5h3.2l.4.5v1zm-5 3H1.4L1 9.5v-1l.4-.5h3.2l.4.5v1zm3.9-8h-1v2h1zm-1 6h1v6h-1zm-4 3h-1v3h1zm7.9 0h3.19l.4-.5v-.95l-.4-.5H11.4l-.4.5v.95zm2.1-9h-1v6h1zm-1 10h1v2h-1z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               />
             }
             name="More"
           ></Headeritem>
           <Link href="/create" className="pt-5">
-            <div className="flex flex-row md:w-[calc(180px)]  mx-auto md:mr-auto  md:py-[14px] md:h-[44px] p-3 w-[52px] h-[52px] bg-black transition-all ease-linear duration-100 cursor-pointer hover:bg-black items-center content-center">
-              <span className={`text-white md:inline-block hidden text-xs text-center mx-auto  font-medium pt-[0px]`}>
+            <div className="mx-auto flex h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-black p-3 transition-all duration-100 ease-linear hover:bg-black md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
+              <span className={`mx-auto hidden pt-[0px] text-center text-xs font-medium  text-white md:inline-block`}>
                 New Post
               </span>
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="md:hidden w-[22px] h-[22px] text-white mx-auto my-auto"
+                className="m-auto h-[22px] w-[22px] text-white md:hidden"
                 style={{ fill: "white" }}
               >
                 <g>

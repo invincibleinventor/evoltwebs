@@ -1,13 +1,13 @@
 "use client";
-import { Oval } from "react-loader-spinner";
+import More from "@/components/More";
 import PostComponent from "@/components/PostComponent";
 import { createClient } from "@/utils/supabase/client";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
-import { redirect, useRouter } from "next/navigation";
-import More from "@/components/More";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Oval } from "react-loader-spinner";
 export default function Page({ params }: { params: { slug: string } }) {
   const router = useRouter();
   const supabase = createClient();
@@ -16,7 +16,6 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [loggedin, setloggedin] = useState(false);
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(true);
-  const [postloading, setPostLoading] = useState(true);
   const [cover, setCover] = useState("true");
   const [name, setName] = useState("");
   const [following, setFollowing] = useState(0);
@@ -27,6 +26,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
   const [myId, setMyId] = useState<string | any>();
+
   useEffect(() => {
     async function get() {
       const {
@@ -52,19 +52,19 @@ export default function Page({ params }: { params: { slug: string } }) {
             setFollowing(pd[0].following.length);
 
             if (session) {
-              const { data, error } = await supabase.from("user").select("*").eq("id", session.user.id);
-              if(data){
-              setMyId(data[0].handle);
-              setFollowerList(pd[0].followers);
-              setFollowingList(data[0].following);
-              if (data[0].handle == params.slug) {
-                setMyself(true);
-              } else if (pd[0].followers.includes(data[0].handle)) {
-                setImFollowing(true);
-              } else {
-                setImFollowing(false);
+              const { data } = await supabase.from("user").select("*").eq("id", session.user.id);
+              if (data) {
+                setMyId(data[0].handle);
+                setFollowerList(pd[0].followers);
+                setFollowingList(data[0].following);
+                if (data[0].handle == params.slug) {
+                  setMyself(true);
+                } else if (pd[0].followers.includes(data[0].handle)) {
+                  setImFollowing(true);
+                } else {
+                  setImFollowing(false);
+                }
               }
-            }
             } else {
             }
           }
@@ -90,18 +90,18 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log(error);
       } else {
         console.log(data);
-        let ds:any = data;
+        const ds: any = data;
         for await (const [index, post] of ds.entries()) {
-          const { data, error } = await supabase.from("user").select("*").eq("id", post.poster);
-          if(data){
-          ds[index].name = data[0].name;
+          const { data } = await supabase.from("user").select("*").eq("id", post.poster);
+          if (data) {
+            ds[index].name = data[0].name;
 
-          ds[index].dp = data[0].image;
+            ds[index].dp = data[0].image;
 
-          let date2 = new Date(ds[index].created_at);
-          ds[index].diff = date1.getTime() - date2.getTime();
+            const date2 = new Date(ds[index].created_at);
+            ds[index].diff = date1.getTime() - date2.getTime();
+          }
         }
-      }
         setPosts(ds);
         setLoading(false);
       }
@@ -127,11 +127,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           .update({ followers: arr })
           .eq("handle", params.slug)
           .select();
-        const { data: me, error: mee } = await supabase
-          .from("user")
-          .update({ following: arr2 })
-          .eq("handle", myId)
-          .select();
+
         if (error) {
           console.log(error);
         } else {
@@ -141,9 +137,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         setFollowingList(arr2);
         setImFollowing(false);
       } else {
-        let arr = followerlist;
+        const arr = followerlist;
         arr.push(myId);
-        let arr2 = Array();
+        let arr2 = [];
         arr2 = followinglist;
         arr2.push(params.slug);
         console.log(arr);
@@ -152,11 +148,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           .update({ followers: arr })
           .eq("handle", params.slug)
           .select();
-        const { data: me, error: mee } = await supabase
-          .from("user")
-          .update({ following: arr2 })
-          .eq("handle", myId)
-          .select();
+
         if (error) {
           console.log(error);
         } else {
@@ -169,58 +161,64 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }
   return !loading ? (
-    <div className="flex-1 h-screen p-0 overflow-x-hidden overflow-y-hidden">
-      <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
+    <div className="h-screen flex-1 overflow-hidden p-0">
+      <div className="hiddenscroll h-full overflow-y-scroll pb-10">
         <div className="relative h-64">
-          <div className="bg-gray-200 h-48 w-[calc(100%)-8px]  m-4 ">
+          <div className="m-4 h-48 w-[calc(100%)-8px]  bg-gray-200 ">
             {cover && (
-              <img
-                src={found ? (cover ? cover + "?" + new Date().getTime() : "/bg.jpg") : "/bg.jpg"}
-                className="object-cover w-full h-48 "
-              ></img>
+              <Image
+                width={180}
+                height={180}
+                src={found ? (cover ? cover : "/bg.jpg") : "/bg.jpg"}
+                className="h-48 w-full object-cover "
+                alt="cover"
+              />
             )}
           </div>
-          <img
-            className="absolute w-24 h-24 bottom-5 md:left-12 left-7"
+          <Image
+            width={90}
+            height={90}
+            className="absolute bottom-5 left-7 h-24 w-24 md:left-12"
             src={found ? image : "/usernotfound.png"}
-          ></img>
+            alt="userimage"
+          />
           {found && loggedin && (
             <button
               onClick={() => onfollow()}
-              className={`absolute  text-xs font-semibold bottom-10 md:right-12 right-6 px-8 py-3  ${
+              className={`absolute  bottom-10 right-6 px-8 py-3 text-xs font-semibold md:right-12  ${
                 !(imfollowing || myself)
-                  ? "bg-black text-white border-1 border-black"
-                  : "bg-white text-black border border-black"
+                  ? "border-[1px] border-black bg-black text-white"
+                  : "border border-black bg-white text-black"
               }`}
             >
               {myself ? "Edit Profile" : imfollowing ? "Unfollow" : "Follow"}
             </button>
           )}
         </div>
-        <div className="flex flex-col gap-2 ml-8 md:ml-14">
+        <div className="ml-8 flex flex-col gap-2 md:ml-14">
           {found && (
-            <div className="flex flex-row items-center content-center gap-2 ">
+            <div className="flex flex-row content-center items-center gap-2 ">
               <h1 className="text-xl font-semibold">{name}</h1>
-              <h1 className="text-sm font-normal text-neutral-400">@{params.slug}</h1>
+              <h1 className="text-sm font-normal text-gray-400">@{params.slug}</h1>
             </div>
           )}
-          <h1 className="pr-12 text-sm font-normal leading-relaxed text-neutral-400">{about}</h1>
+          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-400">{about}</h1>
         </div>
         {found && (
           <>
-            <div className="flex flex-row items-center content-center gap-6 px-4 py-4 mx-8 my-4 mb-1 border md:mx-14 border-neutral-700">
-              <div className="flex flex-row w-full md:mx-auto">
-                <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
+            <div className="mx-8 my-4 mb-1 flex flex-row content-center items-center gap-6 border border-gray-700 p-4 md:mx-14">
+              <div className="flex w-full flex-row md:mx-auto">
+                <div className="mx-auto flex w-max flex-col content-center items-center gap-1">
                   <h1 className="text-xs font-semibold">Followers</h1>
                   <h1 className="text-sm font-medium text-gray-700">{followers} Followers</h1>
                 </div>
-                <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
+                <div className="mx-auto flex w-max flex-col content-center items-center gap-1">
                   <h1 className="text-xs font-semibold">Following</h1>
                   <h1 className="text-sm font-medium text-gray-700">{following} Following</h1>
                 </div>
               </div>
             </div>
-            <h1 className="px-8 mt-8 mb-4 text-xl font-bold md:mt-10 md:mb-4 md:px-14 ">{name}'s Posts</h1>
+            <h1 className="mb-4 mt-8 px-8 text-xl font-bold md:mb-4 md:mt-10 md:px-14 ">{name}&apos;s Posts</h1>
             <div className="flex flex-col gap-2 px-3 md:px-9">
               {!loading ? (
                 posts.length > 0 ? (
@@ -242,12 +240,12 @@ export default function Page({ params }: { params: { slug: string } }) {
                 ) : (
                   <>
                     <h1 className="px-[22px] text-sm font-medium text-gray-700">
-                      No Posts To Display. {name} haven't posted anything yet.
+                      No Posts To Display. {name} haven&apos;t posted anything yet.
                     </h1>
                   </>
                 )
               ) : (
-                <div className="flex flex-col items-center content-center mt-10">
+                <div className="mt-10 flex flex-col content-center items-center">
                   <Oval
                     height={80}
                     width={80}
@@ -269,7 +267,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       </div>
     </div>
   ) : (
-    <div className="flex items-center content-center w-full h-screen">
+    <div className="flex h-screen w-full content-center items-center">
       <Oval
         height={80}
         width={80}

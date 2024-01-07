@@ -1,15 +1,11 @@
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
-import Link from "next/link";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
-import StoriesView from "@/components/StoriesView";
-import PostComponent from "@/components/PostComponent";
-import { redirect } from "next/navigation";
-import More from "@/components/More";
+import MoreUsers from "@/components/MoreUsers";
 import Search from "@/components/SearchComponent";
 import UserComponent from "@/components/UserComponent";
-import MoreUsers from "@/components/MoreUsers";
+import { createClient } from "@/utils/supabase/server";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import { cookies } from "next/headers";
+import Link from "next/link";
 export default async function Index() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
@@ -25,16 +21,14 @@ export default async function Index() {
   };
   TimeAgo.locale(en);
 
-  const timeAgo = new TimeAgo("en-US");
-  const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
-  let empty = false;
+  const empty = false;
   let users: any[] = [];
   let loading = true;
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  let userid = user?.id;
+  const userid = user?.id;
   let myhandle = "";
   let followinglist: never[] = [];
   async function get() {
@@ -42,15 +36,15 @@ export default async function Index() {
     if (error) {
       console.log(error);
     } else {
-      let ds = data;
-      const { data: u, error: e } = await supabase.from("user").select("*").eq("id", userid);
+      const ds = data;
+      const { data: u } = await supabase.from("user").select("*").eq("id", userid);
       let ifollow;
-      if(u){
-      ifollow = u[0]["following"];
-      followinglist = ifollow;
-      myhandle = u[0]["handle"]; 
-    }
-      
+      if (u) {
+        ifollow = u[0]["following"];
+        followinglist = ifollow;
+        myhandle = u[0]["handle"];
+      }
+
       for await (const [index, user] of ds.entries()) {
         if (ifollow.includes(user.handle)) {
           ds[index]["isfollowing"] = true;
@@ -68,12 +62,12 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="flex-1 h-screen p-0 py-2 pb-20 overflow-x-hidden overflow-y-hidden">
-          <div className="p-4 py-2 pb-4 mx-1 md:mx-1">
+        <div className="h-screen flex-1 overflow-hidden p-0 py-2 pb-20">
+          <div className="mx-1 p-4 py-2 md:mx-1">
             <Search page="induvidual" text="Users" />
           </div>
-          <div className="h-full overflow-y-scroll hiddenscroll">
-            <div className="grid items-center content-center grid-cols-1 gap-2 px-3 xl:grid-cols-2 animate-in hiddenscroll">
+          <div className="hiddenscroll h-full overflow-y-scroll">
+            <div className="animate-in hiddenscroll grid grid-cols-1 content-center items-center gap-2 px-3 xl:grid-cols-2">
               {!loading ? (
                 !empty ? (
                   users.map((user) => (
@@ -93,17 +87,17 @@ export default async function Index() {
                     />
                   ))
                 ) : (
-                  <div className="flex items-center content-center w-full px-10 mt-24 lg:px-24 sm:px-24 md:px-16">
-                    <div className="flex flex-col gap-2 mx-auto max-w-max">
-                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
-                      <h1 className="mx-auto text-sm text-center text-neutral-400">
+                  <div className="mt-24 flex w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
+                    <div className="mx-auto flex max-w-max flex-col gap-2">
+                      <h1 className="mx-auto text-center text-lg font-semibold text-black">No Posts To View!</h1>
+                      <h1 className="mx-auto text-center text-sm text-gray-800">
                         Follow people to view their posts on your home feed. The more people you follow, the more posts
                         on your feed
                       </h1>
                       <Link
                         href="/explore"
-                        className={`w-max mx-auto text-xs font-bold mt-3 px-8 py-3  ${
-                          1 == 1 ? "bg-black text-white" : "bg-white border-2"
+                        className={`mx-auto mt-3 w-max px-8 py-3 text-xs font-bold  ${
+                          1 == 1 ? "bg-black text-white" : "border-2 bg-white"
                         }`}
                       >
                         Explore People
@@ -112,7 +106,7 @@ export default async function Index() {
                   </div>
                 )
               ) : (
-                <div className="flex items-center content-center w-full h-screen"></div>
+                <div className="flex h-screen w-full content-center items-center"></div>
               )}
             </div>
             <MoreUsers></MoreUsers>
