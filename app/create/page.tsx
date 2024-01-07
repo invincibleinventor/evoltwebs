@@ -1,19 +1,10 @@
 "use client";
-import "@mdxeditor/editor/style.css";
 import { createClient } from "@/utils/supabase/client";
-import { redirect } from "next/navigation";
-import Link from "next/link";
-import { useRef, useState } from "react";
-import {
-  MDXEditor,
-  linkPlugin,
-  MDXEditorMethods,
-  headingsPlugin,
-  UndoRedo,
-  toolbarPlugin,
-  BoldItalicUnderlineToggles,
-} from "@mdxeditor/editor";
+import "@mdxeditor/editor/style.css";
 import MDEditor from "@uiw/react-md-editor";
+import Image from "next/image";
+import { redirect } from "next/navigation";
+import { useRef, useState } from "react";
 import rehypeSanitize from "rehype-sanitize";
 
 export default function Create() {
@@ -22,9 +13,7 @@ export default function Create() {
     const bucket = "posts";
 
     // Call Storage API to upload file
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload("/covers/" + id + ".jpg", file, { upsert: true });
+    const { error } = await supabase.storage.from(bucket).upload("/covers/" + id + ".jpg", file, { upsert: true });
 
     // Handle error if upload failed
     if (error) {
@@ -52,7 +41,10 @@ export default function Create() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    const { data: u } = await supabase.from("user").select("handle").eq("id", user?.id);
+    const { data: u } = await supabase
+      .from("user")
+      .select("handle")
+      .eq("id", user?.id);
     const { data: check } = await supabase
       .from("posts")
       .select("*")
@@ -65,67 +57,67 @@ export default function Create() {
     } else {
       s = [];
     }
-    if(u){
-    if (s && s.excerpt == excerpt && s.title == title && s.handle == u[0]["handle"] && s.content == content) {
-      return redirect("/");
-    } else {
-      const { data, error } = await supabase
-        .from("posts")
-        .insert({ handle: u[0]["handle"], excerpt: excerpt, content: content, title: title });
-      if (error) {
-        alert(error.message);
-        console.log(error);
+    if (u) {
+      if (s && s.excerpt == excerpt && s.title == title && s.handle == u[0]["handle"] && s.content == content) {
+        return redirect("/");
       } else {
-        if (changed) {
-          const { data, error } = await supabase
-            .from("posts")
-            .select("*")
-            .eq("poster", user?.id)
-            .order("id", { ascending: false })
-            .limit(1);
-          if(data){
-          let newCover = await coverChange(data[0]["id"]);
-          const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", data[0]["id"]);
-          if (es) {
-            alert(es.message);
-          } else {
-            window.location.replace("/");
-          }
+        const { error } = await supabase
+          .from("posts")
+          .insert({ handle: u[0]["handle"], excerpt: excerpt, content: content, title: title });
+        if (error) {
+          alert(error.message);
+          console.log(error);
         } else {
-          window.location.replace("/");
+          if (changed) {
+            const { data } = await supabase
+              .from("posts")
+              .select("*")
+              .eq("poster", user?.id)
+              .order("id", { ascending: false })
+              .limit(1);
+            if (data) {
+              const newCover = await coverChange(data[0]["id"]);
+              const { error: es } = await supabase.from("posts").update({ cover: newCover }).eq("id", data[0]["id"]);
+              if (es) {
+                alert(es.message);
+              } else {
+                window.location.replace("/");
+              }
+            } else {
+              window.location.replace("/");
+            }
+          }
         }
       }
     }
-    }
-  }
   }
   return (
-    <div className={`flex-1 h-screen overflow-y-hidden px-8 gap-2 overflow-x-hidden`}>
-      <div className="h-full overflow-y-scroll hiddenscroll">
+    <div className={`h-screen flex-1 gap-2 overflow-hidden px-8`}>
+      <div className="hiddenscroll h-full overflow-y-scroll">
         <form
-          className="flex flex-col justify-center w-full gap-2 pt-10 pb-10 pr-5 my-auto overflow-x-hidden animate-in text-foreground"
+          className="animate-in my-auto flex w-full flex-col justify-center gap-2 overflow-x-hidden py-10 pr-5 text-foreground"
           action={create}
         >
           <h1 className="mb-6 text-2xl font-bold text-black md:text-3xl">Publish New Post</h1>
 
-          <label className="mb-1 text-md" htmlFor="content">
+          <label className="mb-1 text-lg" htmlFor="content">
             Title
           </label>
           <input
             onChange={(e: any) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
+            className="mb-6 mr-4 w-full border bg-white px-4 py-2 text-sm "
             name="content"
             placeholder="Please Type Out Your Title"
             required
             maxLength={60}
             minLength={15}
           />
-          <label className="mb-1 text-md" htmlFor="content">
+          <label className="mb-1 text-lg" htmlFor="content">
             Excerpt
           </label>
           <textarea
             onChange={(e: any) => setExcerpt(e.target.value)}
-            className="w-full px-4 py-2 mb-6 mr-4 text-sm bg-white border "
+            className="mb-6 mr-4 w-full border bg-white px-4 py-2 text-sm "
             name="content"
             placeholder="Please Type Out Your Excerpt"
             required
@@ -133,43 +125,45 @@ export default function Create() {
             minLength={90}
           />
           <input
-            onChange={(e:any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
-            className="bottom-0 left-0 right-0 hidden mx-auto"
+            onChange={(e: any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
+            className="inset-x-0 bottom-0 mx-auto hidden"
             type="file"
             ref={hiddenFileInput}
           />
-          <label className="mb-1 text-md" htmlFor="content">
+          <label className="mb-1 text-lg" htmlFor="content">
             Cover Image
           </label>
-          <div className="relative w-full h-40 px-4 py-2 mb-6 mr-4 border shrink-0">
-            <img src={cover} className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-40 shrink-0"></img>
+          <div className="relative mb-6 mr-4 h-40 w-full shrink-0 border px-4 py-2">
+            <Image
+              src={cover}
+              width={160}
+              height={160}
+              className="absolute inset-0 h-40 w-full shrink-0 object-cover"
+              alt="cover"
+            />
             <button
               onClick={(e: any) => (setChanged(true), handleClick(e))}
-              className="absolute top-0 bottom-0 left-0 right-0 px-6 py-3 mx-auto my-auto text-xs text-white bg-black bg-opacity-60 backdrop-blur-sm w-max h-max"
+              className="absolute inset-0 m-auto h-max w-max bg-black/60 px-6 py-3 text-xs text-white backdrop-blur-sm"
             >
               Change Cover
             </button>
           </div>
-          <label className="mb-1 text-md" htmlFor="content">
+          <label className="mb-1 text-lg" htmlFor="content">
             Content
           </label>
           <div data-color-mode="light">
-            <div className="wmde-markdown-var"> </div>
-
             <MDEditor
-              className="mx-[2px] mb-6 shrink-1 rounded-none"
+              className="mx-[2px] mb-6 shrink rounded-none"
               style={{ borderRadius: "0px", height: "100px !important" }}
               value={content}
-              onChange={()=>(setContent)}
+              onChange={(e) => setContent(e!)}
               previewOptions={{
                 rehypePlugins: [[rehypeSanitize]],
               }}
             />
           </div>
 
-          <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max text-foreground">
-            Publish This Post
-          </button>
+          <button className="mb-2 w-max bg-black px-8 py-4 text-sm text-white">Publish This Post</button>
         </form>
       </div>
     </div>

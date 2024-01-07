@@ -2,33 +2,33 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function LikeComponent(props:any) {
+export default function LikeComponent(props: any) {
   const supabase = createClient();
+
   const [likedlist, setLikedList] = useState(props.likedlist);
   const [liked, toggleLiked] = useState(props.liked);
   const [ulikedlist, setuLikedList] = useState(props.userliked);
   const [disabled, setDisabled] = useState(false);
   const [likes, setLikes] = useState(props.likes);
-  const postid = props.postid;
-  const handle = props.handle;
+
   async function setLiked(like: boolean) {
     if (like == false) {
-      let l = likedlist;
+      // let l = likedlist;
       setDisabled(true);
 
-      l = l.filter(function (item: any) {
-        return item !== props.handle;
-      });
+      // l = l.filter(function (item: any) {
+      //   return item !== props.handle;
+      // });
       let u = ulikedlist;
 
       u = u.filter(function (item: any) {
         return item !== props.postid;
       });
 
-      const { error } = await supabase
-        .from("posts")
-        .update({ liked: l, likes: likes - 1 })
-        .eq("id", props.postid);
+      // const { error } = await supabase
+      //   .from("posts")
+      //   .update({ liked: l, likes: likes - 1 })
+      //   .eq("id", props.postid);
       const { error: e } = await supabase.from("user").update({ liked: u }).eq("handle", props.handle);
       if (e) {
         alert(e.message);
@@ -36,22 +36,22 @@ export default function LikeComponent(props:any) {
         toggleLiked(false);
 
         const { data } = await supabase.from("posts").select("liked").eq("id", props.postid);
-        if(data){
-        setLikedList(data[0]["liked"]);
-        const { data: d } = await supabase.from("user").select("liked").eq("handle", props.handle);
-        if(d){
-        setuLikedList(d[0]["liked"]);
-        setDisabled(false);
+        if (data) {
+          setLikedList(data[0]["liked"]);
+          const { data: d } = await supabase.from("user").select("liked").eq("handle", props.handle);
+          if (d) {
+            setuLikedList(d[0]["liked"]);
+            setDisabled(false);
 
-        setLikes(likes - 1);
-        } 
-      }
+            setLikes(likes - 1);
+          }
+        }
       }
     } else {
-      let l = likedlist;
+      const l = likedlist;
       setDisabled(true);
       l.push(props.handle);
-      let u = ulikedlist;
+      const u = ulikedlist;
       u.push(props.postid);
       console.log(l);
       const { error: e } = await supabase.from("user").update({ liked: u }).eq("handle", props.handle);
@@ -60,26 +60,26 @@ export default function LikeComponent(props:any) {
         .update({ liked: l, likes: likes + 1 })
         .eq("id", props.postid);
 
-      if (error) {
-        alert(error.message);
+      if (error || e) {
+        alert(error!.message);
+        alert(e!.message);
       } else {
-        
         const { data } = await supabase.from("posts").select("liked").eq("id", props.postid);
-        if(data){
-        setLikedList(data[0]["liked"]);
-        const { data: d } = await supabase.from("user").select("liked").eq("handle", props.handle);
-        if(d){
-        setuLikedList(d[0]["liked"]);
+        if (data) {
+          setLikedList(data[0]["liked"]);
+          const { data: d } = await supabase.from("user").select("liked").eq("handle", props.handle);
+          if (d) {
+            setuLikedList(d[0]["liked"]);
+          }
+          setDisabled(false);
+          setLikes(likes + 1);
+          toggleLiked(true);
         }
-        setDisabled(false);
-        setLikes(likes + 1);
-        toggleLiked(true);
       }
-    }
     }
   }
   return (
-    <div className="flex flex-row items-center content-center  px-6  space-x-[8px]">
+    <div className="flex flex-row content-center items-center  space-x-[8px]  px-6">
       <svg
         onClick={() => (!disabled ? (toggleLiked(!liked), setLiked(!liked)) : console.log("holdup"))}
         xmlns="http://www.w3.org/2000/svg"

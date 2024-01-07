@@ -9,7 +9,7 @@ interface pros {
 
 export default function App(props: pros) {
   const loc = usePathname();
-  let a = { opened: false };
+  const a = { opened: false };
 
   if (loc == props.link) {
     console.log(props.link);
@@ -25,12 +25,12 @@ export default function App(props: pros) {
   return (
     <Link
       href={props.link}
-      className={`flex flex-row rounded-lg px-3 md:px-[6px] md:pr-8 w-max md:w-full py-[10px] md:py-[8px] mx-2 md:mx-0 md:space-x-[8px] rounded-lg transition-all ease-linear duration-100 cursor-pointer items-center content-center  ${
+      className={`mx-2 flex w-max cursor-pointer flex-row content-center items-center rounded-lg px-3 py-[10px] transition-all duration-100 ease-linear md:mx-0 md:w-full md:space-x-[8px] md:px-[6px] md:py-[8px] md:pr-8  ${
         a.opened ? "" : ""
       }`}
     >
       <svg
-        className={`w-[26px] stroke-[2px] p-[2px] text-black h-[26px] ${a.opened ? "text-black" : "text-gray-600"}`}
+        className={`h-[26px] w-[26px] stroke-[2px] p-[2px] text-black ${a.opened ? "text-black" : "text-gray-600"}`}
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
@@ -39,7 +39,7 @@ export default function App(props: pros) {
         {props.url}
       </svg>
       <span
-        className={`text-black text-xs md:inline-block hidden font-pops ${
+        className={`font-pops hidden text-xs text-black md:inline-block ${
           a.opened ? "font-medium text-black" : "font-normal text-gray-600"
         } pt-[0px]`}
       >

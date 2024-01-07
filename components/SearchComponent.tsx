@@ -1,18 +1,17 @@
 "use client";
-import { redirect } from "next/navigation";
 import { useState } from "react";
-export default function Search(props:any) {
+export default function Search(props: any) {
   const [value, setValue] = useState("");
   function search() {
     console.log("ok");
     window.location.replace("/search/" + props.page + "/" + value);
   }
   return (
-    <div className="relative items-center content-center">
+    <div className="relative content-center items-center">
       <svg
         viewBox="0 0 24 24"
         aria-hidden="true"
-        className=" top-0 bottom-0 my-auto absolute ml-6 w-[18px] h-[18px] text-black"
+        className=" absolute inset-y-0 my-auto ml-6 h-[18px] w-[18px] text-black"
       >
         <g>
           <path
@@ -29,7 +28,7 @@ export default function Search(props:any) {
         minLength={4}
         maxLength={50}
         type="search"
-        className="w-full h-12 pr-8 text-[14px] bg-white border border-gray-150 peer focus:outline-black focus:bg-white placeholder:text-neutral-600 font-poppins pl-14"
+        className="font-poppins peer h-12 w-full border border-gray-200 bg-white pl-14 pr-8 text-[14px] placeholder:text-gray-600 focus:bg-white focus:outline-black"
         placeholder={"Search " + props.text}
       ></input>
     </div>
