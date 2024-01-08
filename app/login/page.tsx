@@ -66,7 +66,7 @@ export default function Login() {
           <h1 className=" pt-2 text-xl font-black">Register / Login</h1>
           <h1 className="pl-[1px] text-xs font-medium text-black">Email Address</h1>
           <input
-            onChange={(e: any) => {
+            onChange={(e) => {
               setEmail(e.target.value);
             }}
             type="email"
@@ -75,7 +75,7 @@ export default function Login() {
           ></input>
           <h1 className="pl-[1px] text-xs font-medium text-black">Password</h1>
           <input
-            onChange={(e: any) => {
+            onChange={(e) => {
               setPassword(e.target.value);
             }}
             type="password"
@@ -83,13 +83,13 @@ export default function Login() {
             placeholder="Your Password"
           ></input>
           <button
-            onClick={(e: any) => (e.preventDefault(), console.log("login"), login())}
+            onClick={(e) => (e.preventDefault(), console.log("login"), login())}
             className=" bg-black px-5 py-3 text-xs font-medium text-white"
           >
             Sign In To Your Account
           </button>
           <button
-            onClick={(e: any) => (e.preventDefault(), console.log("register"), register())}
+            onClick={(e) => (e.preventDefault(), console.log("register"), register())}
             className="border bg-gray-100 px-5 py-3 text-xs font-medium text-black"
           >
             Register Your Account

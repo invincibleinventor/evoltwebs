@@ -36,7 +36,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log(error);
       } else {
         console.log(data);
-        const ds: any = data;
+        const ds = data;
         for await (const [index, post] of ds.entries()) {
           const { data } = await supabase.from("user").select("*").eq("id", post.poster);
           if (data) {

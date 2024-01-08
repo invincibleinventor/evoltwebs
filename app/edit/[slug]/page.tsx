@@ -12,7 +12,7 @@ import rehypeSanitize from "rehype-sanitize";
 export default function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
 
-  const hiddenFileInput = useRef<HTMLInputElement | any>(null);
+  const hiddenFileInput = useRef<HTMLInputElement | null>(null);
 
   async function coverChange(id: string) {
     console.log("here here");
@@ -32,15 +32,15 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }
 
-  const handleClick = (event: any) => {
+  const handleClick = (event) => {
     event.preventDefault();
-    hiddenFileInput.current.click();
+    hiddenFileInput!.current!.click();
   };
 
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [cover, setCover] = useState("/bg.jpg");
-  const [file, setFile] = useState<any>();
+  const [file, setFile] = useState();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
   const [, setNotFound] = useState(false);
@@ -117,7 +117,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               Title
             </label>
             <input
-              onChange={(e: any) => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
               className="mb-6 mr-4 w-full border bg-white px-4 py-2 text-sm "
               name="content"
               placeholder="Please Type Out Your Title"
@@ -130,7 +130,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               Excerpt
             </label>
             <textarea
-              onChange={(e: any) => setExcerpt(e.target.value)}
+              onChange={(e) => setExcerpt(e.target.value)}
               className="mb-6 mr-4 w-full border bg-white px-4 py-2 text-sm "
               name="content"
               placeholder="Please Type Out Your Excerpt"
@@ -140,7 +140,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               minLength={90}
             />
             <input
-              onChange={(e: any) => {
+              onChange={(e) => {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}
@@ -160,7 +160,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 alt="cover"
               />
               <button
-                onClick={(e: any) => {
+                onClick={(e) => {
                   setChanged(true);
                   handleClick(e);
                 }}

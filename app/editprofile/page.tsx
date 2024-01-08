@@ -38,7 +38,7 @@ export default function Create() {
   const [image, setImage] = useState("");
 
   async function create() {
-    const { data,  } = await supabase.from("user").select("*").eq("handle", handle);
+    const { data } = await supabase.from("user").select("*").eq("handle", handle);
     if (data && data.length > 0) {
       alert("Handle Already Exists");
     } else {
@@ -71,7 +71,7 @@ export default function Create() {
           Name
         </label>
         <input
-          onChange={(e: any) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           className="mb-6 mr-4 border bg-inherit px-4 py-2"
           name="name"
           placeholder="Please Type Out Your Display Name"
@@ -83,7 +83,7 @@ export default function Create() {
           Handle - You cannot change this later
         </label>
         <input
-          onChange={(e: any) => setHandle(e.target.value.trim().replace(" ", "_"))}
+          onChange={(e) => setHandle(e.target.value.trim().replace(" ", "_"))}
           className="mb-6 mr-4 border bg-inherit px-4 py-2"
           name="handke"
           placeholder="Please Type Out Your Handle"
@@ -95,7 +95,7 @@ export default function Create() {
           About
         </label>
         <textarea
-          onChange={(e: any) => setAbout(e.target.value)}
+          onChange={(e) => setAbout(e.target.value)}
           className="mb-6 mr-4 border bg-inherit px-4 py-2"
           name="content"
           placeholder="Please Type About Yourself"

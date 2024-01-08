@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-export default function Search(props: any) {
+export default function Search(props) {
   const [value, setValue] = useState("");
   function search() {
     console.log("ok");
@@ -24,7 +24,7 @@ export default function Search(props: any) {
         onKeyDown={(e) => {
           if (e.key === "Enter") search();
         }}
-        onChange={(e: any) => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value)}
         minLength={4}
         maxLength={50}
         type="search"

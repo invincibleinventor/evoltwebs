@@ -21,11 +21,11 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [following, setFollowing] = useState(0);
   const [imfollowing, setImFollowing] = useState(false);
   const [followers, setFollowers] = useState(0);
-  const [followerlist, setFollowerList] = useState<any>([]);
-  const [followinglist, setFollowingList] = useState<any>([]);
+  const [followerlist, setFollowerList] = useState([]);
+  const [followinglist, setFollowingList] = useState([]);
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
-  const [myId, setMyId] = useState<string | any>();
+  const [myId, setMyId] = useState<string | undefined>();
 
   useEffect(() => {
     async function get() {
@@ -90,7 +90,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         console.log(error);
       } else {
         console.log(data);
-        const ds: any = data;
+        const ds = data;
         for await (const [index, post] of ds.entries()) {
           const { data } = await supabase.from("user").select("*").eq("id", post.poster);
           if (data) {
@@ -117,7 +117,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         let arr = followerlist;
         console.log("before");
         console.log(arr);
-        arr = arr.filter((item: any) => item !== myId);
+        arr = arr.filter((item) => item !== myId);
         let arr2 = followinglist;
         arr2 = arr2.filter((item: string) => item !== params.slug);
 

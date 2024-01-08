@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-export default function StoriesView(props: any) {
+export default function StoriesView(props) {
   const [visible, setVisible] = useState(false);
 
   return (
