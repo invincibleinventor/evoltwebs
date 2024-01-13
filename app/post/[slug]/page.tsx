@@ -223,7 +223,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </section>
         </div>
       )}
-      <div className="absolute bottom-0 flex h-14 w-full flex-row border-t border-t-gray-200 bg-white md:border-x-2">
+      <div className="absolute bottom-0 flex h-14 w-full flex-row border-t border-t-gray-200 bg-white ">
         <BookMarksComponent
           userliked={userbookmarked}
           postid={params.slug}
