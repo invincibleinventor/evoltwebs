@@ -2,13 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function BookMarksComponent(props: {
-  likedlist: any;
-  liked: any;
-  userliked: any;
-  handle: any;
-  postid: any;
-}) {
+export default function BookMarksComponent(props) {
   const supabase = createClient();
   const [likedlist, setLikedList] = useState(props.likedlist);
 
@@ -22,12 +16,12 @@ export default function BookMarksComponent(props: {
       console.log(l);
       setDisabled(true);
 
-      l = l.filter(function (item: any) {
+      l = l.filter(function (item) {
         return item !== props.handle;
       });
       let u = ulikedlist;
 
-      u = u.filter(function (item: any) {
+      u = u.filter(function (item) {
         return item !== props.postid;
       });
 

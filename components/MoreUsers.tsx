@@ -7,7 +7,7 @@ import { Oval } from "react-loader-spinner";
 import UserComponent from "./UserComponent";
 
 export default function MoreUsers() {
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState([]);
   const [myhandle, setMyHandle] = useState("");
   const [, setUserId] = useState("");
   const supabase = createClient();
@@ -89,7 +89,7 @@ export default function MoreUsers() {
   return (
     <div className="w-full">
       <div className="animate-in hiddenscroll grid grid-cols-1 content-center items-center gap-2 px-3 xl:grid-cols-2">
-        {users.map((user: any) => (
+        {users.map((user) => (
           <UserComponent
             myID={myhandle}
             key={user["id"]}

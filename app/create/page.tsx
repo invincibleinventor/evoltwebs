@@ -25,16 +25,16 @@ export default function Create() {
       return "https://xiexuntwvmedvyxokvvf.supabase.co/storage/v1/object/public/posts/covers/" + id + ".jpg";
     }
   }
-  const hiddenFileInput = useRef<HTMLInputElement | any>(null);
-  const handleClick = (event: any) => {
+  const hiddenFileInput = useRef<HTMLInputElement | null>(null);
+  const handleClick = (event) => {
     event.preventDefault();
-    hiddenFileInput.current.click();
+    hiddenFileInput!.current!.click();
   };
   const supabase = createClient();
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [cover, setCover] = useState("/bg.jpg");
-  const [file, setFile] = useState<any>();
+  const [file, setFile] = useState();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
   async function create() {
@@ -104,7 +104,7 @@ export default function Create() {
             Title
           </label>
           <input
-            onChange={(e: any) => setTitle(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
             className="mb-6 mr-4 w-full border bg-white px-4 py-2 text-sm "
             name="content"
             placeholder="Please Type Out Your Title"
@@ -116,7 +116,7 @@ export default function Create() {
             Excerpt
           </label>
           <textarea
-            onChange={(e: any) => setExcerpt(e.target.value)}
+            onChange={(e) => setExcerpt(e.target.value)}
             className="mb-6 mr-4 w-full border bg-white px-4 py-2 text-sm "
             name="content"
             placeholder="Please Type Out Your Excerpt"
@@ -125,7 +125,7 @@ export default function Create() {
             minLength={90}
           />
           <input
-            onChange={(e: any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
+            onChange={(e) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
             className="inset-x-0 bottom-0 mx-auto hidden"
             type="file"
             ref={hiddenFileInput}
@@ -142,7 +142,7 @@ export default function Create() {
               alt="cover"
             />
             <button
-              onClick={(e: any) => (setChanged(true), handleClick(e))}
+              onClick={(e) => (setChanged(true), handleClick(e))}
               className="absolute inset-0 m-auto h-max w-max bg-black/60 px-6 py-3 text-xs text-white backdrop-blur-sm"
             >
               Change Cover

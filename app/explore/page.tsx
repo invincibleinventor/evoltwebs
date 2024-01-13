@@ -23,7 +23,7 @@ export default async function Index() {
 
   const isSupabaseConnected = canInitSupabaseClient();
   const empty = false;
-  let users: any[] = [];
+  let users = [];
   let loading = true;
   const {
     data: { user },

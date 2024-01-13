@@ -1,23 +1,24 @@
 "use client";
+
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function UserComponent(props: any) {
+export default function UserComponent(props) {
   const supabase = createClient();
 
   const [myId] = useState(props.myID);
 
-  async function onfollow(handle: any) {
+  async function onfollow(handle) {
     if (imfollowing) {
       console.log("uesuesues");
       let arr = followerlist;
       console.log("before");
       console.log(arr);
-      arr = arr.filter((item: any) => item !== myId);
+      arr = arr.filter((item) => item !== myId);
       let arr2 = followinglist;
-      arr2 = arr2.filter((item: any) => item !== handle);
+      arr2 = arr2.filter((item) => item !== handle);
 
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
@@ -78,7 +79,7 @@ export default function UserComponent(props: any) {
           </div>
         </div>
         <button
-          onClick={(e: any) => (e.stopPropagation(), e.preventDefault(), onfollow(props.handle))}
+          onClick={(e) => (e.stopPropagation(), e.preventDefault(), onfollow(props.handle))}
           className={
             imfollowing
               ? "h-max border border-black bg-white px-5 py-2 text-xs text-black"

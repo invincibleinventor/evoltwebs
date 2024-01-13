@@ -26,7 +26,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   const [empty, setEmpty] = useState(true);
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function get() {
@@ -106,7 +106,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 }
               }}
               defaultValue={search}
-              onChange={(e: any) => setTempSearch(e.target.value.trim())}
+              onChange={(e) => setTempSearch(e.target.value.trim())}
               minLength={4}
               maxLength={50}
               type="search"
@@ -119,32 +119,20 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="animate-in hiddenscroll mb-20 flex flex-col gap-2">
             {!loading ? (
               !empty ? (
-                posts.map(
-                  (post: {
-                    id: any;
-                    title: any;
-                    diff: number;
-                    image: any;
-                    dp: any;
-                    handle: any;
-                    cover: any;
-                    name: any;
-                    excerpt: any;
-                  }) => (
-                    <PostComponent
-                      id={post.id}
-                      title={post.title}
-                      time={timeAgo.format(Date.now() - post.diff)}
-                      key={post.id}
-                      image={post.image}
-                      dp={post.dp}
-                      handle={post.handle}
-                      cover={post.cover}
-                      name={post.name}
-                      description={post.excerpt}
-                    />
-                  )
-                )
+                posts.map((post) => (
+                  <PostComponent
+                    id={post.id}
+                    title={post.title}
+                    time={timeAgo.format(Date.now() - post.diff)}
+                    key={post.id}
+                    image={post.image}
+                    dp={post.dp}
+                    handle={post.handle}
+                    cover={post.cover}
+                    name={post.name}
+                    description={post.excerpt}
+                  />
+                ))
               ) : (
                 <div className="mt-24 flex w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
                   <div className="mx-auto flex max-w-max flex-col gap-2">

@@ -28,12 +28,12 @@ export default async function App({ params }: { params: { slug: string } }) {
   let myhandle = "";
   let loggedin = false;
   let liked = false;
-  let likedlist: string | any[] = [];
+  let likedlist = [];
   let bookmarked = false;
   let bookmarkedlist: never[] = [];
   let userliked: never[] = [];
   let userbookmarked: never[] = [];
-  let comments: any[] = [];
+  let comments = [];
   TimeAgo.locale(en);
   let user = "";
   const timeAgo = new TimeAgo("en-US");
@@ -182,9 +182,9 @@ export default async function App({ params }: { params: { slug: string } }) {
                   <path
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                     d="m5 16l-1 4l4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0zM15 6l3 3m-5 11h8"
                   />
                 </svg>

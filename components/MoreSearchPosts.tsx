@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
 import PostComponent from "./PostComponent";
-export default function MoreSearchPosts(props: any) {
+export default function MoreSearchPosts(props) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
-  const [posts, setPosts] = useState<any>([]);
+  const [posts, setPosts] = useState([]);
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
@@ -66,7 +66,7 @@ export default function MoreSearchPosts(props: any) {
   return (
     <>
       <div className="flex flex-col content-center items-center gap-2">
-        {posts.map((post: any) => (
+        {posts.map((post) => (
           <PostComponent
             id={post.id}
             type="profile"

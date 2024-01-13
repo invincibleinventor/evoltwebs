@@ -8,15 +8,15 @@ import { useEffect, useRef, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import CommentComponent from "./CommentComponent";
 import MoreComments from "./MoreComments";
-export default function CommentsComponent(props: any) {
+export default function CommentsComponent(props) {
   TimeAgo.locale(en);
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState<any>([]);
+  const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
-  const inputRef = useRef<HTMLInputElement | any>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [commentChange, setCommentChange] = useState(false);
 
   const [posted, setPosted] = useState(false);
@@ -26,7 +26,7 @@ export default function CommentsComponent(props: any) {
       console.log(error.message);
     } else {
       setPosted(true);
-      inputRef.current.value = "";
+      inputRef.current!.value = "";
       setCommentChange(true);
     }
   }
@@ -88,7 +88,7 @@ export default function CommentsComponent(props: any) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") post();
               }}
-              onChange={(e: any) => setText(e.target.value)}
+              onChange={(e) => setText(e.target.value)}
               ref={inputRef}
               className="w-full border px-4 py-2 outline-none focus:border-gray-700"
               placeholder={"Post a comment publicly as " + props.myname}
@@ -102,7 +102,7 @@ export default function CommentsComponent(props: any) {
       <div className="my-3 mt-6 flex flex-col space-y-4 px-1">
         {!loading ? (
           <>
-            {comments.map((comment: any) => (
+            {comments.map((comment) => (
               <CommentComponent
                 time={timeAgo.format(Date.now() - comment.newtime)}
                 myhandle={props.myhandle}

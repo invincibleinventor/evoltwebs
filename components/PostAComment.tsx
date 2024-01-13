@@ -3,10 +3,10 @@ import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
-export default function PostAComment(props: any) {
+export default function PostAComment(props) {
   const supabase = createClient();
   const [text, setText] = useState("");
-  const inputRef = useRef<HTMLInputElement | any>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [posted, setPosted] = useState(false);
   async function post() {
@@ -15,7 +15,7 @@ export default function PostAComment(props: any) {
       console.log(error.message);
     } else {
       setPosted(true);
-      inputRef.current.value = "";
+      inputRef.current!.value = "";
     }
   }
   return (
@@ -28,7 +28,7 @@ export default function PostAComment(props: any) {
         onKeyDown={(e) => {
           if (e.key === "Enter") post();
         }}
-        onChange={(e: any) => setText(e.target.value)}
+        onChange={(e) => setText(e.target.value)}
         ref={inputRef}
         className="w-full border px-4 py-2 outline-none focus:border-gray-700"
         placeholder={"Post a comment publicly as " + props.myname}
