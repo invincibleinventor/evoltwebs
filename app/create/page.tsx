@@ -133,12 +133,11 @@ export default function Create() {
           <label className="mb-1 text-base" htmlFor="content">
             Cover Image
           </label>
-          <div className="relative w-full h-40 px-4 py-2 mb-6 mr-4 border shrink-0">
-            <Image
+          <div className="relative px-4 py-2 mb-6 mr-4 border aspect-video shrink-0">
+            <img
               src={cover}
-              width={160}
-              height={160}
-              className="absolute inset-0 object-cover w-full h-40 shrink-0"
+              
+              className="absolute inset-0 object-cover aspect-video shrink-0"
               alt="cover"
             />
             <button

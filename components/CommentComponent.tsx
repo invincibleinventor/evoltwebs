@@ -50,18 +50,18 @@ export default function CommentComponent(props) {
   }
 
   return (
-    <div className="my-2 flex w-full flex-row gap-4">
-      <Link href={`/profile/${props.handle}`} className="h-10 w-10 shrink-0">
+    <div className="flex flex-row w-full gap-4 my-2">
+      <Link href={`/profile/${props.handle}`} className="w-10 h-10 shrink-0">
         <Image
           width={32}
           height={32}
-          className="m-auto h-8 w-8 shrink-0 border border-gray-200"
+          className="w-8 h-8 m-auto border border-gray-200 shrink-0"
           src={props.profile!}
           alt="profile"
         />
       </Link>
       <div className="flex w-full flex-col gap-[2px]">
-        <div className="flex w-full flex-row content-center items-center">
+        <div className="flex flex-row items-center content-center w-full">
           <Link href={`/profile/${props.handle}`} className="text-base font-semibold">
             {props.name}
           </Link>

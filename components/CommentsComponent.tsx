@@ -14,7 +14,7 @@ export default function CommentsComponent(props) {
   const date1 = new Date();
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState();
   const [text, setText] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [commentChange, setCommentChange] = useState(false);
@@ -79,8 +79,8 @@ export default function CommentsComponent(props) {
     <>
       {props.loggedin && (
         <div className="flex flex-col space-y-2">
-          <div className="mb-3 mt-6 flex flex-row space-x-4 px-2">
-            <Image width={32} height={32} src={props.myphoto} className="h-8 w-8 shrink-0" alt="comment" />
+          <div className="flex flex-row px-2 mt-6 mb-3 space-x-4">
+            <Image width={32} height={32} src={props.myphoto} className="w-8 h-8 shrink-0" alt="comment" />
             <textarea
               required
               minLength={5}
@@ -90,7 +90,7 @@ export default function CommentsComponent(props) {
               }}
               onChange={(e) => setText(e.target.value)}
               ref={inputRef}
-              className="w-full border px-4 py-2 outline-none focus:border-gray-700"
+              className="w-full px-4 py-2 border outline-none focus:border-gray-700"
               placeholder={"Post a comment publicly as " + props.myname}
             ></textarea>
           </div>
@@ -99,7 +99,7 @@ export default function CommentsComponent(props) {
           </div>
         </div>
       )}
-      <div className="my-3 mt-6 flex flex-col space-y-4 px-1">
+      <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
         {!loading ? (
           <>
             {comments.map((comment) => (

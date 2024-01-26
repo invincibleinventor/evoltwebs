@@ -140,12 +140,12 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex h-screen flex-1 flex-col overflow-hidden">
+    <div className="relative flex flex-col flex-1 h-screen overflow-hidden">
       {error && (
-        <div className="flex h-screen w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
-          <div className="mx-auto flex max-w-max flex-col gap-2">
-            <h1 className="mx-auto text-center text-lg font-semibold text-black">That Post Doesn&apos;t Exist</h1>
-            <h1 className="mx-auto text-center text-sm text-gray-800">
+        <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
+          <div className="flex flex-col gap-2 mx-auto max-w-max">
+            <h1 className="mx-auto text-lg font-semibold text-center text-black">That Post Doesn&apos;t Exist</h1>
+            <h1 className="mx-auto text-sm text-center text-gray-800">
               That post does not exist. It must have been removed or deleted by the author. Please refresh if you think
               that is not the case
             </h1>
@@ -162,16 +162,13 @@ export default async function App({ params }: { params: { slug: string } }) {
       )}
       {!error && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-200">
-          <div className="relative h-64 w-full">
-            <Image
-              width={250}
-              height={250}
+          <div className="relative aspect-video">
+            <img
               alt="coveri"
               src={cover ? cover : "https://picsum.photos/2000/3000"}
-              className="absolute inset-0 h-64 w-full object-cover"
-            />
+              className="absolute inset-0 object-cover aspect-video"            />
           </div>
-          <div className="flex w-full max-w-full flex-1 flex-col p-8">
+          <div className="flex flex-col flex-1 w-full max-w-full p-8">
             <h1 className="fix-overflow text-3xl font-extrabold md:text-4xl md:leading-[calc(13*4px)]">{title}</h1>
             {imauthor && (
               <Link
@@ -192,9 +189,9 @@ export default async function App({ params }: { params: { slug: string } }) {
                 <h1 className="inline-block text-sm">Edit Post</h1>
               </Link>
             )}
-            <div className="mt-6 flex flex-row content-center items-center justify-between text-lg">
-              <Link href={"/profile/" + author} className="flex flex-row content-center items-center">
-                <Image width={24} height={24} alt="profile" className="mr-3 h-6 w-6" src={profile} />
+            <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
+              <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
+                <Image width={24} height={24} alt="profile" className="w-6 h-6 mr-3" src={profile} />
                 <h1 className="font-medium">{name}</h1>
               </Link>
 
@@ -203,12 +200,12 @@ export default async function App({ params }: { params: { slug: string } }) {
             <Markdown
               remarkPlugins={[remarkGfm]}
               components={components}
-              className="font-inter fix-overflow prose mt-12"
+              className="mt-12 prose font-inter fix-overflow"
             >
               {content}
             </Markdown>
           </div>
-          <section className="px-8 pb-8 pt-0" id="comments">
+          <section className="px-8 pt-0 pb-8" id="comments">
             <h1 className="mb-2 text-xl font-bold">Comments</h1>
 
             <CommentsComponent
@@ -223,7 +220,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </section>
         </div>
       )}
-      <div className="absolute bottom-0 flex h-14 w-full flex-row border-t border-t-gray-200 bg-white ">
+      <div className="absolute bottom-0 flex flex-row w-full bg-white border-t h-14 border-t-gray-200 ">
         <BookMarksComponent
           userliked={userbookmarked}
           postid={params.slug}
@@ -241,7 +238,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           likes={likedlist.length}
         />
 
-        <Link href="#comments" className="ml-auto flex flex-row content-center items-center space-x-2 px-6">
+        <Link href="#comments" className="flex flex-row items-center content-center px-6 ml-auto space-x-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
             <path
               fill="currentColor"
@@ -255,6 +252,6 @@ export default async function App({ params }: { params: { slug: string } }) {
       </div>
     </div>
   ) : (
-    <div className="flex h-screen w-full content-center items-center"></div>
+    <div className="flex items-center content-center w-full h-screen"></div>
   );
 }
