@@ -7,11 +7,17 @@ import { useEffect, useRef, useState } from "react";
 export default function Create() {
   const supabase = createClient();
   const hiddenFileInput = useRef<HTMLInputElement | null>();
+  const hiddenProfileInput = useRef<HTMLInputElement | null>();
   const handleClick = () => {
     hiddenFileInput.current?.click();
   };
+  const handleProfileClick = () => {
+    hiddenFileInput.current?.click();
+  };
   const [changed, setChanged] = useState(false);
+  const [changedprofile, setChangedProfile] = useState(false);
   const [file, setFile] = useState();
+  const [profile, setProfile] = useState();
   async function coverChange() {
     console.log("here here");
     const bucket = "covers";
