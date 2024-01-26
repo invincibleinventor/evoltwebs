@@ -93,7 +93,7 @@ export default function Create() {
           </div>
           <div
             onClick={handleClick}
-            className="absolute left-2 top-2 w-max cursor-pointer bg-black/60 px-6 py-3 text-xs text-white drop-shadow-lg backdrop-blur-lg"
+            className="absolute px-6 py-3 text-xs text-white cursor-pointer left-2 top-2 w-max bg-black/60 drop-shadow-lg backdrop-blur-lg"
           >
             {" "}
             <input id="fupload" className="hidden" />
@@ -114,7 +114,7 @@ export default function Create() {
               setChanged(true);
               setFile(e.target.files[0]);
             }}
-            className="absolute inset-x-0 bottom-0 mx-auto hidden"
+            className="absolute inset-x-0 bottom-0 hidden mx-auto"
             type="file"
             ref={hiddenFileInput}
           />
@@ -122,15 +122,15 @@ export default function Create() {
       </div>
 
       <form
-        className="animate-in mx-auto mt-0 flex w-full max-w-lg flex-col justify-center gap-2 text-foreground md:mt-28 md:px-10"
+        className="flex flex-col justify-center w-full max-w-lg gap-2 mx-auto mt-0 animate-in text-foreground md:mt-28 md:px-10"
         action={create}
       >
-        <label className="mx-6 text-lg" htmlFor="name">
+        <label className="mx-6 text-base" htmlFor="name">
           Name
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
-          className="mx-6 mb-4 border bg-white px-4 py-2"
+          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border"
           name="name"
           defaultValue={name}
           placeholder="Please Type Out Your Display Name"
@@ -139,13 +139,13 @@ export default function Create() {
           maxLength={20}
         />
 
-        <label className="mx-6 text-lg" htmlFor="content">
+        <label className="mx-6 text-base" htmlFor="content">
           About
         </label>
         <textarea
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
-          className="mx-6 mb-4 border bg-white px-4 py-2"
+          className="px-4 py-2 mx-6 mb-4 text-sm bg-white border"
           name="content"
           placeholder="Please Type About Yourself"
           required
@@ -153,7 +153,7 @@ export default function Create() {
           maxLength={100}
         />
 
-        <button className="mx-6 mb-2 w-max bg-black px-8 py-4 text-xs text-white">Save Your Changes</button>
+        <button className="px-8 py-4 mx-6 mb-2 text-xs text-white bg-black w-max">Save Your Changes</button>
       </form>
     </div>
   );

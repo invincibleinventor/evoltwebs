@@ -63,9 +63,9 @@ export default function Page({ params }: { params: { slug: string } }) {
   }, [search]);
 
   return (
-    <div className="h-screen flex-1 overflow-hidden p-0 py-2">
-      <div className="mx-1 p-4 py-2 md:mx-1">
-        <div className="relative content-center items-center">
+    <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
+      <div className="p-4 py-2 mx-1 md:mx-1">
+        <div className="relative items-center content-center">
           <svg
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -98,8 +98,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           ></input>
         </div>
       </div>
-      <div className="hiddenscroll h-full overflow-y-scroll">
-        <div className="animate-in hiddenscroll mb-20 flex flex-col gap-2">
+      <div className="h-full overflow-y-scroll hiddenscroll">
+        <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
           {!loading ? (
             !empty ? (
               posts.map((post) => (
@@ -117,10 +117,10 @@ export default function Page({ params }: { params: { slug: string } }) {
                 />
               ))
             ) : (
-              <div className="mt-24 flex w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
-                <div className="mx-auto flex max-w-max flex-col gap-2">
-                  <h1 className="mx-auto text-center text-lg font-semibold text-black">No Posts To View!</h1>
-                  <h1 className="mx-auto text-center text-sm text-gray-800">
+              <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                <div className="flex flex-col gap-2 mx-auto max-w-max">
+                  <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
+                  <h1 className="mx-auto text-sm text-center text-gray-800">
                     The text you searched for does not match any post. Please use a different search term.
                   </h1>
                   <Link
@@ -135,7 +135,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
             )
           ) : (
-            <div className="flex h-screen w-full content-center items-center">
+            <div className="flex items-center content-center w-full h-screen">
               <Oval
                 height={80}
                 width={80}

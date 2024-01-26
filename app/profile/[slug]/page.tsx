@@ -161,16 +161,16 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }
   return !loading ? (
-    <div className="h-screen flex-1 overflow-hidden p-0">
-      <div className="hiddenscroll h-full overflow-y-scroll pb-10">
+    <div className="flex-1 h-screen p-0 overflow-hidden">
+      <div className="h-full pb-10 overflow-y-scroll hiddenscroll">
         <div className="relative h-64">
           <div className="m-4 h-48 w-[calc(100%)-8px]  bg-gray-200 ">
             {cover && (
               <Image
                 width={180}
                 height={180}
-                src={found ? (cover ? cover : "/bg.jpg") : "/bg.jpg"}
-                className="h-48 w-full object-cover "
+                src={`${found ?(cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
+                className="object-cover w-full h-48 "
                 alt="cover"
               />
             )}
@@ -178,8 +178,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           <Image
             width={90}
             height={90}
-            className="absolute bottom-5 left-7 h-24 w-24 md:left-12"
-            src={found ? image : "/usernotfound.png"}
+            className="absolute w-24 h-24 bottom-5 left-7 md:left-12"
+            src={`${(found ? image : "/usernotfound.png")}`}
             alt="userimage"
           />
           {found && loggedin && (
@@ -195,30 +195,30 @@ export default function Page({ params }: { params: { slug: string } }) {
             </button>
           )}
         </div>
-        <div className="ml-8 flex flex-col gap-2 md:ml-14">
+        <div className="flex flex-col gap-2 ml-8 md:ml-14">
           {found && (
-            <div className="flex flex-row content-center items-center gap-2 ">
+            <div className="flex flex-row items-center content-center gap-2 ">
               <h1 className="text-xl font-semibold">{name}</h1>
-              <h1 className="text-sm font-normal text-gray-400">@{params.slug}</h1>
+              <h1 className="text-sm font-normal text-gray-600">@{params.slug}</h1>
             </div>
           )}
-          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-400">{about}</h1>
+          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-600">{about}</h1>
         </div>
         {found && (
           <>
-            <div className="mx-8 my-4 mb-1 flex flex-row content-center items-center gap-6 border border-gray-700 p-4 md:mx-14">
-              <div className="flex w-full flex-row md:mx-auto">
-                <div className="mx-auto flex w-max flex-col content-center items-center gap-1">
+            <div className="flex flex-row items-center content-center gap-6 p-4 mx-8 my-4 mb-1 border border-gray-700 md:mx-14">
+              <div className="flex flex-row w-full md:mx-auto">
+                <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
                   <h1 className="text-xs font-semibold">Followers</h1>
                   <h1 className="text-sm font-medium text-gray-700">{followers} Followers</h1>
                 </div>
-                <div className="mx-auto flex w-max flex-col content-center items-center gap-1">
+                <div className="flex flex-col items-center content-center gap-1 mx-auto w-max">
                   <h1 className="text-xs font-semibold">Following</h1>
                   <h1 className="text-sm font-medium text-gray-700">{following} Following</h1>
                 </div>
               </div>
             </div>
-            <h1 className="mb-4 mt-8 px-8 text-xl font-bold md:mb-4 md:mt-10 md:px-14 ">{name}&apos;s Posts</h1>
+            <h1 className="px-8 mt-8 mb-4 text-xl font-bold md:mb-4 md:mt-10 md:px-14 ">{name}&apos;s Posts</h1>
             <div className="flex flex-col gap-2 px-3 md:px-9">
               {!loading ? (
                 posts.length > 0 ? (
@@ -245,7 +245,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </>
                 )
               ) : (
-                <div className="mt-10 flex flex-col content-center items-center">
+                <div className="flex flex-col items-center content-center mt-10">
                   <Oval
                     height={80}
                     width={80}
@@ -267,7 +267,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       </div>
     </div>
   ) : (
-    <div className="flex h-screen w-full content-center items-center">
+    <div className="flex items-center content-center w-full h-screen">
       <Oval
         height={80}
         width={80}
