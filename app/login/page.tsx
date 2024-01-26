@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/classnames-order */
 "use client";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
@@ -59,43 +60,43 @@ export default function Login() {
   };
 
   return (
-    <div className="flex h-full flex-col">
-      <Image width={250} height={250} alt="login" src="/evoltlogin.jpg" className="h-64 w-full object-cover" />
-      <div className="mx-auto flex flex-col border border-gray-900">
+    <div className="flex flex-col h-full">
+      <Image width={250} height={250} alt="login" src="/evoltlogin.jpg" className="object-cover w-full h-64" />
+      <div className="flex flex-col mx-auto ">
         <form className="flex flex-col content-center gap-2 p-2 text-xs font-normal">
-          <h1 className=" pt-2 text-xl font-black">Register / Login</h1>
-          <h1 className="pl-[1px] text-xs font-medium text-black">Email Address</h1>
+          <h1 className="pt-2 mt-4 text-xl font-black ">Register / Login</h1>
+          <h1 className="mt-3 pl-[1px] text-xs font-medium text-black">Email Address</h1>
           <input
             onChange={(e) => {
               setEmail(e.target.value);
             }}
             type="email"
-            className="w-max border px-5 py-3 outline-none placeholder:text-gray-600 "
+            className="px-5 py-3 border outline-none w-max placeholder:text-gray-600 "
             placeholder="Your Email Address"
           ></input>
-          <h1 className="pl-[1px] text-xs font-medium text-black">Password</h1>
+          <h1 className="pl-[1px] mt-4 text-xs font-medium text-black">Password</h1>
           <input
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             type="password"
-            className="w-max border px-5 py-3 outline-none placeholder:text-gray-600 "
+            className="px-5 py-3 border outline-none w-max placeholder:text-gray-600 "
             placeholder="Your Password"
           ></input>
           <button
             onClick={(e) => (e.preventDefault(), console.log("login"), login())}
-            className=" bg-black px-5 py-3 text-xs font-medium text-white"
+            className="px-5 py-3 mt-4 text-xs font-medium text-white bg-black "
           >
             Sign In To Your Account
           </button>
           <button
             onClick={(e) => (e.preventDefault(), console.log("register"), register())}
-            className="border bg-gray-100 px-5 py-3 text-xs font-medium text-black"
+            className="px-5 py-3 text-xs font-medium text-black bg-gray-100 border"
           >
             Register Your Account
           </button>
           <button
-            className=" flex justify-center gap-4 border bg-white px-5 py-3 text-xs font-medium text-black"
+            className="flex justify-center gap-4 px-5 py-3 text-xs font-medium text-black bg-white border "
             onClick={() => (console.log("google"), signWithGoogle())}
           >
             <svg width="16" height="16" viewBox="0 0 775 794" fill="none" xmlns="http://www.w3.org/2000/svg">
