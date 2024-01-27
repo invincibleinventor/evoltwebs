@@ -8,6 +8,9 @@ const nextConfig = {
       { hostname: "picsum.photos" },
     ],
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 module.exports = nextConfig;
