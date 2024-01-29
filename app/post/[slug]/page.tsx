@@ -28,12 +28,12 @@ export default async function App({ params }: { params: { slug: string } }) {
   let myhandle = "";
   let loggedin = false;
   let liked = false;
-  let likedlist = [];
+  let likedlist: string | any[] = [];
   let bookmarked = false;
   let bookmarkedlist: never[] = [];
   let userliked: never[] = [];
   let userbookmarked: never[] = [];
-  let comments = [];
+  let comments: any[] = [];
   TimeAgo.locale(en);
   let user = "";
   const timeAgo = new TimeAgo("en-US");

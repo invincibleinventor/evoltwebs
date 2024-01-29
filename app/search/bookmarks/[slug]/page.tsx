@@ -26,7 +26,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   const [empty, setEmpty] = useState(true);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function get() {
@@ -119,7 +119,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="animate-in hiddenscroll mb-20 flex flex-col gap-2">
             {!loading ? (
               !empty ? (
-                posts.map((post) => (
+                posts.map((post:any) => (
                   <PostComponent
                     id={post.id}
                     title={post.title}

@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 export default function Create() {
   const supabase = createClient();
-  const hiddenFileInput = useRef<HTMLInputElement | null>();
+  const hiddenFileInput = useRef<HTMLInputElement | any>();
   const hiddenProfileInput = useRef<HTMLInputElement | null>();
   const handleClick = () => {
     hiddenFileInput.current?.click();
@@ -16,7 +16,7 @@ export default function Create() {
   };
   const [changed, setChanged] = useState(false);
   const [changedprofile, setChangedProfile] = useState(false);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<any>();
   const [profile, setProfile] = useState();
   async function coverChange() {
     console.log("here here");
@@ -115,7 +115,7 @@ export default function Create() {
           />
 
           <input
-            onChange={(e) => {
+            onChange={(e:any) => {
               setCover(URL.createObjectURL(e.target.files![0]));
               setChanged(true);
               setFile(e.target.files[0]);

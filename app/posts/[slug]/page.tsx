@@ -19,7 +19,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   };
 
   const isSupabaseConnected = canInitSupabaseClient();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   TimeAgo.locale(en);
 
@@ -80,7 +80,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className="hiddenscroll h-full overflow-y-scroll">
           <div className="animate-in hiddenscroll mb-20 flex flex-col gap-2">
             {!loading ? (
-              posts.map((post) => (
+              posts.map((post: { [x: string]: any; }) => (
                 <PostComponent
                   id={post["id"]}
                   title={post["title"]}

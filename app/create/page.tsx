@@ -4,7 +4,7 @@ import "@mdxeditor/editor/style.css";
 import MDEditor from "@uiw/react-md-editor";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useRef, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 import rehypeSanitize from "rehype-sanitize";
 
 export default function Create() {
@@ -26,7 +26,7 @@ export default function Create() {
     }
   }
   const hiddenFileInput = useRef<HTMLInputElement | null>(null);
-  const handleClick = (event) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     hiddenFileInput!.current!.click();
   };
@@ -34,7 +34,7 @@ export default function Create() {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [cover, setCover] = useState("/bg.jpg");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
   async function create() {
@@ -125,7 +125,7 @@ export default function Create() {
             minLength={90}
           />
           <input
-            onChange={(e) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
+            onChange={(e:any) => (setCover(URL.createObjectURL(e.target.files[0])), setFile(e.target.files[0]))}
             className="inset-x-0 bottom-0 hidden mx-auto"
             type="file"
             ref={hiddenFileInput}
@@ -141,7 +141,7 @@ export default function Create() {
               alt="cover"
             />
             <button
-              onClick={(e) => (setChanged(true), handleClick(e))}
+              onClick={(e:any) => (setChanged(true), handleClick(e))}
               className="absolute inset-0 px-6 py-3 m-auto text-xs text-white h-max w-max bg-black/60 backdrop-blur-sm"
             >
               Change Cover

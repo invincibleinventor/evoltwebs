@@ -26,9 +26,9 @@ export default async function Index() {
   const date1 = new Date();
   const isSupabaseConnected = canInitSupabaseClient();
   let empty = true;
-  let posts = [];
+  let posts: any[] = [];
   let loading = true;
-  let l = [];
+  let l: any[] = [];
   async function get() {
     const { data: user } = await supabase.auth.getUser();
     const s = user.user!.id;

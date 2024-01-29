@@ -8,15 +8,15 @@ import { useEffect, useRef, useState } from "react";
 import { Oval } from "react-loader-spinner";
 import CommentComponent from "./CommentComponent";
 import MoreComments from "./MoreComments";
-export default function CommentsComponent(props) {
+export default function CommentsComponent(props:any) {
   TimeAgo.locale(en);
   const timeAgo = new TimeAgo("en-US");
   const date1 = new Date();
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState<any>();
   const [text, setText] = useState("");
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | any>(null);
   const [commentChange, setCommentChange] = useState(false);
 
   const [posted, setPosted] = useState(false);
@@ -102,7 +102,7 @@ export default function CommentsComponent(props) {
       <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
         {!loading ? (
           <>
-            {comments.map((comment) => (
+            {comments.map((comment:any) => (
               <CommentComponent
                 time={timeAgo.format(Date.now() - comment.newtime)}
                 myhandle={props.myhandle}

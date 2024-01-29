@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-export default function CommentComponent(props) {
+export default function CommentComponent(props:any) {
   const supabase = createClient();
   const [liked, toggleLiked] = useState(props.likedbyme);
   const [likes, setLikes] = useState(props.likes);
@@ -14,7 +14,7 @@ export default function CommentComponent(props) {
     if (like == false) {
       let l = props.likedbypeople;
       console.log(l);
-      l = l.filter(function (item) {
+      l = l.filter(function (item:any) {
         return item !== props.myhandle;
       });
       console.log(l);

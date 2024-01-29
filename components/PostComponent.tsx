@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-export default function Post(props) {
+export default function Post(props:any) {
   let s = props.description;
 
   const a = props.title;

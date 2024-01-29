@@ -12,7 +12,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const router = useRouter();
   const supabase = createClient();
   const [image, setImage] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   const [loggedin, setloggedin] = useState(false);
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(true);
@@ -21,8 +21,8 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [following, setFollowing] = useState(0);
   const [imfollowing, setImFollowing] = useState(false);
   const [followers, setFollowers] = useState(0);
-  const [followerlist, setFollowerList] = useState([]);
-  const [followinglist, setFollowingList] = useState([]);
+  const [followerlist, setFollowerList] = useState<any>([]);
+  const [followinglist, setFollowingList] = useState<any>([]);
   const [found, setFound] = useState(true);
   const [myself, setMyself] = useState(false);
   const [myId, setMyId] = useState<string | undefined>();
@@ -114,10 +114,10 @@ export default function Page({ params }: { params: { slug: string } }) {
     } else {
       if (followerlist.includes(myId)) {
         console.log("uesuesues");
-        let arr = followerlist;
+        let arr:any = followerlist;
         console.log("before");
         console.log(arr);
-        arr = arr.filter((item) => item !== myId);
+        arr = arr.filter((item:any) => item !== myId);
         let arr2 = followinglist;
         arr2 = arr2.filter((item: string) => item !== params.slug);
 
@@ -137,9 +137,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         setFollowingList(arr2);
         setImFollowing(false);
       } else {
-        const arr = followerlist;
+        const arr:any = followerlist;
         arr.push(myId);
-        let arr2 = [];
+        let arr2:any = [];
         arr2 = followinglist;
         arr2.push(params.slug);
         console.log(arr);
@@ -222,7 +222,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="flex flex-col gap-2 px-3 md:px-9">
               {!loading ? (
                 posts.length > 0 ? (
-                  posts.map((post) => (
+                  posts.map((post:any) => (
                     <PostComponent
                       id={post["id"]}
                       type="profile"

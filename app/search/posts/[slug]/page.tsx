@@ -102,7 +102,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
           {!loading ? (
             !empty ? (
-              posts.map((post) => (
+              posts.map((post:any) => (
                 <PostComponent
                   cover={post.cover}
                   id={post.id}

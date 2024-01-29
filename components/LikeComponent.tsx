@@ -2,7 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { useState } from "react";
 
-export default function LikeComponent(props) {
+export default function LikeComponent(props:any) {
   const supabase = createClient();
 
   const [likedlist, setLikedList] = useState(props.likedlist);
@@ -21,7 +21,7 @@ export default function LikeComponent(props) {
       // });
       let u = ulikedlist;
 
-      u = u.filter(function (item) {
+      u = u.filter(function (item:any) {
         return item !== props.postid;
       });
 

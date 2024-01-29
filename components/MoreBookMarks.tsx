@@ -11,7 +11,7 @@ export default function MoreBookMarks(props: { slug: string }) {
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
@@ -74,7 +74,7 @@ export default function MoreBookMarks(props: { slug: string }) {
   return (
     <>
       <div className="flex flex-col content-center items-center gap-2">
-        {posts.map((post) => (
+        {posts.map((post:any) => (
           <PostComponent
             id={post.id}
             type="profile"

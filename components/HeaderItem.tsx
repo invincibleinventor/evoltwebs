@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function App(props) {
+export default function App(props:any) {
   const loc = usePathname();
   const a = { opened: false };
 

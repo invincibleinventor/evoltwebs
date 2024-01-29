@@ -32,7 +32,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     }
   }
 
-  const handleClick = (event) => {
+  const handleClick = (event:any) => {
     event.preventDefault();
     hiddenFileInput!.current!.click();
   };
@@ -40,7 +40,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [cover, setCover] = useState("/bg.jpg");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
   const [, setNotFound] = useState(false);
@@ -140,7 +140,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               minLength={90}
             />
             <input
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setCover(URL.createObjectURL(e.target.files[0]));
                 setFile(e.target.files[0]);
               }}

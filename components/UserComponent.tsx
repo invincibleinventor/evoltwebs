@@ -5,20 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function UserComponent(props) {
+export default function UserComponent(props:any) {
   const supabase = createClient();
 
   const [myId] = useState(props.myID);
 
-  async function onfollow(handle) {
+  async function onfollow(handle:any) {
     if (imfollowing) {
       console.log("uesuesues");
       let arr = followerlist;
       console.log("before");
       console.log(arr);
-      arr = arr.filter((item) => item !== myId);
+      arr = arr.filter((item:any) => item !== myId);
       let arr2 = followinglist;
-      arr2 = arr2.filter((item) => item !== handle);
+      arr2 = arr2.filter((item:any) => item !== handle);
 
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
