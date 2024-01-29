@@ -140,7 +140,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col flex-1 h-screen overflow-hidden">
+    <div className="relative flex flex-col bg-white flex-1 h-screen overflow-hidden">
       {error && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-2 mx-auto max-w-max">
@@ -166,7 +166,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             <img
               alt="coveri"
               src={cover ? cover : "https://picsum.photos/2000/3000"}
-              className="absolute inset-0 object-cover aspect-video"            />
+              className="absolute inset-0 object-cover w-full h-full aspect-video"            />
           </div>
           <div className="flex flex-col flex-1 w-full max-w-full p-8">
             <h1 className="fix-overflow text-3xl font-extrabold md:text-4xl md:leading-[calc(13*4px)]">{title}</h1>

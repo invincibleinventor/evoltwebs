@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 export default function App$() {
   const loc = usePathname();
   return (
-    <div className="mb-auto md:w-[400px]">
+    <div className="mb-auto lg:w-[400px]">
       <div className={`  flex w-max flex-col items-start p-0 md:pr-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
         <Link className="flex flex-row mt-1" href="/">
           <svg
@@ -27,7 +27,7 @@ export default function App$() {
             />
           </svg>
         </Link>
-        <div className="flex flex-col space-y-1 py-4 pt-[14px] md:mt-7 md:space-y-[0px] md:bg-white md:px-4 md:pt-[4px]">
+        <div className="flex flex-col space-y-3 py-4 pt-[14px] md:mt-7 md:space-y-[4px] md:bg-neutral-100 md:px-4 md:pt-[4px]">
           <Headeritem
             link="/"
             url={

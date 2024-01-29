@@ -20,7 +20,7 @@ export default function Post(props:any) {
   return (
     <Link className="animate-in" href={`/post/${props.id}`}>
       <div className="w-full px-5 py-[6px]">
-        <div  className="flex flex-col bg-white border border-gray-200 md:gap-0">
+        <div  className="flex flex-col bg-gray-50 border border-gray-300 rounded-lg  md:gap-0">
           <div  className="flex items-center content-center bg-black rounded-md aspect-video">
             <Image
             width={1000}

@@ -5,29 +5,10 @@ import { usePathname } from "next/navigation";
 export default function Sidebar() {
   const loc = usePathname();
   return (
-    <div className="mb-auto lg:block hidden lg:w-[400px]">
+    <div className="mb-auto xl:ml-6 lg:block hidden lg:w-[400px]">
       <div className={`  flex w-max flex-col items-start p-0 md:pr-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
-        <Link className="flex flex-row mt-1" href="/">
-          <svg
-            className="ml-[8px] mr-2 mt-[2px] h-[51px] w-[51px] cursor-pointer rounded-full p-[10px] text-black transition-all  duration-100 ease-linear hover:bg-gray-400 md:ml-[4px] md:mr-0"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="9"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-        </Link>
-        <div className="flex flex-col space-y-1 py-4 pt-[14px] md:mt-7 md:space-y-[0px] md:bg-white md:px-4 md:pt-[4px]">
+       
+        <div className="flex flex-col space-y-1 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:bg-gray-100 md:px-4 md:pt-[4px]">
           <Headeritem
             link="/"
             url={
