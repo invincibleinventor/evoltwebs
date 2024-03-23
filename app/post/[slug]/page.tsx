@@ -192,7 +192,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
                 <Image width={24} height={24} alt="profile" className="w-6 h-6 mr-3" src={profile} />
-                <h1 className="font-medium">{name}</h1>
+                <h1 className="text-sm font-medium">{name}</h1>
               </Link>
 
               <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
