@@ -33,7 +33,7 @@ export default function Create() {
   const supabase = createClient();
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
-  const [cover, setCover] = useState("/bg.jpg");
+  const [cover, setCover] = useState("/bgcover.jpg");
   const [file, setFile] = useState<any>();
   const [changed, setChanged] = useState(false);
   const [title, setTitle] = useState("");
@@ -133,7 +133,7 @@ export default function Create() {
           <label className="mb-1 text-base" htmlFor="content">
             Cover Image
           </label>
-          <div className="relative px-4 py-2 mb-6 mr-4 border aspect-video shrink-0">
+          <div className="relative px-4 py-2 mb-6 border aspect-video shrink-0">
             <img
               src={cover}
               

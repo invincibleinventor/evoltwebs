@@ -20,12 +20,11 @@ export default function Post(props:any) {
   return (
     <Link className="animate-in" href={`/post/${props.id}`}>
       <div className="w-full px-5 py-[6px]">
-        <div  className="flex flex-col bg-gray-50 border border-gray-300 rounded-none  md:gap-0">
-          <div  className="flex items-center content-center bg-black rounded-md aspect-video">
-            <Image
-            width={1000}
-            height={420}
-              className="aspect-video"
+        <div  className="flex flex-col border border-gray-300 rounded-none bg-gray-50 md:gap-0">
+          <div  className="flex items-center content-center bg-black rounded-md ">
+            <img
+           
+              className="object-cover aspect-video"
               src={props.cover ? props.cover : "https://picsum.photos/300/400"}
               // src={"https://picsum.photos/300/400"}
               alt="cover"
