@@ -199,16 +199,16 @@ export default function Page({ params }: { params: { slug: string } }) {
         </div>
         <div className="flex flex-col gap-2 ml-8 md:ml-14">
           {found && (
-            <div className="flex flex-row items-center content-center gap-2 ">
+            <div className="flex flex-col content-center sm:gap-2 sm:items-center sm:flex-row ">
               <h1 className="text-xl font-semibold">{name}</h1>
               <h1 className="text-sm font-normal text-gray-600">@{params.slug}</h1>
             </div>
           )}
-          <div className="flex flex-row justify-between">
-          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-600">{about}</h1>
+          <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
+          <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-700 sm:text-gray-600">{about}</h1>
 
           <div className={resume?"mr-16  flex flex-row space-x-4":"mr-16 flex flex-row"}>
-          <h1 className={resume?"text-xs font-medium text-blue-600":"hidden"}>View Resume</h1>
+          <h1 className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</h1>
           
           <h1 className="text-xs font-medium text-blue-600">View Projects</h1>
         </div>

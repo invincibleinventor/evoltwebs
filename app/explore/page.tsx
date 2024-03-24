@@ -30,7 +30,7 @@ export default async function Index() {
   } = await supabase.auth.getUser();
   const userid = user?.id;
   let myhandle = "";
-  let followinglist: never[] = [];
+  let followinglist: any[] = [];
   async function get() {
     const { data, error } = await supabase.from("user").select("*").not("id", "in", `(${userid})`).limit(4);
     if (error) {
@@ -62,12 +62,12 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="h-screen flex-1 overflow-hidden p-0 py-2 pb-20">
-          <div className="mx-1 p-4 py-2 md:mx-1">
+        <div className="flex-1 h-screen p-0 py-2 pb-20 overflow-hidden">
+          <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="induvidual" text="Users" />
           </div>
-          <div className="hiddenscroll h-full overflow-y-scroll">
-            <div className="animate-in hiddenscroll grid grid-cols-1 content-center items-center gap-2 px-3 xl:grid-cols-2">
+          <div className="h-full overflow-y-scroll hiddenscroll">
+            <div className="grid items-center content-center grid-cols-1 gap-2 px-3 animate-in hiddenscroll xl:grid-cols-2">
               {!loading ? (
                 !empty ? (
                   users.map((user) => (
@@ -87,10 +87,10 @@ export default async function Index() {
                     />
                   ))
                 ) : (
-                  <div className="mt-24 flex w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
-                    <div className="mx-auto flex max-w-max flex-col gap-2">
-                      <h1 className="mx-auto text-center text-lg font-semibold text-black">No Posts To View!</h1>
-                      <h1 className="mx-auto text-center text-sm text-gray-800">
+                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                    <div className="flex flex-col gap-2 mx-auto max-w-max">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
+                      <h1 className="mx-auto text-sm text-center text-gray-800">
                         Follow people to view their posts on your home feed. The more people you follow, the more posts
                         on your feed
                       </h1>
@@ -106,7 +106,7 @@ export default async function Index() {
                   </div>
                 )
               ) : (
-                <div className="flex h-screen w-full content-center items-center"></div>
+                <div className="flex items-center content-center w-full h-screen"></div>
               )}
             </div>
             <MoreUsers></MoreUsers>

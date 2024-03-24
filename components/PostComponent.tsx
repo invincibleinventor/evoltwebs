@@ -3,7 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Post(props:any) {
   let s = props.description;
-
+  let x = props.name;
+  if (x.length >= 11) {
+    x = x.slice(0, 7);
+    x += "...";
+  }
   const a = props.title;
 
   if (props.type == "profile") {
@@ -36,7 +40,7 @@ export default function Post(props:any) {
 
               <div className="flex flex-row gap-[2px]">
                 <div className="flex flex-row items-center content-center flex-1 gap-1 py-0 rounded-lg">
-                  <h1 className="text-xs font-medium text-black ">{props.name}</h1>
+                  <h1 className="text-xs font-medium text-black "><span className="inline-block md:hidden">{x}</span><span className="hidden md:inline-block">{props.name}</span></h1>
                   <h1 className="text-xs font-normal text-gray-600 ">@{props.handle}</h1>
                 </div>
               </div>

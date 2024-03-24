@@ -1,6 +1,6 @@
 'use client'
-export default function toggle(props:any){
+export default function Toggle(props:any){
     return(
-        <button className="px-6 py-3 text-sm text-white bg-black">{props.isresume?"Edit Resume":"Setup Resume"}</button>
+        <button className="px-6 py-3 text-xs text-white bg-black w-max">{props.isresume?"Edit Resume":"Setup Resume"}</button>
     )
 }

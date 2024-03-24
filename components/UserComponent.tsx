@@ -22,12 +22,13 @@ export default function UserComponent(props:any) {
 
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
+      const { data:d, error:e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
       // const { data: me, error: mee } = await supabase
       //   .from("user")
       //   .update({ following: arr2 })
       //   .eq("handle", myId)
       //   .select();
-      if (error) {
+      if (error || e) {
         console.log(error);
       } else {
         console.log(data);
@@ -42,12 +43,14 @@ export default function UserComponent(props:any) {
       arr2.push(handle);
       console.log(arr);
       const { data, error } = await supabase.from("user").update({ followers: arr }).eq("handle", handle).select();
+      const { data:d, error:e } = await supabase.from("user").update({ following: arr2 }).eq("handle", myId).select();
+
       // const { data: me, error: mee } = await supabase
       //   .from("user")
       //   .update({ following: arr2 })
       //   .eq("handle", myId)
       //   .select();
-      if (error) {
+      if (error || e) {
         console.log(error);
       } else {
         console.log(data);
