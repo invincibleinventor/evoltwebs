@@ -13,6 +13,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   const supabase = createClient();
   const [image, setImage] = useState("");
   const [posts, setPosts] = useState<any>([]);
+  const [resume,setIsResume] = useState(false);
   const [loggedin, setloggedin] = useState(false);
   const [about, setAbout] = useState("");
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             setCover(pd[0].cover);
             setAbout(pd[0].about);
             setImage(pd[0].image);
+            setIsResume(pd[0].isresume);
             setFollowers(pd[0].followers.length);
             setFollowing(pd[0].following.length);
 
@@ -202,7 +204,15 @@ export default function Page({ params }: { params: { slug: string } }) {
               <h1 className="text-sm font-normal text-gray-600">@{params.slug}</h1>
             </div>
           )}
+          <div className="flex flex-row justify-between">
           <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-600">{about}</h1>
+
+          <div className={resume?"mr-16  flex flex-row space-x-4":"mr-16 flex flex-row"}>
+          <h1 className={resume?"text-xs font-medium text-blue-600":"hidden"}>View Resume</h1>
+          
+          <h1 className="text-xs font-medium text-blue-600">View Projects</h1>
+        </div>
+          </div>
         </div>
         {found && (
           <>
