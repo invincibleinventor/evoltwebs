@@ -86,7 +86,7 @@ const [workhistory,setWorkHistory] = useState('')
           onChange={(e) => setfirstname(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your First Name"
           required
           minLength={4}
           maxLength={20}
@@ -98,7 +98,7 @@ const [workhistory,setWorkHistory] = useState('')
           onChange={(e) => setlastname(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your Last Name"
           required
           minLength={4}
           maxLength={20}
@@ -110,7 +110,7 @@ const [workhistory,setWorkHistory] = useState('')
           onChange={(e) => setage(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your Age"
           required
          type="number"
          min={14}
