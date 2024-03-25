@@ -12,19 +12,34 @@ export default function Create() {
     const {data:user} = await supabase.auth.getUser()
     if(user.user){
     const {data,error} = await supabase.from('user').select('*').eq('id',user.user.id)
-        if(data && data[0]["isresume"]==true){
-            window.location.replace('/editresume')
+        if(data && data[0]["isresume"]==false){
+            window.location.replace('/setupresume')
         }
         else if (error) {
             console.log(error)
         }
         else{
             setid(user.user.id)
-        }
-        
+            const {data,error} = await supabase.from('resume').select('*').eq('id',user.user.id)
+            if(error){
+                console.log(error)
+            }
+            else{
+                setfirstname(data[0]["firstname"])
+                setlastname(data[0]["lastname"])
+                setage(data[0]["age"])
+                setEducation(data[0]["education"])
+                setSkills(data[0]["skills"])
+                setWorkHistory(data[0]["workhistory"])
+                setProfessionalSummary(data[0]["professionalSummary"])
+                setCertifications(data[0]["certifications"])
+                setContact(data[0]["contact"])
+            }
+    }
 }
   }
-  check()},[])
+  check()
+},[])
   const [id,setid] = useState('')
 const [firstname,setfirstname] = useState('')
 const [lastname,setlastname] = useState('')
@@ -39,7 +54,8 @@ const [workhistory,setWorkHistory] = useState('')
 
   async function create() {
     
-      const { error } = await supabase.from("resume").insert({
+      const { error } = await supabase.from("resume").upsert({
+        id:id,
         firstname:firstname,
         lastname:lastname,
         age:parseInt(age),
@@ -50,22 +66,11 @@ const [workhistory,setWorkHistory] = useState('')
         professionalSummary:professionalSummary,
         workhistory:workhistory,
       });
-     
-      
       if (error) {
         console.log(error);
       } else {
-        const {error:e} = await supabase.from('user').update({
-            
-            isresume:true
-          }).eq('id',id)
-          if(e){
-            console.log(e)
-          }
-          else{
         window.location.replace("/");
       }
-    }
     
   }
   return (
@@ -80,37 +85,46 @@ const [workhistory,setWorkHistory] = useState('')
         <h1 className="mt-2 ml-5 mr-5 text-xs font-normal text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
             </div>
         <label className="text-base" htmlFor="name">
-          First Name (Cannot Edit This Later)
+          First Name
         </label>
         <input
+                disabled = {true}
+
+        defaultValue={firstname}
           onChange={(e) => setfirstname(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your First Name"
           required
           minLength={4}
           maxLength={20}
         />
         <label className="text-base" htmlFor="name">
-          Last Name (Cannot Edit This Later)
+          Last Name
         </label>
         <input
+                disabled = {true}
+
+        defaultValue={lastname}
           onChange={(e) => setlastname(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your Last Name"
           required
           minLength={4}
           maxLength={20}
         />
         <label className="text-base" htmlFor="name">
-          Age (Cannot Edit This Later)
+          Age
         </label>
         <input
+        defaultValue={age}
+        disabled = {true}
+
           onChange={(e) => setage(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
-          placeholder="Please Type Out Your Display Name"
+          placeholder="Please Type Out Your Age"
           required
          type="number"
          min={14}
@@ -204,7 +218,7 @@ const [workhistory,setWorkHistory] = useState('')
               }}
             />
       </div>
-        <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max">Save Your Changes</button>
+        <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max">Setup Your Resume</button>
       </form>
     </div>
     </>
