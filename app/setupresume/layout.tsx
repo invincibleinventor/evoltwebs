@@ -1,7 +1,5 @@
-import NavBar from "@/components/NavBar";
 import Script from "next/script";
-import "./globals.css";
-import Sidebar from "@/components/SideBar";
+import "../globals.css";
 const defaultUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
 
 export const metadata = {
@@ -11,7 +9,7 @@ export const metadata = {
     "Evolt is a modern open source internet journal aimed at empowering authors with content freedom and ownership",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function ResumeLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="noSelect font-poppins">
       <head>
@@ -20,15 +18,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <body className="bg-gray-100 bg-cover" lang="en">
         <main>
-          <section className="relative m-auto flex h-screen flex-row content-center items-center overflow-hidden sm:w-screen lg:w-[970px] xl:w-[1200px]">
-            <NavBar></NavBar>
+          <section className="relative m-auto flex hiddenscroll flex-col content-center items-center pb-20 sm:w-screen lg:w-[970px] xl:w-[1200px]">
+            
             <div className="w-full mt-0 ">
-              <div className="items-center content-center flex-1 w-full h-screen px-0 border-x border-x-gray-100 backdrop-blur-md md:border-none">
+              <div className="flex items-center content-center w-full px-0 border-x border-x-gray-100 backdrop-blur-md md:border-none">
                 {children}
               </div>
             </div>
           
-            <Sidebar></Sidebar>
             
           </section>
         </main>

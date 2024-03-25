@@ -11,7 +11,11 @@ export default function App(props:any) {
     a.opened = true;
   } else if (props.link == "/myself" && loc.startsWith("/profile")) {
     a.opened = true;
-  } else if (props.link == "/myself" && loc == "/customize") {
+  }
+  else if (props.link == 'more' && loc.startsWith("/more")) {
+    a.opened = true;
+  }
+  else if (props.link == "/myself" && loc == "/customize") {
     a.opened = true;
   } else {
     console.log("");

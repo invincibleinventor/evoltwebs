@@ -45,6 +45,7 @@ export default function Create() {
       const { error } = await supabase.from("user").insert({
         email: email,
         name: name,
+        cover: 'bgcover.jpg',
         handle: handle.toLowerCase(),
         about: about,
         image: image,
