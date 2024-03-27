@@ -7,7 +7,7 @@ export default async function resume(){
     const {data:user} = await supabase.auth.getUser()
     if(user.user){
     const {data,error} = await supabase.from('resume').select('*').eq('id',user.user.id)
-    }
+    
         if(!error){
         firstname = data[0]["firstname"]
         lastname = data[0]["lastname"]
@@ -20,9 +20,11 @@ export default async function resume(){
         contact = data[0]["contact"]
 
     }
+            
     else{
         console.log(error)
 
+    }
     }
     return(
         <div className="grid h-full grid-flow-col grid-cols-2 lg:grid-flow-row lg:grid-rows-2">
