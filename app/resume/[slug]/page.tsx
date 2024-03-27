@@ -5,8 +5,10 @@ export default async function resume(){
     const supabase = createClient(cookieStore)
     let firstname,lastname,workhistory,education,id,certifications,skills,professionalSummary,age,contact;
     const {data:user} = await supabase.auth.getUser()
+    if(user.user){
     const {data,error} = await supabase.from('resume').select('*').eq('id',user.user.id)
-    if(!error){
+    }
+        if(!error){
         firstname = data[0]["firstname"]
         lastname = data[0]["lastname"]
         age = data[0]["age"]
