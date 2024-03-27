@@ -113,7 +113,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   }, []);
   async function onfollow() {
     if (myself) {
-      router.push("/customize");
+      router.push("/more/customize");
     } else {
       if (followerlist.includes(myId)) {
         console.log("uesuesues");
