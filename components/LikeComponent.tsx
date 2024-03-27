@@ -108,7 +108,7 @@ export default function LikeComponent(props:any) {
         )}
       </svg>
 
-      <h1 className="text-sm">{likes} Likes</h1>
+      <h1 className="text-xs md:text-sm">{likes} Likes</h1>
     </div>
   );
 }

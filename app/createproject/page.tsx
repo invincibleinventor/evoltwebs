@@ -12,38 +12,23 @@ export default function Create() {
     const {data:user} = await supabase.auth.getUser()
     if(user.user){
     const {data,error} = await supabase.from('user').select('*').eq('id',user.user.id)
-        if(data && data[0]["isresume"]==false){
-            window.location.replace('/setupresume')
+        if(data && data[0]["isresume"]==true){
+            window.location.replace('/editresume')
         }
         else if (error) {
             console.log(error)
         }
         else{
             setid(user.user.id)
-            const {data,error} = await supabase.from('resume').select('*').eq('id',user.user.id)
-            if(error){
-                console.log(error)
-            }
-            else{
-                setfirstname(data[0]["firstname"])
-                setlastname(data[0]["lastname"])
-                setage(data[0]["age"])
-                setEducation(data[0]["education"])
-                setSkills(data[0]["skills"])
-                setWorkHistory(data[0]["workhistory"])
-                setProfessionalSummary(data[0]["professionalSummary"])
-                setCertifications(data[0]["certifications"])
-                setContact(data[0]["contact"])
-            }
-    }
+        }
+        
 }
   }
-  check()
-},[])
+  check()},[])
   const [id,setid] = useState('')
-const [firstname,setfirstname] = useState('')
-const [lastname,setlastname] = useState('')
-const [age,setage] = useState('')
+const [projectname,setprojectname] = useState('')
+const [projectsummary,setprojectsummary] = useState('')
+const [projectwriteup,setprojectwriteup] = useState('')
 const [education,setEducation] = useState('')
 const [certifications,setCertifications] = useState('')
 const [skills,setSkills] = useState('')
@@ -54,8 +39,7 @@ const [workhistory,setWorkHistory] = useState('')
 
   async function create() {
     
-      const { error } = await supabase.from("resume").upsert({
-        id:id,
+      const { error } = await supabase.from("resume").insert({
         firstname:firstname,
         lastname:lastname,
         age:parseInt(age),
@@ -66,11 +50,22 @@ const [workhistory,setWorkHistory] = useState('')
         professionalSummary:professionalSummary,
         workhistory:workhistory,
       });
+     
+      
       if (error) {
         console.log(error);
       } else {
+        const {error:e} = await supabase.from('user').update({
+            
+            isresume:true
+          }).eq('id',id)
+          if(e){
+            console.log(e)
+          }
+          else{
         window.location.replace("/");
       }
+    }
     
   }
   return (
@@ -80,14 +75,14 @@ const [workhistory,setWorkHistory] = useState('')
         className="flex flex-col justify-center w-full gap-2 my-auto ml-auto md:pr-10 hiddenscroll animate-in text-foreground"
         action={create}
       >
-        <h1 className="mt-8 mb-4 text-2xl font-bold text-black md:text-3xl">Edit Resume</h1>
+        <div className="pb-5 mx-0 mt-5 mb-10 rounded-lg bg-gradient-to-br from-black to-gray-700">
+        <h1 className="mt-5 ml-5 mr-5 text-2xl font-semibold text-white md:text-3xl">Setup Resume</h1>
+        <h1 className="mt-2 ml-5 mr-5 text-xs font-normal text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
+            </div>
         <label className="text-base" htmlFor="name">
-          First Name
+          First Name (Cannot Edit This Later)
         </label>
         <input
-                disabled = {true}
-
-        defaultValue={firstname}
           onChange={(e) => setfirstname(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
@@ -97,12 +92,9 @@ const [workhistory,setWorkHistory] = useState('')
           maxLength={20}
         />
         <label className="text-base" htmlFor="name">
-          Last Name
+          Last Name (Cannot Edit This Later)
         </label>
         <input
-                disabled = {true}
-
-        defaultValue={lastname}
           onChange={(e) => setlastname(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
@@ -112,12 +104,9 @@ const [workhistory,setWorkHistory] = useState('')
           maxLength={20}
         />
         <label className="text-base" htmlFor="name">
-          Age
+          Age (Cannot Edit This Later)
         </label>
         <input
-        defaultValue={age}
-        disabled = {true}
-
           onChange={(e) => setage(e.target.value)}
           className="px-4 py-2 mb-6 mr-4 border bg-inherit"
           name="name"
@@ -215,9 +204,7 @@ const [workhistory,setWorkHistory] = useState('')
               }}
             />
       </div>
-        <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max">Save Your Changes
-        
-      </button>
+        <button className="px-8 py-4 mb-2 text-sm text-white bg-black w-max">Save Your Changes</button>
       </form>
     </div>
     </>

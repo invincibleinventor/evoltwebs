@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Oval } from "react-loader-spinner";
@@ -172,7 +173,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 width={180}
                 height={180}
                 src={`${found ?(cover ? cover : "/bg.jpg") : "/bg.jpg"}`}
-                className="object-cover w-full h-48 "
+                className="object-cover w-full h-48 border "
                 alt="cover"
               />
             )}
@@ -187,7 +188,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           {found && loggedin && (
             <button
               onClick={() => onfollow()}
-              className={`absolute  bottom-10 right-6 px-8 py-3 text-xs font-semibold md:right-12  ${
+              className={`absolute  bottom-10 right-7 px-8 py-3 text-xs font-semibold md:right-12  ${
                 !(imfollowing || myself)
                   ? "border-[1px] border-black bg-black text-white"
                   : "border border-black bg-white text-black"
@@ -208,9 +209,9 @@ export default function Page({ params }: { params: { slug: string } }) {
           <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-700 sm:text-gray-600">{about}</h1>
 
           <div className={resume?"mr-16  flex flex-row space-x-4":"mr-16 flex flex-row"}>
-          <h1 className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</h1>
+          <Link href={"/resume/"+params.slug} className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</Link>
           
-          <h1 className="text-xs font-medium text-blue-600">View Projects</h1>
+          <Link href={"/projects/"+params.slug} className="text-sm font-medium text-blue-600">View Projects</Link>
         </div>
           </div>
         </div>

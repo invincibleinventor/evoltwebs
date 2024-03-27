@@ -1,24 +1,24 @@
 "use client";
-import Headeritem from "@/components/HeaderItem";
+import Headeritem from "@/components/SettingsItem";
 import { usePathname } from "next/navigation";
 export default function SettingsBar() {
   const loc = usePathname();
   return (
-    <div className="mb-auto xl:ml-6  lg:w-[400px]">
+    <div className="mb-auto ">
       <div className={`absolute md:static left-0  flex w-max  flex-col items-start p-0 md:pr-0 ${loc.startsWith("/post/") ? "md:flex" : ""}`}>
        
-        <div className="flex flex-row md:flex-col space-x-1 md:space-x-0 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:bg-gray-100 md:px-4 md:pt-[4px]">
+        <div className="flex flex-row md:flex-col space-x-0 md:space-x-0 py-4 pt-[14px] md:mt-[calc(17*4px)] md:space-y-[0px] md:bg-gray-100 md:px-4 md:pt-[4px]">
         
           <Headeritem
             link="/more"
-            url={
-              <path
-                fill="currentColor"
-                d="M4.38 5h1V4h1V3h-1V2h-1v1h-1v1h1zm8 4h-1v1h-1v1h1v1h1v-1h1v-1h-1zM14 2V1h-1v1h-1v1h1v1h1V3h1V2zm-2.947 2.442a1.49 1.49 0 0 0-2.12 0l-7.49 7.49a1.49 1.49 0 0 0 0 2.12c.59.59 1.54.59 2.12 0l7.49-7.49c.58-.58.58-1.53 0-2.12m-8.2 8.9c-.2.2-.51.2-.71 0c-.2-.2-.2-.51 0-.71l6.46-6.46l.71.71zm7.49-7.49l-.32.32l-.71-.71l.32-.32c.2-.2.51-.2.71 0c.19.2.19.52 0 .71"
-              />
-            }
-            name="Resume"
-          ></Headeritem>
+url={
+  <g fill="currentColor">
+    <path d="M312.1 591.5c3.1 3.1 8.2 3.1 11.3 0l101.8-101.8l86.1 86.2c3.1 3.1 8.2 3.1 11.3 0l226.3-226.5c3.1-3.1 3.1-8.2 0-11.3l-36.8-36.8c-3.1-3.1-8.2-3.1-11.3 0L517 485.3l-86.1-86.2c-3.1-3.1-8.2-3.1-11.3 0L275.3 543.4c-3.1 3.1-3.1 8.2 0 11.3z"/><path  d="M904 160H548V96c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H120c-17.7 0-32 14.3-32 32v520c0 17.7 14.3 32 32 32h356.4v32L311.6 884.1c-3.7 2.4-4.7 7.3-2.3 11l30.3 47.2v.1c2.4 3.7 7.4 4.7 11.1 2.3L512 838.9l161.3 105.8c3.7 2.4 8.7 1.4 11.1-2.3v-.1l30.3-47.2c2.4-3.7 1.3-8.6-2.3-11L548 776.3V744h356c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32m-40 512H160V232h704z"/>
+  </g>
+  
+}
+          name="Resume">
+           </Headeritem>
           <Headeritem
             link="/more/customize"
             url={<path

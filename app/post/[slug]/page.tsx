@@ -140,7 +140,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   console.log(comments);
   console.log("above");
   return !loading ? (
-    <div className="relative flex flex-col bg-white flex-1 h-screen overflow-hidden">
+    <div className="relative flex flex-col flex-1 h-screen overflow-hidden bg-white">
       {error && (
         <div className="flex items-center content-center w-full h-screen px-10 sm:px-24 md:px-16 lg:px-24">
           <div className="flex flex-col gap-2 mx-auto max-w-max">
@@ -192,10 +192,10 @@ export default async function App({ params }: { params: { slug: string } }) {
             <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
               <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
                 <Image width={24} height={24} alt="profile" className="w-6 h-6 mr-3" src={profile} />
-                <h1 className="text-sm font-medium">{name}</h1>
+                <h1 className="text-xs font-medium md:text-sm">{name}</h1>
               </Link>
 
-              <h1 className="text-sm font-normal">Posted {timeAgo.format(Date.now() - time)}</h1>
+              <h1 className="text-xs font-normal md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}</h1>
             </div>
             <Markdown
               remarkPlugins={[remarkGfm]}
@@ -206,7 +206,7 @@ export default async function App({ params }: { params: { slug: string } }) {
             </Markdown>
           </div>
           <section className="px-8 pt-0 pb-8" id="comments">
-            <h1 className="mb-2 text-xl font-bold">Comments</h1>
+            <h1 className="mb-2 text-lg font-bold">Comments</h1>
 
             <CommentsComponent
               myname={myname}
@@ -247,7 +247,7 @@ export default async function App({ params }: { params: { slug: string } }) {
               clipRule="evenodd"
             />
           </svg>{" "}
-          <h1 className="text-sm">Comments</h1>
+          <h1 className="text-xs md:text-sm">Comments</h1>
         </Link>
       </div>
     </div>

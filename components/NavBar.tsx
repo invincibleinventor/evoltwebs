@@ -41,14 +41,14 @@ export default function App$() {
             name="Home"
           ></Headeritem>
           <Headeritem
-            link="/explore"
+            link="/quickies"
             url={
               <path
                 fill="currentColor"
                 d="M4.38 5h1V4h1V3h-1V2h-1v1h-1v1h1zm8 4h-1v1h-1v1h1v1h1v-1h1v-1h-1zM14 2V1h-1v1h-1v1h1v1h1V3h1V2zm-2.947 2.442a1.49 1.49 0 0 0-2.12 0l-7.49 7.49a1.49 1.49 0 0 0 0 2.12c.59.59 1.54.59 2.12 0l7.49-7.49c.58-.58.58-1.53 0-2.12m-8.2 8.9c-.2.2-.51.2-.71 0c-.2-.2-.2-.51 0-.71l6.46-6.46l.71.71zm7.49-7.49l-.32.32l-.71-.71l.32-.32c.2-.2.51-.2.71 0c.19.2.19.52 0 .71"
               />
             }
-            name="Explore"
+            name="Quickies"
           ></Headeritem>
           <Headeritem
             link="/notifications"
@@ -59,6 +59,13 @@ export default function App$() {
               />
             }
             name="Notifications"
+          ></Headeritem>
+          <Headeritem
+            link="/explore"
+            url={
+              <path fill="currentColor" d="M15 14s1 0 1-1s-1-4-5-4s-5 3-5 4s1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276c.593.69.758 1.457.76 1.72l-.008.002l-.014.002zM11 7a2 2 0 1 0 0-4a2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0a3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904c.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724c.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0a3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4a2 2 0 0 0 0-4"/>
+            }
+            name="All People"
           ></Headeritem>
           <Headeritem
             link="/messages"

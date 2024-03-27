@@ -71,13 +71,13 @@ export default async function Index() {
   if (isSupabaseConnected) {
     return (
       <>
-        <div className="h-screen flex-1 overflow-hidden p-0 py-2">
-          <div className="mx-1 p-4 py-2 md:mx-1">
+        <div className="flex-1 h-screen p-0 py-2 overflow-hidden">
+          <div className="p-4 py-2 mx-1 md:mx-1">
             <Search page="bookmarks" text="Bookmarks" />
           </div>
-          <h1 className="my-4 mt-2 px-5 text-xl font-bold">My Bookmarks</h1>
-          <div className="hiddenscroll h-full overflow-y-scroll">
-            <div className="animate-in hiddenscroll mb-20 flex flex-col gap-2">
+          <h1 className="px-6 my-4 mt-4 text-xl font-bold">My Bookmarks</h1>
+          <div className="h-full overflow-y-scroll hiddenscroll">
+            <div className="flex flex-col gap-2 mb-20 animate-in hiddenscroll">
               {!loading ? (
                 !empty ? (
                   posts.map((post) => (
@@ -95,10 +95,10 @@ export default async function Index() {
                     />
                   ))
                 ) : (
-                  <div className="mt-24 flex w-full content-center items-center px-10 sm:px-24 md:px-16 lg:px-24">
-                    <div className="mx-auto flex max-w-max flex-col gap-2">
-                      <h1 className="mx-auto text-center text-lg font-semibold text-black">No Posts To View!</h1>
-                      <h1 className="mx-auto text-center text-sm text-gray-800">
+                  <div className="flex items-center content-center w-full px-10 mt-24 sm:px-24 md:px-16 lg:px-24">
+                    <div className="flex flex-col gap-2 mx-auto max-w-max">
+                      <h1 className="mx-auto text-lg font-semibold text-center text-black">No Posts To View!</h1>
+                      <h1 className="mx-auto text-sm text-center text-gray-800">
                         Your bookmarked posts appear in here. Seems like you have not bookmarked anything yet. Bookmark
                         posts to view them here.
                       </h1>
@@ -114,7 +114,7 @@ export default async function Index() {
                   </div>
                 )
               ) : (
-                <div className="flex h-screen w-full content-center items-center"></div>
+                <div className="flex items-center content-center w-full h-screen"></div>
               )}
               <More in={l}></More>{" "}
             </div>{" "}
