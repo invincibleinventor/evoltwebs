@@ -208,10 +208,8 @@ export default function Page({ params }: { params: { slug: string } }) {
           <div className="flex flex-col justify-between gap-2 sm:gap-0 sm:flex-row">
           <h1 className="pr-12 text-sm font-normal leading-relaxed text-gray-700 sm:text-gray-600">{about}</h1>
 
-          <div className={resume?"mr-16  flex flex-row space-x-4":"mr-16 flex flex-row"}>
+          <div className={resume?"mr-16  flex flex-row":"mr-16 flex flex-row"}>
           <Link href={"/resume/"+params.slug} className={resume?"text-sm font-medium text-blue-600":"hidden"}>View Resume</Link>
-          
-          <Link href={"/projects/"+params.slug} className="text-sm font-medium text-blue-600">View Projects</Link>
         </div>
           </div>
         </div>
