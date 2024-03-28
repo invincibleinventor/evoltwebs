@@ -28,12 +28,12 @@ export default async function Index() {
   let empty = true;
   let posts: [] = [];
   let loading = true;
-  let l: [] = [];
+  let l: any[] = [];
   let myname = "";
   let myphoto = "";
   let myhandle = "";
-  let userliked :[] = [];
-  let userbookmarked:[] = [];
+  let userliked :any[] = [];
+  let userbookmarked:any[] = [];
   
   async function get() {
     const { data: user } = await supabase.auth.getUser();
