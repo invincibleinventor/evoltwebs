@@ -197,7 +197,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 }
 
 
-              <div className="flex flex-row items-center content-center mt-6">
+              <div className="flex flex-row items-center content-center mt-0">
       
          
 
@@ -207,7 +207,7 @@ export default async function App({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
-          <section className="px-8 pt-0 pb-8" id="comments">
+          <section className="px-6 pt-0 pb-8" id="comments">
             <h1 className="mb-2 text-lg font-bold">Comments</h1>
 
             <CommentsComponent

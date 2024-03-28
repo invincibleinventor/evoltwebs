@@ -55,12 +55,13 @@ photocount = props.image.length;
                 </h1>
               </Link>
 
-              <h1
+              <Link
+              href={'/quickie/'+props.id}
                 style={{ wordBreak: "break-word", whiteSpace: "normal" }}
                 className="text-sm font-normal text-gray-900 four-line-ellipsis md:text-base"
               >
                 {props.description}
-              </h1>
+              </Link>
               {photocount>0  &&
               <div className={photocount==1?"w-full border rounded-md mt-4 aspect-video h-full":"mt-4 md:gap-2 gap-1 grid-cols-2 grid"}>
                 {props.image.map((image:string) => 
