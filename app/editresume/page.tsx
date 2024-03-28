@@ -127,7 +127,7 @@ const [workhistory,setWorkHistory] = useState('')
          min={14}
          max={130}
         />
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           Education
         </label>
        <div data-color-mode="light">
@@ -142,7 +142,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Certifications
         </label>
        <div data-color-mode="light">
@@ -157,7 +157,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Skills
         </label>
        <div data-color-mode="light">
@@ -172,7 +172,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Professional Summary
         </label>
        <div data-color-mode="light">
@@ -187,7 +187,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Work History
         </label>
        <div data-color-mode="light">
@@ -201,7 +201,7 @@ const [workhistory,setWorkHistory] = useState('')
               }}
             />
       </div>
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
          Contact
         </label>
        <div data-color-mode="light">
