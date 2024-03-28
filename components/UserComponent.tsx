@@ -74,9 +74,9 @@ export default function UserComponent(props:any) {
       className="mx-auto my-2 flex h-[270.29px] w-[303.86px] bg-gray-50 flex-col border border-gray-100 p-6 xl:mx-2 xl:w-auto"
     >
       <div className="flex flex-row items-center content-center justify-between">
-        <div className="flex flex-row items-center content-center space-x-5">
+        <div className="flex flex-row items-center content-center space-x-3">
           <Image width={40} height={40} src={props.image} className="object-cover w-10 h-10" alt="profile-pic" />
-          <div className="flex flex-col space-y-[1px]">
+          <div className="flex flex-col ">
             <h1 className="text-base font-bold">{a}</h1>
             <h1 className="text-xs font-normal">@{props.handle}</h1>
           </div>
