@@ -1,5 +1,5 @@
 import BookMarksComponent from "@/components/QuickieBookMarksComponent";
-import CommentsComponent from "@/components/CommentsComponent";
+import CommentsComponent from "@/components/QuickieComments";
 import LikeComponent from "@/components/QuickieLikeComponent";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
@@ -7,28 +7,25 @@ import en from "javascript-time-ago/locale/en";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { ClassAttributes, ImgHTMLAttributes, JSX } from "react";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import Iof from "@/components/Iof";
 export default async function App({ params }: { params: { slug: string } }) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
-  let title = "";
-  let name = "";
-  let cover = "";
+  let image:[]=[];
   let profile = "";
   let error = false;
+  let naam = "";
   let time = 0;
   let loading = false;
-  let imauthor = false;
   let myname = "";
   let myphoto = "";
   let myhandle = "";
   let loggedin = false;
   let liked = false;
-  let likedlist: string | any[] = [];
+  let photocount = 0;
+  let likedlist: string | [] = [];
   let bookmarked = false;
   let bookmarkedlist: never[] = [];
   let userliked: never[] = [];
@@ -54,7 +51,7 @@ export default async function App({ params }: { params: { slug: string } }) {
         userbookmarked = users[0]["bookmarks"];
       }
     }
-    const { data, error: e } = await supabase.from("posts").select("*").eq("id", params.slug);
+    const { data, error: e } = await supabase.from("quickies").select("*").eq("id", params.slug);
     if (data && data.length > 0) {
       error = false;
       const l = data[0]["liked"];
@@ -70,14 +67,13 @@ export default async function App({ params }: { params: { slug: string } }) {
       const { data: u } = await supabase.from("user").select("*").eq("id", data[0]["poster"]);
       if (u) {
         author = u[0]["handle"];
-        if (author == myhandle) {
-          imauthor = true;
-        }
-        name = u[0].name;
+        
+        naam = u[0].name;
         profile = u[0].image;
         content = data[0]["content"];
-        title = data[0]["title"];
-        cover = data[0]["cover"];
+        image=data[0]["image"];
+        photocount=data[0]["image"].length;
+        
       }
       const date2 = new Date(data[0].created_at);
       time = date1.getTime() - date2.getTime();
@@ -92,7 +88,7 @@ export default async function App({ params }: { params: { slug: string } }) {
 
   async function fetchcomments() {
     const { data, error } = await supabase
-      .from("comments")
+      .from("quickiecomments")
       .select("*")
       .eq("id", params.slug)
       .order("likes", { ascending: false });
@@ -127,15 +123,8 @@ export default async function App({ params }: { params: { slug: string } }) {
     }
   }
   await fetchcomments();
-  function ClickableImage(
-    props: JSX.IntrinsicAttributes & ClassAttributes<HTMLImageElement> & ImgHTMLAttributes<HTMLImageElement>
-  ) {
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} className="w-full max-w-full" />;
-  }
-  const components = {
-    img: ClickableImage,
-  };
+
+ 
   console.log("here");
   console.log(comments);
   console.log("above");
@@ -162,49 +151,62 @@ export default async function App({ params }: { params: { slug: string } }) {
       )}
       {!error && (
         <div className="hiddenscroll h-full w-[calc(100vw-68px)] overflow-hidden pb-14 md:w-full md:max-w-full md:border-x md:border-x-gray-200">
-          <div className="relative aspect-video">
-            <img
-              alt="coveri"
-              src={cover ? cover : "https://picsum.photos/2000/3000"}
-              className="absolute inset-0 object-cover w-full h-full aspect-video"            />
+          <div className="w-full px-0 py-[6px]">
+        <div  className="flex flex-col rounded-none md:gap-0">
+          <div  className="flex items-center content-center bg-black rounded-md ">
+            
           </div>
-          <div className="flex flex-col flex-1 w-full max-w-full p-8">
-            <h1 className="fix-overflow text-3xl font-extrabold md:text-5xl md:leading-[calc(14*4px)]">{title}</h1>
-            {imauthor && (
-              <Link
-                href={"/edit/" + params.slug}
-                className="my-4 mt-6 flex cursor-pointer flex-row  content-center items-center space-x-[16px] px-1  pr-0"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="m5 16l-1 4l4-1L19.586 7.414a2 2 0 0 0 0-2.828l-.172-.172a2 2 0 0 0-2.828 0zM15 6l3 3m-5 11h8"
-                  />
-                </svg>
+          <div className="flex h-max flex-col gap-[8px] md:p-6 p-4 ">
+            <div className="flex flex-row items-center content-center gap-2 h-max shrink-0">
+             <Link className="w-10 h-10" href={`/profile/`+author}>
+              <Image width={30} height={30} className="w-10 h-10 rounded-md shrink-0" src={profile} alt="dp" />
+             </Link>
+              <Link href={`/profile/`+author} className="flex flex-row gap-[2px]">
+                <div className="flex flex-col content-center flex-1 gap-[2px] py-0 pl-2 rounded-lg">
+                  <div className="flex flex-row items-center content-center">
+                  <h1 className="text-sm font-medium text-black "><span className="inline-block md:hidden">{naam}</span><span className="hidden md:inline-block">{naam}</span></h1>
+                  <h1 className="ml-2 text-xs font-normal text-gray-600 ">@{author}</h1>
 
-                <h1 className="inline-block text-sm">Edit Post</h1>
-              </Link>
-            )}
-            <div className="flex flex-row items-center content-center justify-between mt-6 text-lg">
-              <Link href={"/profile/" + author} className="flex flex-row items-center content-center">
-                <Image width={24} height={24} alt="profile" className="w-6 h-6 mr-3" src={profile} />
-                <h1 className="text-xs font-medium md:text-sm">{name}</h1>
-              </Link>
+                  </div>
+                  <h1 className="text-xs font-medium text-gray-600">{timeAgo.format(Date.now() - time)}</h1>
 
-              <h1 className="text-xs font-normal md:text-sm"><span className="hidden md:inline-block">Posted</span> {timeAgo.format(Date.now() - time)}</h1>
+                </div>
+
+              </Link>
+              
+              <div className="pl-3 ml-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 16.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m0-6a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3m0-6a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3"/></g></svg>
+              </div>
             </div>
-            <Markdown
-              remarkPlugins={[remarkGfm]}
-              components={components}
-              className="mt-12 prose font-poppins fix-overflow"
-            >
-              {content}
-            </Markdown>
+
+            <div>
+             
+
+              <h1
+                style={{ wordBreak: "break-word", whiteSpace: "normal" }}
+                className="my-4 text-sm font-normal text-gray-900 four-line-ellipsis md:text-base"
+              >
+                {content}
+              </h1>
+              {photocount>0  &&
+              <div className={photocount==1?"w-full border rounded-md mt-4 aspect-video h-full":"mt-4 md:gap-2 gap-1 grid-cols-2 grid"}>
+                {image.map((image:string) => 
+                <Iof key={image} src={image}/>
+                )}
+              </div>
+}
+
+
+              <div className="flex flex-row items-center content-center mt-6">
+      
+         
+
+
+              </div>
+            </div>
           </div>
+        </div>
+      </div>
           <section className="px-8 pt-0 pb-8" id="comments">
             <h1 className="mb-2 text-lg font-bold">Comments</h1>
 
@@ -221,15 +223,9 @@ export default async function App({ params }: { params: { slug: string } }) {
         </div>
       )}
       <div className="absolute bottom-0 flex flex-row w-full bg-white border-t h-14 border-t-gray-200 ">
-        <BookMarksComponent
-          userliked={userbookmarked}
-          postid={params.slug}
-          handle={myhandle}
-          likedlist={bookmarkedlist}
-          liked={bookmarked}
-        />
+      
 
-        <LikeComponent
+<LikeComponent
           userliked={userliked}
           postid={params.slug}
           handle={myhandle}
@@ -237,8 +233,15 @@ export default async function App({ params }: { params: { slug: string } }) {
           liked={liked}
           likes={likedlist.length}
         />
-
-        <Link href="#comments" className="flex flex-row items-center content-center px-6 ml-auto space-x-2">
+          <BookMarksComponent
+          userliked={userbookmarked}
+          postid={params.slug}
+          handle={myhandle}
+          likedlist={bookmarkedlist}
+          liked={bookmarked}
+          likes={bookmarkedlist.length}
+        />
+        <Link href="#comments" className="flex flex-row items-center content-center px-6 space-x-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
             <path
               fill="currentColor"
