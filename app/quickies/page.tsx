@@ -64,7 +64,7 @@ export default async function Index() {
         let liked = false;
         let likedlist: string | any[] = ds[index].liked
         let bookmarked = false;
-        let bookmarkedlist: never[] = ds[index].bookmarked;
+        let bookmarkedlist: any[] = ds[index].bookmarked;
         if(likedlist.includes(myhandle)){
           liked = true
         }
