@@ -79,7 +79,7 @@ const [workhistory,setWorkHistory] = useState('')
         <h1 className="mt-5 ml-5 mr-5 text-2xl font-semibold text-white md:text-3xl">Setup Resume</h1>
         <h1 className="mt-2 ml-5 mr-5 text-xs leading-relaxed font-normal text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
             </div>
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           First Name (Cannot Edit This Later)
         </label>
         <input
@@ -91,7 +91,7 @@ const [workhistory,setWorkHistory] = useState('')
           minLength={4}
           maxLength={20}
         />
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           Last Name (Cannot Edit This Later)
         </label>
         <input
@@ -103,7 +103,7 @@ const [workhistory,setWorkHistory] = useState('')
           minLength={4}
           maxLength={20}
         />
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           Age (Cannot Edit This Later)
         </label>
         <input
@@ -116,7 +116,7 @@ const [workhistory,setWorkHistory] = useState('')
          min={14}
          max={130}
         />
-        <label className="text-base" htmlFor="name">
+        <label className="text-sm" htmlFor="name">
           Education
         </label>
        <div data-color-mode="light">
@@ -131,7 +131,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Certifications
         </label>
        <div data-color-mode="light">
@@ -146,7 +146,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Skills
         </label>
        <div data-color-mode="light">
@@ -161,7 +161,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Professional Summary
         </label>
        <div data-color-mode="light">
@@ -176,7 +176,7 @@ const [workhistory,setWorkHistory] = useState('')
             />
       </div>
 
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
           Work History
         </label>
        <div data-color-mode="light">
@@ -190,7 +190,7 @@ const [workhistory,setWorkHistory] = useState('')
               }}
             />
       </div>
-      <label className="text-base" htmlFor="name">
+      <label className="text-sm" htmlFor="name">
          Contact
         </label>
        <div data-color-mode="light">
