@@ -77,14 +77,14 @@ const [workhistory,setWorkHistory] = useState('')
       >
         <div className="pb-5 mx-0 mt-5 mb-10 rounded-lg bg-gradient-to-br from-black to-gray-700">
         <h1 className="mt-5 ml-5 mr-5 text-2xl font-semibold text-white md:text-3xl">Setup Resume</h1>
-        <h1 className="mt-2 ml-5 mr-5 text-xs font-normal text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
+        <h1 className="mt-2 ml-5 mr-5 text-xs leading-relaxed font-normal text-gray-300 md:mt-3">Your resume gives a brief professional overview about yourself. Make sure to be honest on all fields in this form. You can edit this later anytime</h1>
             </div>
         <label className="text-base" htmlFor="name">
           First Name (Cannot Edit This Later)
         </label>
         <input
           onChange={(e) => setfirstname(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
+          className="px-4 py-2 mb-6  border bg-inherit"
           name="name"
           placeholder="Please Type Out Your First Name"
           required
@@ -96,7 +96,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
         <input
           onChange={(e) => setlastname(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
+          className="px-4 py-2 mb-6  border bg-inherit"
           name="name"
           placeholder="Please Type Out Your Last Name"
           required
@@ -108,7 +108,7 @@ const [workhistory,setWorkHistory] = useState('')
         </label>
         <input
           onChange={(e) => setage(e.target.value)}
-          className="px-4 py-2 mb-6 mr-4 border bg-inherit"
+          className="px-4 py-2 mb-6  border bg-inherit"
           name="name"
           placeholder="Please Type Out Your Age"
           required
