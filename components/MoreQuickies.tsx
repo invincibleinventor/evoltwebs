@@ -36,7 +36,7 @@ export default function More(props:any) {
             let liked = false;
         let likedlist: string | any[] = ds[index].liked
         let bookmarked = false;
-        let bookmarkedlist: never[] = ds[index].bookmarked;
+        let bookmarkedlist: any[] = ds[index].bookmarked;
         if(likedlist.includes(props.myhandle)){
           liked = true
         }
@@ -86,7 +86,7 @@ export default function More(props:any) {
               let liked = false;
               let likedlist: string | any[] = ds[index].liked
               let bookmarked = false;
-              let bookmarkedlist: never[] = ds[index].bookmarked;
+              let bookmarkedlist: any[] = ds[index].bookmarked;
               if(likedlist.includes(props.myhandle)){
                 liked = true
               }
