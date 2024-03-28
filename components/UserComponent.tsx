@@ -71,7 +71,7 @@ export default function UserComponent(props:any) {
   return (
     <Link
       href={"/profile/" + props.handle}
-      className="mx-auto my-2 flex h-[270.29px] w-[303.86px] bg-gray-50 flex-col border border-gray-100 p-6 xl:mx-2 xl:w-auto"
+      className="mx-auto my-2 flex h-[270.29px] w-[303.86px] bg-gray-50 flex-col border border-gray-200 p-6 xl:mx-2 xl:w-auto"
     >
       <div className="flex flex-row items-center content-center justify-between">
         <div className="flex flex-row items-center content-center space-x-3">
