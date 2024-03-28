@@ -13,7 +13,7 @@ export default async function App({ params }: { params: { slug: string } }) {
   const supabase = createClient(cookieStore);
   let author = "";
   let content = "";
-  let image:[]=[];
+  let image:any[]=[];
   let profile = "";
   let error = false;
   let naam = "";
@@ -28,8 +28,8 @@ export default async function App({ params }: { params: { slug: string } }) {
   let likedlist: string | [] = [];
   let bookmarked = false;
   let bookmarkedlist: never[] = [];
-  let userliked: never[] = [];
-  let userbookmarked: never[] = [];
+  let userliked: any[] = [];
+  let userbookmarked: any[] = [];
   let comments: any[] = [];
   TimeAgo.locale(en);
   let user = "";
