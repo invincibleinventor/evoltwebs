@@ -1,6 +1,6 @@
-import BookMarksComponent from "@/components/BookMarksComponent";
+import BookMarksComponent from "@/components/QuickieBookMarksComponent";
 import CommentsComponent from "@/components/CommentsComponent";
-import LikeComponent from "@/components/LikeComponent";
+import LikeComponent from "@/components/QuickieLikeComponent";
 import { createClient } from "@/utils/supabase/server";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";

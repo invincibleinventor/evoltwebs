@@ -5,13 +5,14 @@ import en from "javascript-time-ago/locale/en";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Oval } from "react-loader-spinner";
-import PostComponent from "./PostComponent";
+import QuickieComponent from "./QuickieComponent";
 export default function More(props:any) {
   const supabase = createClient();
   const [offset, setOffset] = useState(1);
   const { ref, inView } = useInView();
   const [halt, setHalt] = useState(false);
   const [posts, setPosts] = useState<any>([]);
+  
   TimeAgo.locale(en);
   const PAGE_COUNT = 5;
   const timeAgo = new TimeAgo("en-US");
@@ -20,7 +21,7 @@ export default function More(props:any) {
   async function get(from: number, to: number) {
     if (props.handle) {
       const { data, error } = await supabase
-        .from("posts")
+        .from("quickies")
         .select("*")
         .eq("handle", props.handle)
         .order("id", { ascending: false })
@@ -32,10 +33,26 @@ export default function More(props:any) {
           console.log(data);
           const ds = data;
           for await (const [index, post] of ds.entries()) {
+            let liked = false;
+        let likedlist: string | any[] = ds[index].liked
+        let bookmarked = false;
+        let bookmarkedlist: never[] = ds[index].bookmarked;
+        if(likedlist.includes(props.myhandle)){
+          liked = true
+        }
+        if(bookmarkedlist.includes(props.myhandle)){
+          bookmarked=true
+        }
+        
+        ds[index].liked=liked
+          ds[index].bookmarked=bookmarked
+          ds[index].bookmarkedlist=bookmarkedlist
+          ds[index].likedlist=likedlist
+          console.log(likedlist)
             const { data } = await supabase.from("user").select("*").eq("id", post.poster);
             if (data) {
               ds[index].name = data[0].name;
-
+                
               ds[index].dp = data[0].image;
 
               const date2 = new Date(ds[index].created_at);
@@ -52,7 +69,7 @@ export default function More(props:any) {
       }
     } else {
       const { data, error } = await supabase
-        .from("posts")
+        .from("quickies")
         .select("*")
         .order("id", { ascending: false })
         .in("handle", props.in)
@@ -66,6 +83,22 @@ export default function More(props:any) {
           for await (const [index, post] of ds.entries()) {
             const { data } = await supabase.from("user").select("*").eq("id", post.poster);
             if (data) {
+              let liked = false;
+              let likedlist: string | any[] = ds[index].liked
+              let bookmarked = false;
+              let bookmarkedlist: never[] = ds[index].bookmarked;
+              if(likedlist.includes(props.myhandle)){
+                liked = true
+              }
+              if(bookmarkedlist.includes(props.myhandle)){
+                bookmarked=true
+              }
+              
+              ds[index].liked=liked
+                ds[index].bookmarked=bookmarked
+                ds[index].bookmarkedlist=bookmarkedlist
+                ds[index].likedlist=likedlist
+                console.log(likedlist)
               ds[index].name = data[0].name;
 
               ds[index].dp = data[0].image;
@@ -96,20 +129,27 @@ export default function More(props:any) {
   }, [inView]);
   return (
     <>
-      <div className="flex flex-col items-center content-center gap-2">
+      <div className="flex flex-col items-center content-center w-full gap-2">
         {posts.map((post:any) => (
-          <PostComponent
-            id={post.id}
-            type="profile"
-            title={post.title}
-            cover={post.cover}
-            time={timeAgo.format(Date.now() - post.diff)}
-            key={post.id}
-            image={post.image}
-            dp={post.dp}
-            handle={post.handle}
-            name={post.name}
-            description={post.excerpt}
+          <QuickieComponent
+          id={post.id}
+          cover={post.cover}
+          title={post.title}
+          time={timeAgo.format(Date.now() - post.diff)}
+          key={post.id}
+          image={post.image}
+          userliked={props.userliked}
+          userbookmarked={props.userbookmarked}
+          bookmarkedlist={post.bookmarkedlist}
+          likedlist={post.likedlist}
+          myhandle={props.myhandle}
+          dp={post.dp}
+          bookmarked={post.bookmarked}
+          liked={post.liked}
+          handle={post.handle}
+          name={post.name}
+          comments={post.comments}
+          description={post.content}
           />
         ))}
         <Oval

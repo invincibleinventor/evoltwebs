@@ -248,7 +248,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                   ))
                 ) : (
                   <>
-                    <h1 className="px-[22px] text-sm font-medium text-gray-700">
+                    <h1 className="px-[20px] text-sm font-medium text-gray-700">
                       No Posts To Display. {name} haven&apos;t posted anything yet.
                     </h1>
                   </>

@@ -109,10 +109,10 @@ export default function App$() {
             }
             name="More"
           ></Headeritem>
-          <Link href="/create" className="pt-5">
+          <Link href={loc=='/quickies'?"/quickiemaker":"/create"} className="pt-5">
             <div className="mx-auto flex h-[52px]  w-[52px] cursor-pointer  flex-row content-center items-center bg-black p-3 transition-all duration-100 ease-linear hover:bg-black md:mr-auto md:h-[44px] md:w-[calc(180px)] md:py-[14px]">
               <span className={`mx-auto hidden pt-[0px] text-center text-xs font-medium  text-white md:inline-block`}>
-                New Post
+                New {loc=='/quickies'?'Quickie':'Post'}
               </span>
               <svg
                 viewBox="0 0 24 24"
