@@ -99,7 +99,7 @@ export default function CommentsComponent(props:any) {
           </div>
         </div>
       )}
-      <div className="flex flex-col px-1 my-3 mt-6 space-y-4">
+      <div className="flex flex-col px-0 my-3 mt-6 space-y-4">
         {!loading ? (
           <>
             {comments.map((comment:any) => (
